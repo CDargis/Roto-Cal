@@ -3,7 +3,7 @@ Roto-Cal
 
 AUTHORS
 =======
-Chris Dargis, Gerron Thurman
+Chris Dargis, Gerron Thurman, Jason Moreau
 
 COPYRIGHT & LICENSING
 =====================
