@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QBoxLayout>
+#include "calendarwidget.h"
 
 namespace Ui {
     class MainWindow;
@@ -27,6 +29,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    CalendarWidget* cWidget;
 };
 
 #endif // MAINWINDOW_H

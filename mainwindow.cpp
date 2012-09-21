@@ -1,18 +1,27 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QPushButton>
+#include <QTabWidget>
+
 #include <QCoreApplication>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow)
+    : QMainWindow(parent), ui(new Ui::MainWindow), cWidget(new CalendarWidget(this))
 {
     ui->setupUi(this);
+    setCentralWidget(cWidget);
 }
 
 MainWindow::~MainWindow()
 {
+    delete cWidget;
     delete ui;
 }
+
+//---------------------------------------------------------------------------------------------------
+// BEGIN Qt GENERATED CODE
+//---------------------------------------------------------------------------------------------------
 
 void MainWindow::setOrientation(ScreenOrientation orientation)
 {
@@ -67,3 +76,7 @@ void MainWindow::showExpanded()
     show();
 #endif
 }
+
+//----------------------------------------------------------------------------------------------------
+// END Qt GENERATED CODE
+//----------------------------------------------------------------------------------------------------

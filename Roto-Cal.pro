@@ -23,9 +23,11 @@ symbian:TARGET.CAPABILITY += NetworkServices
 # MOBILITY +=
 
 SOURCES += main.cpp mainwindow.cpp \
-    calendarwidget.cpp
+    calendarwidget.cpp \
+    calendarlabel.cpp
 HEADERS += mainwindow.h \
-    calendarwidget.h
+    calendarwidget.h \
+    calendarlabel.h
 FORMS += mainwindow.ui
 
 # Please do not modify the following two lines. Required for deployment.
@@ -66,3 +68,6 @@ OTHER_FILES += \
     android/res/values-de/strings.xml \
     android/res/values-nl/strings.xml \
     android/res/values-id/strings.xml
+
+RESOURCES += \
+    Resources.qrc
