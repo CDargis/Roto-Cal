@@ -24,10 +24,12 @@ symbian:TARGET.CAPABILITY += NetworkServices
 
 SOURCES += main.cpp mainwindow.cpp \
     calendarwidget.cpp \
-    calendarlabel.cpp
+    calendarmenu.cpp \
+    clickablelabel.cpp
 HEADERS += mainwindow.h \
     calendarwidget.h \
-    calendarlabel.h
+    calendarmenu.h \
+    clickablelabel.h
 FORMS += mainwindow.ui
 
 # Please do not modify the following two lines. Required for deployment.

@@ -1,13 +1,12 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <QPushButton>
-#include <QTabWidget>
-
 #include <QCoreApplication>
+#include <QDesktopWidget>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow), cWidget(new CalendarWidget(this))
+    : QMainWindow(parent), ui(new Ui::MainWindow),
+      cWidget(new CalendarWidget(qApp->desktop()->screenGeometry(), this))
 {
     ui->setupUi(this);
     setCentralWidget(cWidget);
@@ -15,7 +14,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    delete cWidget;
     delete ui;
 }
 

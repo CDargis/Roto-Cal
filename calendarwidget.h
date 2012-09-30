@@ -2,21 +2,22 @@
 #define CALENDARWIDGET_H
 
 #include <QWidget>
-#include <QBoxLayout>
-#include "calendarlabel.h"
+#include <QLabel>
+
+#include "calendarmenu.h"
 
 class CalendarWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit CalendarWidget(QWidget *parent = 0);
-    ~CalendarWidget();
+    explicit CalendarWidget(QRect screenRes, QWidget *parent = 0);
 signals:
     
 public slots:
 
 private:
-    CalendarLabel* cLabel;
+    QRect screen;
+    CalendarMenu* menu;
 };
 
 #endif // CALENDARWIDGET_H
