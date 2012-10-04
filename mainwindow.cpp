@@ -4,12 +4,19 @@
 #include <QCoreApplication>
 #include <QDesktopWidget>
 
+#include <QStackedWidget>
+#include "rotaryview.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow),
       cWidget(new CalendarWidget(qApp->desktop()->screenGeometry(), this))
 {
     ui->setupUi(this);
     setCentralWidget(cWidget);
+    QMenuBar* menuBar = new QMenuBar(this);
+    menuBar->addAction("Add Event");
+    menuBar->addAction("Add To-Do");
+    setMenuBar(menuBar);
 }
 
 MainWindow::~MainWindow()

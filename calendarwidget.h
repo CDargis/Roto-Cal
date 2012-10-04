@@ -3,8 +3,11 @@
 
 #include <QWidget>
 #include <QLabel>
+#include <QMenuBar>
 
 #include "calendarmenu.h"
+#include "rotaryview.h"
+#include "datedisplay.h"
 
 class CalendarWidget : public QWidget
 {
@@ -18,6 +21,10 @@ public slots:
 private:
     QRect screen;
     CalendarMenu* menu;
+    QMenuBar* menuBar;
+    RotaryView* yearView;
+    RotaryView* monthView;
+    DateDisplay* dateDisplay;
 };
 
 #endif // CALENDARWIDGET_H

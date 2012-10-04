@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/images">
+        <file>preAlpha.png</file>
         <file>dial.png</file>
     </qresource>
 </RCC>
