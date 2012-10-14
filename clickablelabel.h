@@ -1,3 +1,6 @@
+// @authors Chris Dargis
+// @Copyright 2012
+
 #ifndef CLICKABLELABEL_H
 #define CLICKABLELABEL_H
 

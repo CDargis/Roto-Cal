@@ -9,30 +9,30 @@ CalendarMenu::CalendarMenu(int xOffset, int yOffset, int menuWidth, int menuHeig
 
     setGeometry(xOffset, yOffset, menuWidth, menuHeight);
 
-    yearLabel = new ClickableLabel("Year", this);
     monthLabel = new ClickableLabel("Month", this);
     dayLabel = new ClickableLabel("Day", this);
+    listLabel = new ClickableLabel("List", this);
     toDoLabel = new ClickableLabel("To-Do", this);
 
-    connect(yearLabel, SIGNAL(clicked()), this, SLOT(slotYearlLabelClicked()));
     connect(monthLabel, SIGNAL(clicked()), this, SLOT(slotMonthLabelClicked()));
     connect(dayLabel, SIGNAL(clicked()), this, SLOT(slotDayLabelClicked()));
+    connect(listLabel, SIGNAL(clicked()), this, SLOT(slotListLabelClicked()));
     connect(toDoLabel, SIGNAL(clicked()), this, SLOT(slotToDoLabelClicked()));
 
-    yearLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    yearLabel->setGeometry(0, 0, labelWidth, menuHeight);
-    yearLabel->setSelectStyleSheet(true);
-    yearLabel->setAlignment(Qt::AlignCenter);
-
     monthLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    monthLabel->setGeometry(labelWidth, 0, labelWidth, menuHeight);
-    monthLabel->setSelectStyleSheet(false);
+    monthLabel->setGeometry(0, 0, labelWidth, menuHeight);
+    monthLabel->setSelectStyleSheet(true);
     monthLabel->setAlignment(Qt::AlignCenter);
 
     dayLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    dayLabel->setGeometry(labelWidth*2, 0, labelWidth, menuHeight);
+    dayLabel->setGeometry(labelWidth, 0, labelWidth, menuHeight);
     dayLabel->setSelectStyleSheet(false);
     dayLabel->setAlignment(Qt::AlignCenter);
+
+    listLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    listLabel->setGeometry(labelWidth*2, 0, labelWidth, menuHeight);
+    listLabel->setSelectStyleSheet(false);
+    listLabel->setAlignment(Qt::AlignCenter);
 
     toDoLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     toDoLabel->setGeometry(labelWidth*3, 0, labelWidth, menuHeight);
@@ -40,38 +40,38 @@ CalendarMenu::CalendarMenu(int xOffset, int yOffset, int menuWidth, int menuHeig
     toDoLabel->setAlignment(Qt::AlignCenter);
 }
 
-void CalendarMenu::slotYearlLabelClicked()
-{
-    yearLabel->setSelectStyleSheet(true);
-    monthLabel->setSelectStyleSheet(false);
-    dayLabel->setSelectStyleSheet(false);
-    toDoLabel->setSelectStyleSheet(false);
-    emit yearLabelClicked(0);
-}
-
 void CalendarMenu::slotMonthLabelClicked()
 {
-    yearLabel->setSelectStyleSheet(false);
     monthLabel->setSelectStyleSheet(true);
     dayLabel->setSelectStyleSheet(false);
+    listLabel->setSelectStyleSheet(false);
     toDoLabel->setSelectStyleSheet(false);
-    emit monthLabelClicked(1);
+    emit labelClicked(0);
 }
 
 void CalendarMenu::slotDayLabelClicked()
 {
-    yearLabel->setSelectStyleSheet(false);
     monthLabel->setSelectStyleSheet(false);
     dayLabel->setSelectStyleSheet(true);
+    listLabel->setSelectStyleSheet(false);
     toDoLabel->setSelectStyleSheet(false);
-    emit dayLabelClicked(2);
+    emit labelClicked(1);
+}
+
+void CalendarMenu::slotListLabelClicked()
+{
+    monthLabel->setSelectStyleSheet(false);
+    dayLabel->setSelectStyleSheet(false);
+    listLabel->setSelectStyleSheet(true);
+    toDoLabel->setSelectStyleSheet(false);
+    emit labelClicked(2);
 }
 
 void CalendarMenu::slotToDoLabelClicked()
 {
-    yearLabel->setSelectStyleSheet(false);
     monthLabel->setSelectStyleSheet(false);
     dayLabel->setSelectStyleSheet(false);
+    listLabel->setSelectStyleSheet(false);
     toDoLabel->setSelectStyleSheet(true);
-    emit toDoLabelClicked(3);
+    emit labelClicked(3);
 }

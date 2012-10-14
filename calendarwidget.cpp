@@ -15,25 +15,26 @@ CalendarWidget::CalendarWidget(QRect screenRes, QWidget *parent) :
     int pageHeight = screenHeight - menuHeight - dateDisplayHeight;
     int pageOffset = menuHeight + dateDisplayHeight;
 
-    QStackedWidget* stackedWidget = new QStackedWidget(this);
-    stackedWidget->setGeometry(0, pageOffset, screenWidth, pageHeight);
+    QRect pageGeometry(0, pageOffset, screenWidth, pageHeight);
+    rotaryViews = new QStackedWidget(this);
+    rotaryViews->setGeometry(pageGeometry);
 
-    yearView = new
-       RotaryView(tr(":/images/preAlpha.png"), pageHeight, screenWidth, this);
-    stackedWidget->addWidget(yearView);
+    monthView = new MonthView(pageGeometry, this);
+    rotaryViews->addWidget(monthView);
 
-    monthView = new
-            RotaryView(tr(":/images/dial.png"), pageHeight, screenWidth, this);
-    stackedWidget->addWidget(monthView);
+    dayView = new DayView(pageGeometry, this);
+    rotaryViews->addWidget(dayView);
 
-    QLabel* lab1 = new QLabel(tr("Day View Here..."), this);
-    stackedWidget->addWidget(lab1);
+    listView = new ListView(pageGeometry, this);
+    rotaryViews->addWidget(listView);
 
-    QLabel* lab2 = new QLabel(tr("ToDo List Here..."), this);
-    stackedWidget->addWidget(lab2);
+    toDoView = new ToDoView(pageGeometry, this);
+    rotaryViews->addWidget(toDoView);
 
-    connect(menu, SIGNAL(yearLabelClicked(int)), stackedWidget, SLOT(setCurrentIndex(int)));
-    connect(menu, SIGNAL(monthLabelClicked(int)), stackedWidget, SLOT(setCurrentIndex(int)));
-    connect(menu, SIGNAL(dayLabelClicked(int)), stackedWidget, SLOT(setCurrentIndex(int)));
-    connect(menu, SIGNAL(toDoLabelClicked(int)), stackedWidget, SLOT(setCurrentIndex(int)));
+    connect(menu, SIGNAL(labelClicked(int)), rotaryViews, SLOT(setCurrentIndex(int)));
+    connect(menu, SIGNAL(labelClicked(int)), rotaryViews, SLOT(setCurrentIndex(int)));
+    connect(menu, SIGNAL(labelClicked(int)), rotaryViews, SLOT(setCurrentIndex(int)));
+    connect(menu, SIGNAL(labelClicked(int)), rotaryViews, SLOT(setCurrentIndex(int)));
+    connect(monthView->monthLabel, SIGNAL(yearChanged(int)), dateDisplay, SLOT(slotyearChanged(int)));
+    connect(monthView->monthLabel, SIGNAL(monthChanged(int)), dateDisplay, SLOT(slotMonthChanged(int)));
 }

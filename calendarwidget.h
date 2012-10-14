@@ -1,3 +1,6 @@
+// @authors Chris Dargis
+// @Copyright 2012
+
 #ifndef CALENDARWIDGET_H
 #define CALENDARWIDGET_H
 
@@ -6,10 +9,14 @@
 #include <QMenuBar>
 
 #include "calendarmenu.h"
-#include "rotaryview.h"
+#include "monthview.h"
+#include "dayview.h"
+#include "listview.h"
+#include "todoview.h"
 #include "datedisplay.h"
+#include "calobject.h"
 
-class CalendarWidget : public QWidget
+class CalendarWidget : public QWidget, CalObject
 {
     Q_OBJECT
 public:
@@ -20,11 +27,15 @@ public slots:
 
 private:
     QRect screen;
+    QStackedWidget* rotaryViews;
     CalendarMenu* menu;
-    QMenuBar* menuBar;
-    RotaryView* yearView;
-    RotaryView* monthView;
     DateDisplay* dateDisplay;
+    QMenuBar* menuBar;
+
+    MonthView* monthView;
+    DayView* dayView;
+    ListView* listView;
+    ToDoView* toDoView;
 };
 
 #endif // CALENDARWIDGET_H

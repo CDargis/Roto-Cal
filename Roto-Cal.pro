@@ -28,14 +28,28 @@ SOURCES += main.cpp mainwindow.cpp \
     clickablelabel.cpp \
     rotaryview.cpp \
     rotatablelabel.cpp \
-    datedisplay.cpp
+    datedisplay.cpp \
+    monthview.cpp \
+    calobject.cpp \
+    dayview.cpp \
+    todoview.cpp \
+    listview.cpp \
+    daylabel.cpp \
+    monthlabel.cpp
 HEADERS += mainwindow.h \
     calendarwidget.h \
     calendarmenu.h \
     clickablelabel.h \
     rotaryview.h \
     rotatablelabel.h \
-    datedisplay.h
+    datedisplay.h \
+    monthview.h \
+    calobject.h \
+    dayview.h \
+    todoview.h \
+    listview.h \
+    daylabel.h \
+    monthlabel.h
 FORMS += mainwindow.ui
 
 # Please do not modify the following two lines. Required for deployment.

@@ -1,14 +1,14 @@
 #include "rotatablelabel.h"
 #include <QDebug>
 
-RotatableLabel::RotatableLabel(QPixmap pixmap, QWidget *parent) : QLabel(parent)
+RotatableLabel::RotatableLabel(QWidget *parent) : QLabel(parent)
 {
     connect(this, SIGNAL(mouseDown()), this, SLOT(slotMouseDown()));
     connect(this, SIGNAL(mouseMove()), this, SLOT(slotMouseMoved()));
     connect(this, SIGNAL(mouseUp()), this, SLOT(slotMouseUp()));
     currentRotation = 0;
-    originalPixmap = pixmap;
-    setPixmap(originalPixmap);
+
+    grabGesture(Qt::SwipeGesture);
 }
 
 void RotatableLabel::mousePressEvent(QMouseEvent *ev)
@@ -26,6 +26,13 @@ void RotatableLabel::mouseReleaseEvent(QMouseEvent *ev)
     emit mouseUp();
 }
 
+bool RotatableLabel::event(QEvent *e)
+{
+    if(e->type() == QEvent::Gesture)
+        return gestureEvent(static_cast<QGestureEvent*>(e));
+    else return QLabel::event(e);
+}
+
 void RotatableLabel::slotMouseDown()
 {
     startPoint = QWidget::mapFromGlobal(QCursor::pos());
@@ -34,34 +41,18 @@ void RotatableLabel::slotMouseDown()
 void RotatableLabel::slotMouseMoved()
 {
     QPoint point = QWidget::mapFromGlobal(QCursor::pos());
-    double x = point.rx();
     double y = point.ry();
-    if(x < startPoint.rx() || y < startPoint.ry()) currentRotation--;
-    else currentRotation++;
+    if(y < startPoint.ry()) currentRotation -= 2;
+    else currentRotation += 2;
+    currentRotation %= 360;
+    qDebug() << currentRotation;
     startPoint = point;
     update();
-
-    /**
-    double numerator = (x*startPoint.rx()) + (y*startPoint.ry());
-    double magA = sqrt(x*x + y*y);
-    double magB = sqrt(startPoint.rx()*startPoint.rx() + startPoint.ry()*startPoint.ry());
-    double demoninator = magA*magB;
-    double theta = acos(numerator / demoninator) * (180.00 / PI);
-
-    if(x < startPoint.rx() | y < startPoint.ry()) theta = -theta;
-
-    currentRotation += theta;
-    update();
-    startPoint = point;
-
-//    qDebug() << "origin: " << startPoint.x() << ", " << startPoint.y() << " current: "
-  //           << x << ", " << y << " angle: " << theta;
-  */
 }
 
 void RotatableLabel::slotMouseUp()
 {
-
+    startPoint = QPoint(0,0);
 }
 
 void RotatableLabel::paintEvent(QPaintEvent *pe)
@@ -76,4 +67,29 @@ void RotatableLabel::paintEvent(QPaintEvent *pe)
     p.drawPixmap(0, 0, pixmap);
     this->setPixmap(rotatedMap);
     QLabel::paintEvent(pe);
+}
+
+bool RotatableLabel::gestureEvent(QGestureEvent *event)
+{
+    QMessageBox box;
+    box.setText("gesture event");
+    box.exec();
+    if(QGesture* swipe = event->gesture(Qt::SwipeGesture))
+        swipeTriggered(static_cast<QSwipeGesture*>(swipe));
+    return true;
+}
+
+void RotatableLabel::swipeTriggered(QSwipeGesture *gesture)
+{
+    currentRotation = 200;
+    update();
+    qDebug() << "swipe has been triggered yo!";
+    QMessageBox box;
+    box.setText("swipe has been triggered yo!");
+    box.exec();
+}
+
+void RotatableLabel::setCurrentRotation(int rotation)
+{
+    currentRotation = rotation;
 }

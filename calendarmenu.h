@@ -1,3 +1,6 @@
+// @authors Chris Dargis
+// @Copyright 2012
+
 #ifndef CALENDARMENU_H
 #define CALENDARMENU_H
 
@@ -15,23 +18,20 @@ public:
     const int& getLabelWidth() { return labelWidth; }
     const int& getMenuHeight() { return menuHeight; }
 signals:
-    void yearLabelClicked(int pageIndex);
-    void monthLabelClicked(int pageIndex);
-    void dayLabelClicked(int pageIndex);
-    void toDoLabelClicked(int pageIndex);
+    void labelClicked(int pageIndex);
 public slots:
-    void slotYearlLabelClicked();
     void slotMonthLabelClicked();
     void slotDayLabelClicked();
+    void slotListLabelClicked();
     void slotToDoLabelClicked();
 private:
     int menuWidth;
     int labelWidth;
     int menuHeight;
 
-    ClickableLabel* yearLabel;
     ClickableLabel* monthLabel;
     ClickableLabel* dayLabel;
+    ClickableLabel* listLabel;
     ClickableLabel* toDoLabel;
 };
 
