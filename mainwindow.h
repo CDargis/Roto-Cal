@@ -5,8 +5,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QBoxLayout>
 #include "calendarwidget.h"
+#include "addeventwidget.h"
 
 namespace Ui {
     class MainWindow;
@@ -30,9 +30,13 @@ public:
 
     void showExpanded();
 
+public slots:
+    void slotActionTriggered(QAction* a);
 private:
     Ui::MainWindow *ui;
+    QStackedWidget* screens;
     CalendarWidget* cWidget;
+    AddEventWidget* addEventWidget;
 };
 
 #endif // MAINWINDOW_H

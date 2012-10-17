@@ -1,5 +1,4 @@
 #include "rotatablelabel.h"
-#include <QDebug>
 
 RotatableLabel::RotatableLabel(QWidget *parent) : QLabel(parent)
 {
@@ -45,7 +44,6 @@ void RotatableLabel::slotMouseMoved()
     if(y < startPoint.ry()) currentRotation -= 2;
     else currentRotation += 2;
     currentRotation %= 360;
-    qDebug() << currentRotation;
     startPoint = point;
     update();
 }
@@ -57,7 +55,6 @@ void RotatableLabel::slotMouseUp()
 
 void RotatableLabel::paintEvent(QPaintEvent *pe)
 {
-    qDebug() << currentRotation;
     QPixmap pixmap(originalPixmap);
     QPixmap rotatedMap(pixmap.size());
     QPainter p(&rotatedMap);
@@ -92,4 +89,5 @@ void RotatableLabel::swipeTriggered(QSwipeGesture *gesture)
 void RotatableLabel::setCurrentRotation(int rotation)
 {
     currentRotation = rotation;
+    update();
 }

@@ -11,11 +11,10 @@ class CalObject
 public:
     explicit CalObject();
     virtual void setDate(QDate date);
-    virtual QDate getDate();
 protected:
-    QDate date;
+
 signals:
-    
+    void setScreenIndex(int index);
 public slots:
     
 };

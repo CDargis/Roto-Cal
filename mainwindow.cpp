@@ -4,7 +4,6 @@
 #include <QCoreApplication>
 #include <QDesktopWidget>
 
-#include <QStackedWidget>
 #include "rotaryview.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -12,16 +11,34 @@ MainWindow::MainWindow(QWidget *parent)
       cWidget(new CalendarWidget(qApp->desktop()->screenGeometry(), this))
 {
     ui->setupUi(this);
-    setCentralWidget(cWidget);
+
     QMenuBar* menuBar = new QMenuBar(this);
-    menuBar->addAction("Add Event");
-    menuBar->addAction("Add To-Do");
+    menuBar->addAction(tr("Add Event"));
+    menuBar->addAction(tr("Add To-Do"));
     setMenuBar(menuBar);
+    connect(menuBar, SIGNAL(triggered(QAction*)), this, SLOT(slotActionTriggered(QAction*)));
+
+    screens = new QStackedWidget(this);
+    screens->addWidget(cWidget);
+    addEventWidget = new AddEventWidget(this);
+    screens->addWidget(addEventWidget);
+    connect(cWidget, SIGNAL(setScreenIndex(int)), screens, SLOT(setCurrentIndex(int)));
+    connect(addEventWidget, SIGNAL(setScreenIndex(int)), screens, SLOT(setCurrentIndex(int)));
+
+    setCentralWidget(screens);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::slotActionTriggered(QAction *a)
+{
+    if(a->text().compare(tr("Add Event")) == 0)
+        screens->setCurrentIndex(1);
+    else if(a->text().compare(tr("Add To-Do")) == 0)
+        return;
 }
 
 //---------------------------------------------------------------------------------------------------

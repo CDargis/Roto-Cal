@@ -20,12 +20,15 @@ CalendarWidget::CalendarWidget(QRect screenRes, QWidget *parent) :
     rotaryViews->setGeometry(pageGeometry);
 
     monthView = new MonthView(pageGeometry, this);
+    monthView->setDate(QDate::currentDate());
     rotaryViews->addWidget(monthView);
 
     dayView = new DayView(pageGeometry, this);
+    //dayView->setDate(QDate::currentDate());
     rotaryViews->addWidget(dayView);
 
     listView = new ListView(pageGeometry, this);
+    //dayView->setDate(QDate::currentDate());
     rotaryViews->addWidget(listView);
 
     toDoView = new ToDoView(pageGeometry, this);
