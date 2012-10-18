@@ -11,7 +11,7 @@
 #include "calendarmenu.h"
 #include "monthview.h"
 #include "dayview.h"
-#include "listview.h"
+#include "detailview.h"
 #include "todoview.h"
 #include "datedisplay.h"
 #include "calobject.h"
@@ -34,7 +34,7 @@ private:
 
     MonthView* monthView;
     DayView* dayView;
-    ListView* listView;
+    DetailView* detailView;
     ToDoView* toDoView;
 };
 

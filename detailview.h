@@ -7,11 +7,11 @@
 #include <QListWidgetItem>
 #include <QHBoxLayout>
 
-class ListView : public RotaryView
+class DetailView : public RotaryView
 {
     Q_OBJECT
 public:
-    explicit ListView(QRect& pageGeometry, QWidget *parent);
+    explicit DetailView(QRect& pageGeometry, QWidget *parent);
     
 signals:
     

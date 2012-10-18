@@ -27,9 +27,9 @@ CalendarWidget::CalendarWidget(QRect screenRes, QWidget *parent) :
     //dayView->setDate(QDate::currentDate());
     rotaryViews->addWidget(dayView);
 
-    listView = new ListView(pageGeometry, this);
-    //dayView->setDate(QDate::currentDate());
-    rotaryViews->addWidget(listView);
+    detailView = new DetailView(pageGeometry, this);
+    //detailView->setDate(QDate::currentDate());
+    rotaryViews->addWidget(detailView);
 
     toDoView = new ToDoView(pageGeometry, this);
     rotaryViews->addWidget(toDoView);

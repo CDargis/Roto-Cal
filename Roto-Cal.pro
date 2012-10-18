@@ -33,10 +33,10 @@ SOURCES += main.cpp mainwindow.cpp \
     calobject.cpp \
     dayview.cpp \
     todoview.cpp \
-    listview.cpp \
     daylabel.cpp \
     monthlabel.cpp \
-    addeventwidget.cpp
+    addeventwidget.cpp \
+    detailview.cpp
 HEADERS += mainwindow.h \
     calendarwidget.h \
     calendarmenu.h \
@@ -48,10 +48,10 @@ HEADERS += mainwindow.h \
     calobject.h \
     dayview.h \
     todoview.h \
-    listview.h \
     daylabel.h \
     monthlabel.h \
-    addeventwidget.h
+    addeventwidget.h \
+    detailview.h
 FORMS += mainwindow.ui
 
 # Please do not modify the following two lines. Required for deployment.

@@ -25,6 +25,7 @@ private:
 
     QLineEdit* titleEdit;
     QLineEdit* descEdit;
+    QLineEdit* locationEdit;
     QDateTimeEdit* sTimeEdit;
     QDateTimeEdit* eTimeEdit;
 };

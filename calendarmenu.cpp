@@ -11,7 +11,7 @@ CalendarMenu::CalendarMenu(int xOffset, int yOffset, int menuWidth, int menuHeig
 
     monthLabel = new ClickableLabel("Month", this);
     dayLabel = new ClickableLabel("Day", this);
-    listLabel = new ClickableLabel("List", this);
+    listLabel = new ClickableLabel("Event\nDetails", this);
     toDoLabel = new ClickableLabel("To-Do", this);
 
     connect(monthLabel, SIGNAL(clicked()), this, SLOT(slotMonthLabelClicked()));

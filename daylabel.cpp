@@ -33,3 +33,21 @@ QPixmap DayLabel::paintDaysOnPixmap(int numDays, QPixmap pixmap)
     }
     return labeledMap;
 }
+
+void DayLabel::setDayPixmap(int days)
+{
+    if(days == 28)
+        originalPixmap = pixmap28Days;
+    else if(days == 29)
+        originalPixmap = pixmap29Days;
+    else if(days == 30)
+        originalPixmap = pixmap30Days;
+    else if(days == 31)
+        originalPixmap = pixmap31Days;
+    setPixmap(originalPixmap);
+}
+
+void DayLabel::paintEvent(QPaintEvent *pe)
+{
+    RotatableLabel::paintEvent(pe);
+}

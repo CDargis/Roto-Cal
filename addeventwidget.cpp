@@ -14,7 +14,9 @@
 AddEventWidget::AddEventWidget(QWidget *parent) :
     QWidget(parent)
 {
-    QFormLayout* mainLayout = new QFormLayout(this);
+    QVBoxLayout* mainLayout = new QVBoxLayout(this);
+
+    QFormLayout* form = new QFormLayout(this);
     QLabel* addTitle = new QLabel(tr("Add an Event"), this);
     QFont font = addTitle->font();
     font.setBold(true);
@@ -22,46 +24,44 @@ AddEventWidget::AddEventWidget(QWidget *parent) :
     addTitle->setFont(font);
     QGridLayout* centerTitle = new QGridLayout(this);
     centerTitle->addWidget(addTitle);
-    mainLayout->addRow(centerTitle);
+    form->addRow(centerTitle);
 
-    QHBoxLayout* titleInput = new QHBoxLayout(this);
-    QLabel* title = new QLabel(tr("Title:"), this);
     titleEdit = new QLineEdit(this);
-    titleInput->addWidget(title);
-    titleInput->addWidget(titleEdit);
-    mainLayout->addRow(titleInput);
+    form->addRow(tr("Title:"), titleEdit);
 
-    QHBoxLayout* descInput = new QHBoxLayout(this);
-    QLabel* desc = new QLabel(tr("Description:"), this);
+    locationEdit = new QLineEdit(this);
+    form->addRow(tr("Location:"), locationEdit);
+
     descEdit = new QLineEdit(this);
-    descInput->addWidget(desc);
-    descInput->addWidget(descEdit);
-    mainLayout->addRow(descInput);
+    form->addRow(tr("Description:"), descEdit);
 
-    QHBoxLayout* sTimeInput = new QHBoxLayout(this);
+    QVBoxLayout* sTimeInput = new QVBoxLayout(this);
     QLabel* sTime = new QLabel(tr("Start Time:"), this);
     sTimeEdit = new QDateTimeEdit(this);
     sTimeEdit->setDateTime(QDateTime::currentDateTime());
     sTimeEdit->showMaximized();
     sTimeInput->addWidget(sTime);
     sTimeInput->addWidget(sTimeEdit);
-    mainLayout->addRow(sTimeInput);
+    form->addRow(sTimeInput);
 
-    QHBoxLayout* eTimeInput = new QHBoxLayout(this);
+    QVBoxLayout* eTimeInput = new QVBoxLayout(this);
     QLabel* eTime = new QLabel(tr("End Time:"), this);
     eTimeEdit = new QDateTimeEdit(this);
     eTimeEdit->setDateTime(QDateTime::currentDateTime());
     eTimeEdit->showMaximized();
     eTimeInput->addWidget(eTime);
     eTimeInput->addWidget(eTimeEdit);
-    mainLayout->addRow(eTimeInput);
+    form->addRow(eTimeInput);
 
     QHBoxLayout* buttonLayout = new QHBoxLayout(this);
     QPushButton* addButton = new QPushButton(tr("Add"), this);
     QPushButton* cancelButton = new QPushButton(tr("Cancel"), this);
     buttonLayout->addWidget(addButton);
     buttonLayout->addWidget(cancelButton);
-    mainLayout->addRow(buttonLayout);
+
+    mainLayout->addLayout(form);
+    mainLayout->addLayout(buttonLayout);
+
     connect(addButton, SIGNAL(clicked()), this, SLOT(slotAddClicked()));
     connect(cancelButton, SIGNAL(clicked()), this, SLOT(slotCancelClicked()));
 
@@ -77,6 +77,7 @@ void AddEventWidget::keyPressEvent(QKeyEvent *e)
 void AddEventWidget::resetInput()
 {
     titleEdit->setText(tr(""));
+    locationEdit->setText(tr(""));
     descEdit->setText(tr(""));
     sTimeEdit->setDateTime(QDateTime::currentDateTime());
     eTimeEdit->setDateTime(QDateTime::currentDateTime());

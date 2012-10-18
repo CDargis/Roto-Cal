@@ -15,7 +15,6 @@ public:
 
     static const QString months[12];
 signals:
-    void yearChanged(int year);
     void monthChanged(int month);
 public slots:
 

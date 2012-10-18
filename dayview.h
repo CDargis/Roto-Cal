@@ -9,6 +9,7 @@ class DayView : public RotaryView
     Q_OBJECT
 public:
     explicit DayView(QRect& pageGeometry, QWidget *parent = 0);
+    void setDate(QDate date);
     DayLabel* dayLabel;
 signals:
     
