@@ -1,5 +1,5 @@
-#ifndef LISTVIEW_H
-#define LISTVIEW_H
+#ifndef DETAILVIEW_H
+#define DETAILVIEW_H
 
 #include "rotaryview.h"
 #include <QScrollArea>
@@ -19,4 +19,4 @@ public slots:
     
 };
 
-#endif // LISTVIEW_H
+#endif // DETAILVIEW_H

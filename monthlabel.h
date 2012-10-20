@@ -17,7 +17,7 @@ public:
 signals:
     void monthChanged(int month);
 public slots:
-
+    void slotMouseMovedFromParent();
 protected:
     void paintEvent(QPaintEvent *pe);
 };
