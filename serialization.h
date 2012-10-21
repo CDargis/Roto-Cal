@@ -6,7 +6,7 @@
 #include <QDebug>
 #include <set>
 #include "event.h"
-#include "Event_set.h"
+#include "event_set.h"
 
 //! Serialization Class.
 /*!
