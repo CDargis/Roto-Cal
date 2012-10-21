@@ -21,6 +21,12 @@ Event::Event(QString name, QString location, QString description, Date startDate
     this->endTime = createTime(endDate, endTime);
 }
 
+Event::~Event()
+{
+
+}
+
+
 void Event::display(){
     std::string start = ctime(&startTime);
     std::string end = ctime(&endTime);
