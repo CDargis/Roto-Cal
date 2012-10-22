@@ -34,12 +34,8 @@ protected:
     void mouseMoveEvent(QMouseEvent *ev);
     void mouseReleaseEvent(QMouseEvent *ev);
     void paintEvent(QPaintEvent *pe);
-    bool event(QEvent *e);
     QPixmap originalPixmap;
 private:
-    bool gestureEvent(QGestureEvent* event);
-    void swipeTriggered(QSwipeGesture* gesture);
-
     QPoint startPoint;
     int currentRotation;
 };

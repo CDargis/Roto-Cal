@@ -1,4 +1,5 @@
 #include "daylabel.h"
+#include <QDebug>
 
 DayLabel::DayLabel(QPixmap pixmap, QWidget *parent) :
     RotatableLabel(parent)
@@ -9,6 +10,17 @@ DayLabel::DayLabel(QPixmap pixmap, QWidget *parent) :
     pixmap31Days = paintDaysOnPixmap(31, pixmap);
     originalPixmap = pixmap31Days;
     setPixmap(originalPixmap);
+    connect(this, SIGNAL(mouseMove()), this, SLOT(slotGrabMouseMove()));
+}
+
+void DayLabel::slotGrabMouseMove()
+{
+    int cRotation = getCurrentRotation();
+    if(cRotation < 0)
+        cRotation += 360;
+    float div = (float)cRotation / 11.612903226;
+    int day = ((int)div) + 1;
+    emit dayChanged(day);
 }
 
 QPixmap DayLabel::paintDaysOnPixmap(int numDays, QPixmap pixmap)
@@ -45,9 +57,5 @@ void DayLabel::setDayPixmap(int days)
     else if(days == 31)
         originalPixmap = pixmap31Days;
     setPixmap(originalPixmap);
-}
-
-void DayLabel::paintEvent(QPaintEvent *pe)
-{
-    RotatableLabel::paintEvent(pe);
+    update();
 }

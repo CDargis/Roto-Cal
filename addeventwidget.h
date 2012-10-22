@@ -7,6 +7,7 @@
 #include <QLineEdit>
 #include <QTextEdit>
 #include <QDateTimeEdit>
+#include <QScrollArea>
 
 class AddEventWidget : public QWidget, CalObject
 {
@@ -15,6 +16,7 @@ public:
     explicit AddEventWidget(QWidget *parent = 0);
 protected:
     void keyPressEvent(QKeyEvent *e);
+    void mouseMoveEvent(QMouseEvent *e);
 signals:
     void setScreenIndex(int index);
 public slots:
@@ -28,6 +30,7 @@ private:
     QLineEdit* locationEdit;
     QDateTimeEdit* sTimeEdit;
     QDateTimeEdit* eTimeEdit;
+    QPoint lastPoint;
 };
 
 #endif // ADDEVENTWIDGET_H

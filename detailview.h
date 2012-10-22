@@ -16,7 +16,7 @@ public:
 signals:
     
 public slots:
-    
+
 };
 
 #endif // DETAILVIEW_H

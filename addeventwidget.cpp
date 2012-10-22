@@ -12,8 +12,9 @@
 #include <QButtonGroup>
 
 AddEventWidget::AddEventWidget(QWidget *parent) :
-    QWidget(parent)
+    QWidget(parent), CalObject()
 {
+    lastPoint = QPoint(0, 0);
     QVBoxLayout* mainLayout = new QVBoxLayout(this);
 
     QFormLayout* form = new QFormLayout(this);
@@ -64,8 +65,18 @@ AddEventWidget::AddEventWidget(QWidget *parent) :
 
     connect(addButton, SIGNAL(clicked()), this, SLOT(slotAddClicked()));
     connect(cancelButton, SIGNAL(clicked()), this, SLOT(slotCancelClicked()));
-
+    mainLayout->setSizeConstraint(QLayout::SetMinAndMaxSize);
     setLayout(mainLayout);
+}
+
+void AddEventWidget::mouseMoveEvent(QMouseEvent *e)
+{
+    // Scrolling down or up
+    QPoint p = QWidget::mapFromGlobal(QCursor::pos());
+    if(p.ry() < lastPoint.ry()) scroll(0, -5);
+    else scroll(0, 5);
+    lastPoint = p;
+    QWidget::mouseMoveEvent(e);
 }
 
 void AddEventWidget::keyPressEvent(QKeyEvent *e)

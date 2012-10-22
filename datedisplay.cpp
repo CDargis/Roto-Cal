@@ -3,7 +3,7 @@
 #include <QStyle>
 
 DateDisplay::DateDisplay(int xOffset, int yOffset, int width, int height, QWidget *parent)
-    : QLabel(parent)
+    : QLabel(parent), CalObject()
 {
     setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     setGeometry(xOffset, yOffset, width, height);
@@ -32,6 +32,8 @@ void DateDisplay::slotMonthChanged(int month)
 void DateDisplay::slotdayChanged(int day)
 {
     QDate date = QDate::fromString(text());
+    if(day > date.daysInMonth())
+        return;
     date.setDate(date.year(), date.month(), day);
     setText(date.toString());
 }

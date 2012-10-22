@@ -6,30 +6,24 @@ RotatableLabel::RotatableLabel(QWidget *parent) : QLabel(parent)
     connect(this, SIGNAL(mouseMove()), this, SLOT(slotMouseMoved()));
     connect(this, SIGNAL(mouseUp()), this, SLOT(slotMouseUp()));
     currentRotation = 0;
-
-    grabGesture(Qt::SwipeGesture);
 }
 
 void RotatableLabel::mousePressEvent(QMouseEvent *ev)
 {
     emit mouseDown();
+    QLabel::mousePressEvent(ev);
 }
 
 void RotatableLabel::mouseMoveEvent(QMouseEvent *ev)
 {
     emit mouseMove();
+    QLabel::mousePressEvent(ev);
 }
 
 void RotatableLabel::mouseReleaseEvent(QMouseEvent *ev)
 {
     emit mouseUp();
-}
-
-bool RotatableLabel::event(QEvent *e)
-{
-    if(e->type() == QEvent::Gesture)
-        return gestureEvent(static_cast<QGestureEvent*>(e));
-    else return QLabel::event(e);
+    QLabel::mouseReleaseEvent(ev);
 }
 
 void RotatableLabel::slotMouseDown()
@@ -64,26 +58,6 @@ void RotatableLabel::paintEvent(QPaintEvent *pe)
     p.drawPixmap(0, 0, pixmap);
     this->setPixmap(rotatedMap);
     QLabel::paintEvent(pe);
-}
-
-bool RotatableLabel::gestureEvent(QGestureEvent *event)
-{
-    QMessageBox box;
-    box.setText("gesture event");
-    box.exec();
-    if(QGesture* swipe = event->gesture(Qt::SwipeGesture))
-        swipeTriggered(static_cast<QSwipeGesture*>(swipe));
-    return true;
-}
-
-void RotatableLabel::swipeTriggered(QSwipeGesture *gesture)
-{
-    currentRotation = 200;
-    update();
-    qDebug() << "swipe has been triggered yo!";
-    QMessageBox box;
-    box.setText("swipe has been triggered yo!");
-    box.exec();
 }
 
 void RotatableLabel::setCurrentRotation(int rotation)

@@ -9,6 +9,7 @@ MonthLabel::MonthLabel(QPixmap pixmap, QWidget *parent) : RotatableLabel(parent)
     QPixmap paintedPixmap = paintMonthsOnPixmap(pixmap);
     originalPixmap = paintedPixmap;
     setPixmap(originalPixmap);
+    connect(this, SIGNAL(mouseMove()), this, SLOT(slotGrabMouseMove()));
 }
 
 QPixmap MonthLabel::paintMonthsOnPixmap(QPixmap pixmap)
@@ -34,7 +35,7 @@ QPixmap MonthLabel::paintMonthsOnPixmap(QPixmap pixmap)
     return labeledMap;
 }
 
-void MonthLabel::paintEvent(QPaintEvent *pe)
+void MonthLabel::slotGrabMouseMove()
 {
     int cRotation = getCurrentRotation();
     if(cRotation < 0)
@@ -52,5 +53,4 @@ void MonthLabel::paintEvent(QPaintEvent *pe)
     else if(cRotation < 300) emit monthChanged(10);
     else if(cRotation < 330) emit monthChanged(11);
     else if(cRotation < 360) emit monthChanged(12);
-    RotatableLabel::paintEvent(pe);
 }
