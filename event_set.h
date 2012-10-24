@@ -5,6 +5,10 @@
  * \date Oct 2012
  *
  */
+
+#ifndef _event_map_
+#define _event_map_
+
 #include <map>                                                                  
 #include <set>
 #include <ctime>
@@ -12,8 +16,6 @@
 #include "cmp_event_year.h"
 #include "cmp_event_month.h"
 #include "cmp_event_day.h"
-#ifndef _even_map__                                                           
-#define _event_map_
 
 class Event_map                                                                 
 {                                                                               

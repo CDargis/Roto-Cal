@@ -15,12 +15,13 @@
 #include "todoview.h"
 #include "datedisplay.h"
 #include "calobject.h"
+#include "event_set.h"
 
 class CalendarWidget : public QWidget, CalObject
 {
     Q_OBJECT
 public:
-    explicit CalendarWidget(QRect screenRes, QWidget *parent = 0);
+    explicit CalendarWidget(QRect screenRes, Event_map& map, QWidget *parent = 0);
 signals:
     
 public slots:
@@ -36,6 +37,7 @@ private:
     DayView* dayView;
     DetailView* detailView;
     ToDoView* toDoView;
+    //Event_map& eventMap;
 };
 
 #endif // CALENDARWIDGET_H

@@ -2,8 +2,8 @@
 
 #include <QLabel>
 
-DayView::DayView(QRect &pageGeometry, QWidget *parent) :
-    RotaryView(pageGeometry, parent)
+DayView::DayView(QRect &pageGeometry, Event_map &map, QWidget *parent) :
+    RotaryView(pageGeometry, map, parent)
 {
     int pageHeight = geometry().height();
     int screenWidth = geometry().width();

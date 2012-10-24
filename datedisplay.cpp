@@ -2,8 +2,8 @@
 
 #include <QStyle>
 
-DateDisplay::DateDisplay(int xOffset, int yOffset, int width, int height, QWidget *parent)
-    : QLabel(parent), CalObject()
+DateDisplay::DateDisplay(int xOffset, int yOffset, int width, int height, Event_map &map, QWidget *parent)
+    : QLabel(parent), CalObject(map)
 {
     setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     setGeometry(xOffset, yOffset, width, height);
@@ -19,14 +19,17 @@ void DateDisplay::slotyearChanged(int year)
 {
     QDate date = QDate::fromString(text());
     date.setDate(year, date.month(), date.day());
-    setText(date.toString());
+    if(date.isValid())
+        setText(date.toString());
 }
 
 void DateDisplay::slotMonthChanged(int month)
 {
     QDate date = QDate::fromString(text());
     date.setDate(date.year(), month, date.day());
-    setText(date.toString());
+    if(date.isValid())
+        setText(date.toString());
+    emit dateChanged(QDate::fromString(text()));
 }
 
 void DateDisplay::slotdayChanged(int day)
@@ -35,7 +38,8 @@ void DateDisplay::slotdayChanged(int day)
     if(day > date.daysInMonth())
         return;
     date.setDate(date.year(), date.month(), day);
-    setText(date.toString());
+    if(date.isValid())
+        setText(date.toString());
 }
 
 /**

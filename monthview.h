@@ -12,7 +12,7 @@ class MonthView : public RotaryView
 {
     Q_OBJECT
 public:
-    explicit MonthView(QRect& pageGeometry, QWidget *parent);
+    explicit MonthView(QRect& pageGeometry, Event_map& map, QWidget *parent);
     void setDate(QDate date);
     MonthLabel* monthLabel;
 signals:

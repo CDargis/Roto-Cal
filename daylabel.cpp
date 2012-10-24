@@ -59,3 +59,8 @@ void DayLabel::setDayPixmap(int days)
     setPixmap(originalPixmap);
     update();
 }
+
+void DayLabel::slotDateChanged(QDate date)
+{
+    setDayPixmap(date.daysInMonth());
+}
