@@ -9,7 +9,6 @@
 #ifndef _event_map_
 #define _event_map_
 
-#include <map>                                                                  
 #include <set>
 #include <ctime>
 #include "cmp_event_set.h"
