@@ -11,8 +11,8 @@
 #include <QPushButton>
 #include <QButtonGroup>
 
-AddEventWidget::AddEventWidget(Event_map &map, QWidget *parent) :
-    QWidget(parent), CalObject(map)
+AddEventWidget::AddEventWidget(Event_set &set, QWidget *parent) :
+    QWidget(parent), CalObject(set)
 {
     lastPoint = QPoint(0, 0);
     QVBoxLayout* mainLayout = new QVBoxLayout(this);

@@ -4,9 +4,9 @@
 //{
 //}
 
-CalObject::CalObject(Event_map &map) : eventMap(map)
+CalObject::CalObject(Event_set &set) : eventSet(set)
 {
-    //eventMap(map);
+    //eventSet(set);
 }
 
 void CalObject::setDate(QDate date)

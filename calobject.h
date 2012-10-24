@@ -11,10 +11,10 @@ class CalObject
 {
 public:
     //explicit CalObject();
-    explicit CalObject(Event_map& map);
+    explicit CalObject(Event_set& set);
     virtual void setDate(QDate date);
 protected:
-    Event_map& eventMap;
+    Event_set& eventSet;
 signals:
     void setScreenIndex(int index);
 public slots:

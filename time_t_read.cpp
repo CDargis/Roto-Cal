@@ -1,5 +1,5 @@
-/**                                                                             
- * \file Event_map.h                                                            
+/**
+ * \file time_t_read.h
  *                                                                              
  * \author Jason Moreau                                                         
  * \date Oct 2012                                                               

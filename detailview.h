@@ -11,7 +11,7 @@ class DetailView : public RotaryView
 {
     Q_OBJECT
 public:
-    explicit DetailView(QRect& pageGeometry, Event_map& map, QWidget *parent);
+    explicit DetailView(QRect& pageGeometry, Event_set& set, QWidget *parent);
     
 signals:
     

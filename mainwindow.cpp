@@ -8,7 +8,7 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow),
-      cWidget(new CalendarWidget(qApp->desktop()->screenGeometry(), eventMap, this))
+      cWidget(new CalendarWidget(qApp->desktop()->screenGeometry(), eventSet, this))
 {
     ui->setupUi(this);
 
@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     screens = new QStackedWidget(this);
     screens->addWidget(cWidget);
-    addEventWidget = new AddEventWidget(eventMap, this);
+    addEventWidget = new AddEventWidget(eventSet, this);
     screens->addWidget(addEventWidget);
     connect(cWidget, SIGNAL(setScreenIndex(int)), screens, SLOT(setCurrentIndex(int)));
     connect(addEventWidget, SIGNAL(setScreenIndex(int)), screens, SLOT(setCurrentIndex(int)));

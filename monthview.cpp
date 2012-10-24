@@ -1,7 +1,7 @@
 #include "monthview.h"
 
-MonthView::MonthView(QRect &pageGeometry, Event_map &map, QWidget *parent) :
-    RotaryView(pageGeometry, map, parent)
+MonthView::MonthView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
+    RotaryView(pageGeometry, set, parent)
 {
     int pageHeight = geometry().height();
     int screenWidth = geometry().width();

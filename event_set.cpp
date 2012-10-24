@@ -1,5 +1,5 @@
 /*!
- * \class Event_map.cpp
+ * \class Event_set.cpp
  *
  * \brief runtime Event object pointer container class (storage and retrieval)
  *
@@ -19,7 +19,7 @@
 #include "event_set.h"
 
 /* START INSERT FUNCTIONS */                                                    
-bool Event_map::insertEvent(Event * e)                                          
+bool Event_set::insertEvent(Event * e)
 {                                                                               
     if (!insertToYear(e))                                        
         return false;                                                           
@@ -29,7 +29,7 @@ bool Event_map::insertEvent(Event * e)
 }                                                                               
                                                                                 
 /* inserts event into year */
-bool Event_map::insertToYear(Event * e)                               
+bool Event_set::insertToYear(Event * e)
 {                                                                               
     /* check if already exists */                                               
     if (findDuplicate(e))                                                       
@@ -38,15 +38,15 @@ bool Event_map::insertToYear(Event * e)
     return true;                                                                
 }                                                                               
                                                                                 
-/* inserts event into month map */
-bool Event_map::insertToMonth(Event * e)                              
+/* inserts event into month set */
+bool Event_set::insertToMonth(Event * e)
 {                                                                               
     month_set.insert(e);                        
     return true;                                                                
 }                                                                               
                                                                                 
-/* inserts event into day map */
-bool Event_map::insertToDay(Event * e)                              
+/* inserts event into day set */
+bool Event_set::insertToDay(Event * e)
 {                                                                               
     day_set.insert(e);                          
     return true;                                                                
@@ -54,7 +54,7 @@ bool Event_map::insertToDay(Event * e)
 /* END INSERT FUNCTIONS */
 
 /* START DELETE FUNCTIONS */                                                    
-bool Event_map::deleteEvent(Event * e)                                          
+bool Event_set::deleteEvent(Event * e)
 {                                                                               
     if (!deleteFromYear(e))                                                     
         return false;  // not found                                             
@@ -66,7 +66,7 @@ bool Event_map::deleteEvent(Event * e)
 }                                                                               
          
 /* deletes event from year map */
-bool Event_map::deleteFromYear(Event * e)   
+bool Event_set::deleteFromYear(Event * e)
 {                                                                               
     SetIter lower, upper, it;                                                   
     lower = year_set.lower_bound(e);                                
@@ -90,7 +90,7 @@ bool Event_map::deleteFromYear(Event * e)
 }         
 
 /* deletes event from month map */
-bool Event_map::deleteFromMonth(Event * e)                                      
+bool Event_set::deleteFromMonth(Event * e)
 {                                                                               
     SetIter lower = month_set.lower_bound(e);                       
     SetIter upper = month_set.upper_bound(e);                       
@@ -109,8 +109,8 @@ bool Event_map::deleteFromMonth(Event * e)
                                                                                 
 }   
 
-/* deletes event from day map */
-bool Event_map::deleteFromDay(Event * e)                                        
+/* deletes event from day set */
+bool Event_set::deleteFromDay(Event * e)
 {                                                                               
     SetIter lower = day_set.lower_bound(e);                         
     SetIter upper = day_set.upper_bound(e);                         
@@ -127,12 +127,12 @@ bool Event_map::deleteFromDay(Event * e)
     return false;                                                               
 }                                                                               
 
-/* deletes year, month, day map containers and objects within */
-void Event_map::deleteMaps()                                                     
+/* deletes year, month, day set containers and objects within */
+void Event_set::deleteSets()
 {                                                                               
     SetIter it;                                                                 
     /*  delete year event objects, effectively deleting all objects of event    
-     *  type stored in maps                                                     
+     *  type stored in sets
      */                                                                         
     for (it = year_set.begin(); it != year_set.end(); it++) {                   
         delete(*it);                                                     
@@ -146,7 +146,7 @@ void Event_map::deleteMaps()
 
 /* START GET EVENT SET FUNCTIONS */                                             
 /* returns ordered multiset of year containing Event object pointers */
-std::multiset<Event *, Cmp_event_set> * Event_map::getYear(Event * e)          
+std::multiset<Event *, Cmp_event_set> * Event_set::getYear(Event * e)
 {                                                                               
     SetIter lower, upper, it;                                                   
     lower = year_set.lower_bound(e);                                           
@@ -161,7 +161,7 @@ std::multiset<Event *, Cmp_event_set> * Event_map::getYear(Event * e)
 }                                                                               
                                                                                 
 /* returns ordered multiset of month containing Event object pointer */
-std::multiset<Event *, Cmp_event_set> * Event_map::getMonth(Event * e)         
+std::multiset<Event *, Cmp_event_set> * Event_set::getMonth(Event * e)
 {                                                                               
     SetIter lower, upper, it;                                                   
     lower = month_set.lower_bound(e);                                          
@@ -176,7 +176,7 @@ std::multiset<Event *, Cmp_event_set> * Event_map::getMonth(Event * e)
 }   
 
 /* returns ordered multiset of day Event object pointers */
-std::multiset<Event *, Cmp_event_set> * Event_map::getDay(Event * e)           
+std::multiset<Event *, Cmp_event_set> * Event_set::getDay(Event * e)
 {                                                                               
     SetIter lower, upper, it;                                                   
     lower = day_set.lower_bound(e);                                            
@@ -192,11 +192,11 @@ std::multiset<Event *, Cmp_event_set> * Event_map::getDay(Event * e)
 /* END GET EVENT SET FUNCTIONS */
 
 /* START EDIT FUNCTION */                                                       
-/* deletes Event object pointer from year, month, day maps and inserts 
+/* deletes Event object pointer from year, month, day sets and inserts
  * new object 
  * returns false if object already exists 
  * */
-bool Event_map::editEvent(Event * current_e, Event * new_e)                     
+bool Event_set::editEvent(Event * current_e, Event * new_e)
 {                                                                               
     /* if same start time / title already exists */                             
     if (findDuplicate(new_e))                                                   
@@ -206,8 +206,8 @@ bool Event_map::editEvent(Event * current_e, Event * new_e)
     return true;                                                                
 }                                                                               
                                                                                 
-/* finds duplicate objects using day map */
-bool Event_map::findDuplicate(Event * e)                                        
+/* finds duplicate objects using day set */
+bool Event_set::findDuplicate(Event * e)
 {                                                                               
     SetIter lower = day_set.lower_bound(e);                         
     SetIter upper = day_set.upper_bound(e);                         

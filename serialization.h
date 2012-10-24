@@ -16,20 +16,20 @@ class Serialization
 {
 public:
     //Static functions
-    //! Save events from maps to QFile (static).
+    //! Save events from sets to QFile (static).
    /*!
    \param std::multiset<Event *, Cmp_event_day>  reference argument
-   \sa load(Event_map &map)
+   \sa load(Event_set &set)
    */
     static void save(std::multiset<Event *, Cmp_event_day> &events);
 
-    //! Load events to Event_map (static).
+    //! Load events to Event_set (static).
    /*!
-   \param Event_map reference argument
+   \param Event_set reference argument
    \returns true if the load was successful and false if not
    \sa save(std::multiset<Event *, Cmp_event_day> &events)
    */
-    static bool load(Event_map &map);
+    static bool load(Event_set &set);
 };
 
 #endif // SERIALIZATION_H

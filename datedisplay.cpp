@@ -2,8 +2,8 @@
 
 #include <QStyle>
 
-DateDisplay::DateDisplay(int xOffset, int yOffset, int width, int height, Event_map &map, QWidget *parent)
-    : QLabel(parent), CalObject(map)
+DateDisplay::DateDisplay(int xOffset, int yOffset, int width, int height, Event_set &set, QWidget *parent)
+    : QLabel(parent), CalObject(set)
 {
     setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     setGeometry(xOffset, yOffset, width, height);

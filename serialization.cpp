@@ -26,7 +26,7 @@ void Serialization::save(std::multiset<Event *, Cmp_event_day> &events)
     file.close();
 }
 
-bool Serialization::load(Event_map &map)
+bool Serialization::load(Event_set &set)
 {
 
     //Open the Qfile & error check
@@ -44,7 +44,7 @@ bool Serialization::load(Event_map &map)
     {
         Event * e = new Event;
         in >> *e;
-        map.insertEvent(e);
+        set.insertEvent(e);
     }
 
     file.close();

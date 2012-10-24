@@ -13,7 +13,7 @@ class AddEventWidget : public QWidget, CalObject
 {
     Q_OBJECT
 public:
-    explicit AddEventWidget(Event_map& map, QWidget *parent = 0);
+    explicit AddEventWidget(Event_set& set, QWidget *parent = 0);
 protected:
     void keyPressEvent(QKeyEvent *e);
     void mouseMoveEvent(QMouseEvent *e);

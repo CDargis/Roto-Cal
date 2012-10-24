@@ -1,13 +1,13 @@
 /**
- * \file Event_map.h
+ * \file Event_set.h
  *
  * \author Jason Moreau
  * \date Oct 2012
  *
  */
 
-#ifndef _event_map_
-#define _event_map_
+#ifndef _event_set_
+#define _event_set_
 
 #include <set>
 #include <ctime>
@@ -16,7 +16,7 @@
 #include "cmp_event_month.h"
 #include "cmp_event_day.h"
 
-class Event_map                                                                 
+class Event_set
 {                                                                               
     public:                                                                     
 		/** inserts event into year, month, day sets                                    
@@ -37,7 +37,7 @@ class Event_map
         bool editEvent(Event * current_e, Event * new_e);                                       
 		/** delete all sets, and call delete on all event objects
 		 */
-        void deleteMaps();                                                       
+        void deleteSets();
 		/** returns ordered multiset of year containing Event object pointers 
 		 *  @param e event object of year to select for
 		 *  @returns ordered multiset by year, month, day, hour, and minute
@@ -52,10 +52,7 @@ class Event_map
 		 *  @param e event object of year, month, and day to select for
 		 *  @returns ordered multiset by year, month, day, hour, and minute
 		 */ 
-        std::multiset<Event *, Cmp_event_set> * getDay(Event * e);               
-		/** used for test purposes only
-         */
-        void printMap();                                                        
+        std::multiset<Event *, Cmp_event_set> * getDay(Event * e);                                                                    
     private:                                                                    
 		/* general use multiset iterator  */
 		typedef std::multiset<Event*>::iterator SetIter;                

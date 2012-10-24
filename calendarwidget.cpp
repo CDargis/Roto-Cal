@@ -1,8 +1,8 @@
 #include "calendarwidget.h"
 #include <QStackedWidget>
 
-CalendarWidget::CalendarWidget(QRect screenRes, Event_map &map, QWidget *parent) :
-    QWidget(parent), CalObject(map), screen(screenRes)//, eventMap(map)
+CalendarWidget::CalendarWidget(QRect screenRes, Event_set &set, QWidget *parent) :
+    QWidget(parent), CalObject(set), screen(screenRes)//, eventSet(set)
 {
     int menuHeight = screen.width() * .15;
     int screenHeight = screen.height();
@@ -11,7 +11,7 @@ CalendarWidget::CalendarWidget(QRect screenRes, Event_map &map, QWidget *parent)
     menu = new CalendarMenu(0, 0 , screenWidth, menuHeight, this);
     int dateDisplayHeight = screen.height() * .05;
 
-    dateDisplay = new DateDisplay(0, menuHeight, screenWidth, dateDisplayHeight, map, this);
+    dateDisplay = new DateDisplay(0, menuHeight, screenWidth, dateDisplayHeight, set, this);
     int pageHeight = screenHeight - menuHeight - dateDisplayHeight;
     int pageOffset = menuHeight + dateDisplayHeight;
 
@@ -19,19 +19,19 @@ CalendarWidget::CalendarWidget(QRect screenRes, Event_map &map, QWidget *parent)
     rotaryViews = new QStackedWidget(this);
     rotaryViews->setGeometry(pageGeometry);
 
-    monthView = new MonthView(pageGeometry, map, this);
+    monthView = new MonthView(pageGeometry, set, this);
     monthView->setDate(QDate::currentDate());
     rotaryViews->addWidget(monthView);
 
-    dayView = new DayView(pageGeometry, map, this);
+    dayView = new DayView(pageGeometry, set, this);
     //dayView->setDate(QDate::currentDate());
     rotaryViews->addWidget(dayView);
 
-    detailView = new DetailView(pageGeometry, map, this);
+    detailView = new DetailView(pageGeometry, set, this);
     //detailView->setDate(QDate::currentDate());
     rotaryViews->addWidget(detailView);
 
-    toDoView = new ToDoView(pageGeometry, map, this);
+    toDoView = new ToDoView(pageGeometry, set, this);
     rotaryViews->addWidget(toDoView);
 
     connect(menu, SIGNAL(labelClicked(int)), rotaryViews, SLOT(setCurrentIndex(int)));

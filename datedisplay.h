@@ -12,7 +12,7 @@ class DateDisplay : public QLabel, CalObject
 {
     Q_OBJECT
 public:
-    explicit DateDisplay(int xOffset, int yOffset, int width, int height, Event_map& map,QWidget* parent = 0);
+    explicit DateDisplay(int xOffset, int yOffset, int width, int height, Event_set& set,QWidget* parent = 0);
     //QDate getDate();
 signals:
     void dateChanged(QDate date);

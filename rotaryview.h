@@ -13,7 +13,7 @@ class RotaryView : public QWidget, CalObject
 {
     Q_OBJECT
 public:
-    explicit RotaryView(QRect& pageGeometry, Event_map& map, QWidget *parent = 0);
+    explicit RotaryView(QRect& pageGeometry, Event_set& set, QWidget *parent = 0);
 signals:
     
 public slots:

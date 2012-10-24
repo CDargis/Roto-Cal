@@ -38,7 +38,7 @@ private:
     QStackedWidget* screens;
     CalendarWidget* cWidget;
     AddEventWidget* addEventWidget;
-    Event_map eventMap;
+    Event_set eventSet;
 };
 
 #endif // MAINWINDOW_H
