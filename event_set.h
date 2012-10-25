@@ -19,6 +19,8 @@
 class Event_set
 {                                                                               
     public:                                                                     
+		~Event_set();
+		short getSize(); // for debugging purposes
 		/** inserts event into year, month, day sets                                    
  		 *  @param e Event object pointer                                                
  		 *  @returns false if already exists 

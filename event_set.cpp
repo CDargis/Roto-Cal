@@ -18,6 +18,7 @@
 #include "event.h"
 #include "event_set.h"
 
+Event_set::~Event_set() {}
 /* START INSERT FUNCTIONS */                                                    
 bool Event_set::insertEvent(Event * e)
 {                                                                               
@@ -223,3 +224,8 @@ bool Event_set::findDuplicate(Event * e)
     return false; // no match                                                   
 }                       
 
+/*  for debugging purposes */                                                    
+short Event_set::getSize()                                                      
+{                                                                               
+	    return year_set.size();                                                     
+}
