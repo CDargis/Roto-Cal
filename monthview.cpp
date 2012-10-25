@@ -8,6 +8,17 @@ MonthView::MonthView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     QPixmap pixmap(tr(":/images/blank_circle.png"));
     monthLabel = new MonthLabel(pixmap.scaled(pageHeight, pageHeight), this);
     monthLabel->setGeometry(screenWidth / 2, 0, screenWidth, pageHeight);
+
+    /**
+    QPixmap rightArrow(tr(":/images/rightArrow.png"));
+    QLabel* arrowIndicator = new QLabel(this);
+    int scalar = pageHeight * .075;
+    rightArrow = rightArrow.scaled(scalar, scalar);
+    arrowIndicator->setPixmap(rightArrow);
+    arrowIndicator->setGeometry((screenWidth / 2) - rightArrow.width(),
+                                (pageHeight / 2) - (rightArrow.height()),
+                                rightArrow.width(), rightArrow.height());
+    */
 }
 
 void MonthView::setDate(QDate date)

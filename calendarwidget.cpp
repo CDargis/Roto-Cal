@@ -43,3 +43,13 @@ CalendarWidget::CalendarWidget(QRect screenRes, Event_set &set, QWidget *parent)
     connect(dayView->dayLabel, SIGNAL(dayChanged(int)), dateDisplay, SLOT(slotdayChanged(int)));
     connect(dateDisplay, SIGNAL(dateChanged(QDate)), dayView->dayLabel, SLOT(slotDateChanged(QDate)));
 }
+
+QDate CalendarWidget::getCurrentDate()
+{
+    return dateDisplay->getDate();
+}
+
+QDateTime CalendarWidget::getCurrentDateTime()
+{
+    return dateDisplay->getDateTime();
+}

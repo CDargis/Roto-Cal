@@ -1,4 +1,4 @@
-#include "addeventwidget.h"
+#include "saveeventwidget.h"
 
 #include <QDebug>
 
@@ -11,14 +11,14 @@
 #include <QPushButton>
 #include <QButtonGroup>
 
-AddEventWidget::AddEventWidget(Event_set &set, QWidget *parent) :
-    QWidget(parent), CalObject(set)
+SaveEventWidget::SaveEventWidget(Event_set &set, CalendarWidget& widget, QWidget *parent) :
+    QWidget(parent), CalObject(set), cWidget(widget)
 {
     lastPoint = QPoint(0, 0);
     QVBoxLayout* mainLayout = new QVBoxLayout(this);
 
     QFormLayout* form = new QFormLayout(this);
-    QLabel* addTitle = new QLabel(tr("Add an Event"), this);
+    QLabel* addTitle = new QLabel(tr("Save an Event"), this);
     QFont font = addTitle->font();
     font.setBold(true);
     font.setPointSize(12);
@@ -39,7 +39,7 @@ AddEventWidget::AddEventWidget(Event_set &set, QWidget *parent) :
     QVBoxLayout* sTimeInput = new QVBoxLayout(this);
     QLabel* sTime = new QLabel(tr("Start Time:"), this);
     sTimeEdit = new QDateTimeEdit(this);
-    sTimeEdit->setDateTime(QDateTime::currentDateTime());
+    sTimeEdit->setDisplayFormat(tr("d MMM yyyy HH:mm"));
     sTimeEdit->showMaximized();
     sTimeInput->addWidget(sTime);
     sTimeInput->addWidget(sTimeEdit);
@@ -48,28 +48,30 @@ AddEventWidget::AddEventWidget(Event_set &set, QWidget *parent) :
     QVBoxLayout* eTimeInput = new QVBoxLayout(this);
     QLabel* eTime = new QLabel(tr("End Time:"), this);
     eTimeEdit = new QDateTimeEdit(this);
-    eTimeEdit->setDateTime(QDateTime::currentDateTime());
+    eTimeEdit->setDisplayFormat(tr("d MMM yyyy HH:mm"));
     eTimeEdit->showMaximized();
     eTimeInput->addWidget(eTime);
     eTimeInput->addWidget(eTimeEdit);
     form->addRow(eTimeInput);
 
     QHBoxLayout* buttonLayout = new QHBoxLayout(this);
-    QPushButton* addButton = new QPushButton(tr("Add"), this);
+    QPushButton* saveButton = new QPushButton(tr("Save"), this);
     QPushButton* cancelButton = new QPushButton(tr("Cancel"), this);
-    buttonLayout->addWidget(addButton);
+    buttonLayout->addWidget(saveButton);
     buttonLayout->addWidget(cancelButton);
 
     mainLayout->addLayout(form);
     mainLayout->addLayout(buttonLayout);
 
-    connect(addButton, SIGNAL(clicked()), this, SLOT(slotAddClicked()));
+    connect(saveButton, SIGNAL(clicked()), this, SLOT(slotSaveClicked()));
     connect(cancelButton, SIGNAL(clicked()), this, SLOT(slotCancelClicked()));
     mainLayout->setSizeConstraint(QLayout::SetMinAndMaxSize);
+
+    resetInput();
     setLayout(mainLayout);
 }
 
-void AddEventWidget::mouseMoveEvent(QMouseEvent *e)
+void SaveEventWidget::mouseMoveEvent(QMouseEvent *e)
 {
     // Scrolling down or up
     QPoint p = QWidget::mapFromGlobal(QCursor::pos());
@@ -79,28 +81,28 @@ void AddEventWidget::mouseMoveEvent(QMouseEvent *e)
     QWidget::mouseMoveEvent(e);
 }
 
-void AddEventWidget::keyPressEvent(QKeyEvent *e)
+void SaveEventWidget::keyPressEvent(QKeyEvent *e)
 {
     qDebug() << e->key();
     QWidget::keyPressEvent(e);
 }
 
-void AddEventWidget::resetInput()
+void SaveEventWidget::resetInput()
 {
     titleEdit->setText(tr(""));
     locationEdit->setText(tr(""));
     descEdit->setText(tr(""));
-    sTimeEdit->setDateTime(QDateTime::currentDateTime());
-    eTimeEdit->setDateTime(QDateTime::currentDateTime());
+    sTimeEdit->setDateTime(cWidget.getCurrentDateTime());
+    eTimeEdit->setDateTime(cWidget.getCurrentDateTime().addSecs(60*60));
 }
 
-void AddEventWidget::slotAddClicked()
+void SaveEventWidget::slotSaveClicked()
 {
     resetInput();
     emit setScreenIndex(0);
 }
 
-void AddEventWidget::slotCancelClicked()
+void SaveEventWidget::slotCancelClicked()
 {
     resetInput();
     emit setScreenIndex(0);

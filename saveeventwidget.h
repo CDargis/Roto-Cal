@@ -2,6 +2,7 @@
 #define ADDEVENTWIDGET_H
 
 #include "calobject.h"
+#include "calendarwidget.h"
 
 #include <QWidget>
 #include <QLineEdit>
@@ -9,18 +10,18 @@
 #include <QDateTimeEdit>
 #include <QScrollArea>
 
-class AddEventWidget : public QWidget, CalObject
+class SaveEventWidget : public QWidget, CalObject
 {
     Q_OBJECT
 public:
-    explicit AddEventWidget(Event_set& set, QWidget *parent = 0);
+    explicit SaveEventWidget(Event_set& set, CalendarWidget& widget, QWidget *parent = 0);
 protected:
     void keyPressEvent(QKeyEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
 signals:
     void setScreenIndex(int index);
 public slots:
-    void slotAddClicked();
+    void slotSaveClicked();
     void slotCancelClicked();
 private:
     void resetInput();
@@ -31,6 +32,8 @@ private:
     QDateTimeEdit* sTimeEdit;
     QDateTimeEdit* eTimeEdit;
     QPoint lastPoint;
+
+    CalendarWidget& cWidget;
 };
 
 #endif // ADDEVENTWIDGET_H

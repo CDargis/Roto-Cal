@@ -6,7 +6,7 @@
 
 #include <QMainWindow>
 #include "calendarwidget.h"
-#include "addeventwidget.h"
+#include "saveeventwidget.h"
 #include "event_set.h"
 
 namespace Ui {
@@ -37,7 +37,7 @@ private:
     Ui::MainWindow *ui;
     QStackedWidget* screens;
     CalendarWidget* cWidget;
-    AddEventWidget* addEventWidget;
+    SaveEventWidget* saveEventWidget;
     Event_set eventSet;
 };
 

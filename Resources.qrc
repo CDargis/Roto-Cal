@@ -3,5 +3,6 @@
         <file>preAlpha.png</file>
         <file>dial.png</file>
         <file>blank_circle.png</file>
+        <file>rightArrow.png</file>
     </qresource>
 </RCC>

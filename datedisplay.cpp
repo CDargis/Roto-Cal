@@ -42,9 +42,12 @@ void DateDisplay::slotdayChanged(int day)
         setText(date.toString());
 }
 
-/**
 QDate DateDisplay::getDate()
 {
     return QDate::fromString(text());
 }
-*/
+
+QDateTime DateDisplay::getDateTime()
+{
+    return QDateTime(getDate(), QTime::currentTime());
+}

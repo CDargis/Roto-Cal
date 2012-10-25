@@ -20,10 +20,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     screens = new QStackedWidget(this);
     screens->addWidget(cWidget);
-    addEventWidget = new AddEventWidget(eventSet, this);
-    screens->addWidget(addEventWidget);
+    saveEventWidget = new SaveEventWidget(eventSet, *cWidget,this);
+    screens->addWidget(saveEventWidget);
     connect(cWidget, SIGNAL(setScreenIndex(int)), screens, SLOT(setCurrentIndex(int)));
-    connect(addEventWidget, SIGNAL(setScreenIndex(int)), screens, SLOT(setCurrentIndex(int)));
+    connect(saveEventWidget, SIGNAL(setScreenIndex(int)), screens, SLOT(setCurrentIndex(int)));
 
     setCentralWidget(screens);
 }

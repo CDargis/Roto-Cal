@@ -23,7 +23,7 @@ symbian:TARGET.CAPABILITY += NetworkServices
 # MOBILITY +=
 
 # Input
-HEADERS += addeventwidget.h \
+HEADERS += \
            calendarmenu.h \
            calendarwidget.h \
            calobject.h \
@@ -47,9 +47,10 @@ HEADERS += addeventwidget.h \
            serialization.h \
            time1.h \
            time_t_read.h \
-           todoview.h
+           todoview.h \
+    saveeventwidget.h
 FORMS += mainwindow.ui
-SOURCES += addeventwidget.cpp \
+SOURCES += \
            calendarmenu.cpp \
            calendarwidget.cpp \
            calobject.cpp \
@@ -74,7 +75,8 @@ SOURCES += addeventwidget.cpp \
            serialization.cpp \
            time1.cpp \
            time_t_read.cpp \
-           todoview.cpp
+           todoview.cpp \
+    saveeventwidget.cpp
 RESOURCES += Resources.qrc
 
 OTHER_FILES += \
