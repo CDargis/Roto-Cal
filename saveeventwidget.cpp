@@ -74,10 +74,10 @@ SaveEventWidget::SaveEventWidget(Event_set &set, CalendarWidget& widget, QWidget
 void SaveEventWidget::mouseMoveEvent(QMouseEvent *e)
 {
     // Scrolling down or up
-    QPoint p = QWidget::mapFromGlobal(QCursor::pos());
-    if(p.ry() < lastPoint.ry()) scroll(0, -5);
-    else scroll(0, 5);
-    lastPoint = p;
+    //QPoint p = QWidget::mapFromGlobal(QCursor::pos());
+    //if(p.ry() < lastPoint.ry()) scroll(0, -5);
+    //else scroll(0, 5);
+    //lastPoint = p;
     QWidget::mouseMoveEvent(e);
 }
 
