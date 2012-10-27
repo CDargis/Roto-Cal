@@ -229,3 +229,9 @@ short Event_set::getSize()
 {                                                                               
 	    return year_set.size();                                                     
 }
+
+/* for serialization */
+std::multiset<Event *, Cmp_event_day>& Event_set::toSerialize()
+{
+    return day_set;
+}
