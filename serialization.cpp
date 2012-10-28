@@ -1,14 +1,14 @@
 #include "serialization.h"
 
 
-void Serialization::save(std::multiset<Event *, Cmp_event_day> &events)
+bool Serialization::save(std::multiset<Event *, Cmp_event_day> &events)
 {
     //Save file to disk
     QFile file("events.txt");
     if(!file.open(QIODevice::WriteOnly))
     {
         qDebug() << "Could not open file";
-        return;
+        return false;
     }
 
     //create output stream
@@ -24,6 +24,7 @@ void Serialization::save(std::multiset<Event *, Cmp_event_day> &events)
     //Finito! flush the stream to the file and close
     file.flush();
     file.close();
+    return true;
 }
 
 bool Serialization::load(Event_set &set)

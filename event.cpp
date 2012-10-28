@@ -28,10 +28,12 @@ Event::~Event()
 
 
 void Event::display(){
-    std::string start = ctime(&startTime);
-    std::string end = ctime(&endTime);
-    qDebug() << "Name: " << name << "Location: " << location << "Desc: " << description << "\n";
-    qDebug() << "From: " << QString::fromUtf8(start.c_str()) << "\n" << "To: " << QString::fromUtf8(end.c_str());
+    std::string s = ctime(&startTime);
+    std::string e = ctime(&endTime);
+    s.erase(s.find('\n', 0), 1);
+    e.erase(e.find('\n', 0), 1);
+    qDebug() << "Name:" << name << "Location:" << location << "Desc:" << description;
+    qDebug() << "From:" << QString::fromUtf8(s.data(), s.size()) << "- " << QString::fromUtf8(e.data(), e.size()) << "\n";
 
 }
 

@@ -21,7 +21,7 @@ public:
    \param std::multiset<Event *, Cmp_event_day>  reference argument
    \sa load(Event_set &set)
    */
-    static void save(std::multiset<Event *, Cmp_event_day> &events);
+    static bool save(std::multiset<Event *, Cmp_event_day> &events);
 
     //! Load events to Event_set (static).
    /*!
