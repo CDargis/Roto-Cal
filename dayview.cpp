@@ -11,6 +11,15 @@ DayView::DayView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     dayLabel = new DayLabel(pixmap.scaled(pageHeight, pageHeight), this);
     dayLabel->setGeometry(screenWidth / 2, 0, screenWidth, pageHeight);
 
+    QPixmap rightArrow(tr(":/images/rightArrow.png"));
+    QLabel* arrowIndicator = new QLabel(this);
+    int scalar = pageHeight * .050;
+    rightArrow = rightArrow.scaled(scalar, scalar);
+    arrowIndicator->setPixmap(rightArrow);
+    arrowIndicator->setGeometry((screenWidth / 2) - (rightArrow.width() / 2),
+                                (pageHeight / 2) - ((rightArrow.height()) - rightArrow.height() / 8),
+                                rightArrow.width(), rightArrow.height());
+
     eventList = new QLabel(this);
     eventList->setGeometry(0, 0, screenWidth / 2, pageHeight);
 
