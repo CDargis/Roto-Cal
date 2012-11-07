@@ -13,12 +13,12 @@ class MonthView : public RotaryView
     Q_OBJECT
 public:
     explicit MonthView(QRect& pageGeometry, Event_set& set, QWidget *parent);
-    void setDate(QDate date);
     MonthLabel* monthLabel;
 signals:
     
 public slots:
-    
+    void setDate(QDate date);
+    void slotDateChanged(QDate date);
 };
 
 #endif // MONTHVIEW_H

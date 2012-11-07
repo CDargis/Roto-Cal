@@ -2,7 +2,7 @@
 #include <QStackedWidget>
 
 CalendarWidget::CalendarWidget(QRect screenRes, Event_set &set, QWidget *parent) :
-    QWidget(parent), CalObject(set), screen(screenRes)//, eventSet(set)
+    QWidget(parent), CalObject(set), screen(screenRes)
 {
     int menuHeight = screen.width() * .15;
     int screenHeight = screen.height();
@@ -34,14 +34,25 @@ CalendarWidget::CalendarWidget(QRect screenRes, Event_set &set, QWidget *parent)
     toDoView = new ToDoView(pageGeometry, set, this);
     rotaryViews->addWidget(toDoView);
 
-    connect(menu, SIGNAL(labelClicked(int)), rotaryViews, SLOT(setCurrentIndex(int)));
-    connect(menu, SIGNAL(labelClicked(int)), rotaryViews, SLOT(setCurrentIndex(int)));
-    connect(menu, SIGNAL(labelClicked(int)), rotaryViews, SLOT(setCurrentIndex(int)));
-    connect(menu, SIGNAL(labelClicked(int)), rotaryViews, SLOT(setCurrentIndex(int)));
+    connect(menu, SIGNAL(labelClicked(int)), this, SLOT(slotLabelClicked(int)));
     connect(monthView->monthLabel, SIGNAL(yearChanged(int)), dateDisplay, SLOT(slotyearChanged(int)));
     connect(monthView->monthLabel, SIGNAL(monthChanged(int)), dateDisplay, SLOT(slotMonthChanged(int)));
     connect(dayView->dayLabel, SIGNAL(dayChanged(int)), dateDisplay, SLOT(slotdayChanged(int)));
-    connect(dateDisplay, SIGNAL(dateChanged(QDate)), dayView->dayLabel, SLOT(slotDateChanged(QDate)));
+    connect(dateDisplay, SIGNAL(dateChanged(QDate)), monthView, SLOT(slotDateChanged(QDate)));
+    connect(dateDisplay, SIGNAL(dateChanged(QDate)), dayView, SLOT(slotDateChanged(QDate)));
+    rotaryViews->setCurrentIndex(1);
+}
+
+void CalendarWidget::slotLabelClicked(int index)
+{
+    switch(index) {
+        case 0: monthView->setDate(this->getCurrentDate()); break;
+        case 1: dayView->setDate(this->getCurrentDate()); break;
+        case 2: break;
+        case 3: break;
+        default: break;
+    }
+    rotaryViews->setCurrentIndex(index);
 }
 
 QDate CalendarWidget::getCurrentDate()

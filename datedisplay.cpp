@@ -21,6 +21,7 @@ void DateDisplay::slotyearChanged(int year)
     date.setDate(year, date.month(), date.day());
     if(date.isValid())
         setText(date.toString());
+    emit dateChanged(this->getDate());
 }
 
 void DateDisplay::slotMonthChanged(int month)
@@ -29,7 +30,7 @@ void DateDisplay::slotMonthChanged(int month)
     date.setDate(date.year(), month, date.day());
     if(date.isValid())
         setText(date.toString());
-    emit dateChanged(QDate::fromString(text()));
+    emit dateChanged(this->getDate());
 }
 
 void DateDisplay::slotdayChanged(int day)
@@ -40,6 +41,7 @@ void DateDisplay::slotdayChanged(int day)
     date.setDate(date.year(), date.month(), day);
     if(date.isValid())
         setText(date.toString());
+    emit dateChanged(this->getDate());
 }
 
 QDate DateDisplay::getDate()

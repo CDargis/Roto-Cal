@@ -25,9 +25,9 @@ public:
     QDate getCurrentDate();
     QDateTime getCurrentDateTime();
 signals:
-    
-public slots:
 
+public slots:
+    void slotLabelClicked(int index);
 private:
     QRect screen;
     QStackedWidget* rotaryViews;
@@ -39,7 +39,6 @@ private:
     DayView* dayView;
     DetailView* detailView;
     ToDoView* toDoView;
-    //Event_set& eventSet;
 };
 
 #endif // CALENDARWIDGET_H

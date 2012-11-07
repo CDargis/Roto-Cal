@@ -7,7 +7,7 @@
 #include <QWidget>
 #include <QLabel>
 
-#include "clickablelabel.h"
+#include "selectablelabel.h"
 
 class CalendarMenu : public QWidget
 {
@@ -29,10 +29,10 @@ private:
     int labelWidth;
     int menuHeight;
 
-    ClickableLabel* monthLabel;
-    ClickableLabel* dayLabel;
-    ClickableLabel* listLabel;
-    ClickableLabel* toDoLabel;
+    SelectableLabel* monthLabel;
+    SelectableLabel* dayLabel;
+    SelectableLabel* listLabel;
+    SelectableLabel* toDoLabel;
 };
 
 #endif // CALENDARMENU_H

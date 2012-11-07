@@ -27,7 +27,6 @@ HEADERS += \
            calendarmenu.h \
            calendarwidget.h \
            calobject.h \
-           clickablelabel.h \
            cmp_event_day.h \
            cmp_event_month.h \
            cmp_event_set.h \
@@ -48,13 +47,14 @@ HEADERS += \
            time1.h \
            time_t_read.h \
            todoview.h \
-    saveeventwidget.h
+    saveeventwidget.h \
+    selectablelabel.h \
+    clickablelabel.h
 FORMS += mainwindow.ui
 SOURCES += \
            calendarmenu.cpp \
            calendarwidget.cpp \
            calobject.cpp \
-           clickablelabel.cpp \
            cmp_event_day.cpp \
            cmp_event_month.cpp \
            cmp_event_set.cpp \
@@ -76,7 +76,9 @@ SOURCES += \
            time1.cpp \
            time_t_read.cpp \
            todoview.cpp \
-    saveeventwidget.cpp
+    saveeventwidget.cpp \
+    selectablelabel.cpp \
+    clickablelabel.cpp
 RESOURCES += Resources.qrc
 
 OTHER_FILES += \

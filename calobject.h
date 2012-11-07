@@ -10,15 +10,13 @@
 class CalObject
 {
 public:
-    //explicit CalObject();
     explicit CalObject(Event_set& set);
-    virtual void setDate(QDate date);
 protected:
     Event_set& eventSet;
 signals:
     void setScreenIndex(int index);
 public slots:
-
+    virtual void setDate(QDate date);
 };
 
 #endif // CALOBJECT_H

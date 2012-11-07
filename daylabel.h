@@ -22,7 +22,6 @@ signals:
     void dayChanged(int day);
 public slots:
     void slotGrabMouseMove();
-    void slotDateChanged(QDate date);
 protected:
 
 };
