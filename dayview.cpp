@@ -32,9 +32,9 @@ void DayView::setDate(QDate date)
     dayLabel->setCurrentRotation((date.day() - 1) * 11.612903226);
 }
 
-void DayView::slotDateChanged(QDate date)
+void DayView::slotDateChanged(QDateTime dateTime)
 {
-    eventList->setText(date.toString());
+    eventList->setText(dateTime.toString());
     Event* e = NULL;
     Event_set& set = this->getEventSet();
     set.deleteEvent(e);

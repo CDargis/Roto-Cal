@@ -38,8 +38,8 @@ CalendarWidget::CalendarWidget(QRect screenRes, Event_set &set, QWidget *parent)
     connect(monthView->monthLabel, SIGNAL(yearChanged(int)), dateDisplay, SLOT(slotyearChanged(int)));
     connect(monthView->monthLabel, SIGNAL(monthChanged(int)), dateDisplay, SLOT(slotMonthChanged(int)));
     connect(dayView->dayLabel, SIGNAL(dayChanged(int)), dateDisplay, SLOT(slotdayChanged(int)));
-    connect(dateDisplay, SIGNAL(dateChanged(QDate)), monthView, SLOT(slotDateChanged(QDate)));
-    connect(dateDisplay, SIGNAL(dateChanged(QDate)), dayView, SLOT(slotDateChanged(QDate)));
+    connect(dateDisplay, SIGNAL(dateChanged(QDateTime)), monthView, SLOT(slotDateChanged(QDateTime)));
+    connect(dateDisplay, SIGNAL(dateChanged(QDateTime)), dayView, SLOT(slotDateChanged(QDateTime)));
     rotaryViews->setCurrentIndex(1);
 }
 
