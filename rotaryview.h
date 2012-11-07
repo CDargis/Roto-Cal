@@ -14,6 +14,7 @@ class RotaryView : public QWidget, CalObject
     Q_OBJECT
 public:
     explicit RotaryView(QRect& pageGeometry, Event_set& set, QWidget *parent = 0);
+    virtual Event_set& getEventSet() { return eventSet; }
 signals:
     
 public slots:

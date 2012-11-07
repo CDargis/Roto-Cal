@@ -35,4 +35,7 @@ void DayView::setDate(QDate date)
 void DayView::slotDateChanged(QDate date)
 {
     eventList->setText(date.toString());
+    Event* e = NULL;
+    Event_set& set = this->getEventSet();
+    set.deleteEvent(e);
 }

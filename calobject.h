@@ -11,6 +11,7 @@ class CalObject
 {
 public:
     explicit CalObject(Event_set& set);
+    virtual Event_set& getEventSet() { return eventSet; }
 protected:
     Event_set& eventSet;
 signals:
