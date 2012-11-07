@@ -2,8 +2,8 @@
 
 #include <QStyle>
 
-DateDisplay::DateDisplay(int xOffset, int yOffset, int width, int height, QWidget *parent)
-    : QLabel(parent)
+DateDisplay::DateDisplay(int xOffset, int yOffset, int width, int height, Event_set &set, QWidget *parent)
+    : QLabel(parent), CalObject(set)
 {
     setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     setGeometry(xOffset, yOffset, width, height);
@@ -19,26 +19,37 @@ void DateDisplay::slotyearChanged(int year)
 {
     QDate date = QDate::fromString(text());
     date.setDate(year, date.month(), date.day());
-    setText(date.toString());
+    if(date.isValid())
+        setText(date.toString());
+    emit dateChanged(this->getDate());
 }
 
 void DateDisplay::slotMonthChanged(int month)
 {
     QDate date = QDate::fromString(text());
     date.setDate(date.year(), month, date.day());
-    setText(date.toString());
+    if(date.isValid())
+        setText(date.toString());
+    emit dateChanged(this->getDate());
 }
 
 void DateDisplay::slotdayChanged(int day)
 {
     QDate date = QDate::fromString(text());
+    if(day > date.daysInMonth())
+        return;
     date.setDate(date.year(), date.month(), day);
-    setText(date.toString());
+    if(date.isValid())
+        setText(date.toString());
+    emit dateChanged(this->getDate());
 }
 
-/**
 QDate DateDisplay::getDate()
 {
     return QDate::fromString(text());
 }
-*/
+
+QDateTime DateDisplay::getDateTime()
+{
+    return QDateTime(getDate(), QTime::currentTime());
+}

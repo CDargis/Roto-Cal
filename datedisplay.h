@@ -12,10 +12,11 @@ class DateDisplay : public QLabel, CalObject
 {
     Q_OBJECT
 public:
-    explicit DateDisplay(int xOffset, int yOffset, int width, int height, QWidget* parent = 0);
-    //QDate getDate();
+    explicit DateDisplay(int xOffset, int yOffset, int width, int height, Event_set& set, QWidget* parent = 0);
+    QDate getDate();
+    QDateTime getDateTime();
 signals:
-    
+    void dateChanged(QDate date);
 public slots:
     void slotyearChanged(int year);
     void slotMonthChanged(int month);

@@ -17,9 +17,8 @@ public:
 signals:
     void monthChanged(int month);
 public slots:
-
+    void slotGrabMouseMove();
 protected:
-    void paintEvent(QPaintEvent *pe);
 };
 
 #endif // MONTHLABEL_H

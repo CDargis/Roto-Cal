@@ -15,16 +15,19 @@
 #include "todoview.h"
 #include "datedisplay.h"
 #include "calobject.h"
+#include "event_set.h"
 
 class CalendarWidget : public QWidget, CalObject
 {
     Q_OBJECT
 public:
-    explicit CalendarWidget(QRect screenRes, QWidget *parent = 0);
+    explicit CalendarWidget(QRect screenRes, Event_set& set, QWidget *parent = 0);
+    QDate getCurrentDate();
+    QDateTime getCurrentDateTime();
 signals:
-    
-public slots:
 
+public slots:
+    void slotLabelClicked(int index);
 private:
     QRect screen;
     QStackedWidget* rotaryViews;

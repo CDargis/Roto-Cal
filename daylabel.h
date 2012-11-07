@@ -21,9 +21,9 @@ protected:
 signals:
     void dayChanged(int day);
 public slots:
-    
+    void slotGrabMouseMove();
 protected:
-    void paintEvent(QPaintEvent *pe);
+
 };
 
 #endif // DAYLABEL_H
