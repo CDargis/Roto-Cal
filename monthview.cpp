@@ -25,7 +25,7 @@ void MonthView::setDate(QDate date)
     monthLabel->setCurrentRotation((month - 1) * 30);
 }
 
-void MonthView::slotDateChanged(QDate date)
+void MonthView::slotDateChanged(QDateTime dateTime)
 {
 
 }

@@ -18,7 +18,7 @@ signals:
     
 public slots:
     void setDate(QDate date);
-    void slotDateChanged(QDate date);
+    void slotDateChanged(QDateTime dateTime);
 };
 
 #endif // MONTHVIEW_H
