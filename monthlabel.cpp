@@ -11,7 +11,6 @@ MonthLabel::MonthLabel(QPixmap pixmap, QWidget *parent) : RotatableLabel(parent)
     setPixmap(originalPixmap);
     connect(this, SIGNAL(mouseMove()), this, SLOT(slotGrabMouseMove()));
     setPixmap(originalPixmap); 
-    connect(this, SIGNAL(mouseMove()), this, SLOT(slotMouseMovedFromParent()));
 }
 
 QPixmap MonthLabel::paintMonthsOnPixmap(QPixmap pixmap)

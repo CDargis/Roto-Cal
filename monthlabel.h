@@ -16,6 +16,7 @@ public:
     static const QString months[12];
 signals:
     void monthChanged(int month);
+    void yearChanged(int year);
 public slots:
     void slotGrabMouseMove();
 protected:

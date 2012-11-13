@@ -52,7 +52,7 @@ void MonthView::slotDateChanged(QDateTime dateTime)
         new CalendarListItem(NULL, tr("No events"), listWidget);
     } else {
         for (it=daySet->begin(); it!=daySet->end(); it++) {
-            CalendarListItem* item = new CalendarListItem((*it), QString::number((*it)->getHour()).append\
+            new CalendarListItem((*it), QString::number((*it)->getHour()).append\
                                 (":").append(QString::number((*it)->getMinute())).append\
                                 (" ").append(((*it)->getName())), listWidget);
             connect(listWidget, SIGNAL(itemClicked(QListWidgetItem*)),
