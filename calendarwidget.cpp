@@ -37,7 +37,6 @@ CalendarWidget::CalendarWidget(QRect screenRes, Event_set &set, QWidget *parent)
     connect(dateDisplay, SIGNAL(dateChanged(QDateTime)), dayView, SLOT(slotDateChanged(QDateTime)));
     connect(monthView, SIGNAL(eventClicked(Event*)), this, SLOT(slotEventClicked(Event*)));
     connect(dayView, SIGNAL(eventClicked(Event*)), this, SLOT(slotEventClicked(Event*)));
-    this->pokeDateChange();
     rotaryViews->setCurrentIndex(1);
 }
 

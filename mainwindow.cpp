@@ -82,6 +82,8 @@ MainWindow::MainWindow(QWidget *parent)
     eventSet.insertEvent(e10);
 
     setCentralWidget(screens);
+
+    cWidget->pokeDateChange();
 }
 
 MainWindow::~MainWindow()
