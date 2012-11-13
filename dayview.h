@@ -3,6 +3,8 @@
 
 #include "rotaryview.h"
 #include "daylabel.h"
+#include "clickablelabel.h"
+
 
 class DayView : public RotaryView
 {
@@ -16,7 +18,7 @@ public slots:
     void setDate(QDate date);
     void slotDateChanged(QDateTime dateTime);
 private:
-    QLabel* eventList;
+    QListWidget* listWidget;
 };
 
 #endif // DAYVIEW_H
