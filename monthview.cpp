@@ -41,19 +41,19 @@ void MonthView::slotDateChanged(QDateTime dateTime)
 {
     Event* e = new Event;
     Event_set& set = this->getEventSet();
-    std::multiset<Event *, Cmp_event_set>* daySet;
+    std::multiset<Event *, Cmp_event_set>* monthSet;
     std::multiset<Event*, Cmp_event_set>::iterator it;
     e->setStartTime(dateTime.toTime_t());
-    daySet = set.getDay(e);
+    monthSet = set.getMonth(e);
 
     listWidget->clear();
 
-    if(daySet->size()==0) {
-        new CalendarListItem(NULL, tr("No events"), listWidget);
+    if(monthSet->size()==0) {
+        CalendarListItem *item = new CalendarListItem(NULL, tr("No events"), listWidget);
+        item->setFlags(Qt::ItemIsEnabled);
     } else {
-        for (it=daySet->begin(); it!=daySet->end(); it++) {
-            new CalendarListItem((*it), QString::number((*it)->getHour()).append\
-                                (":").append(QString::number((*it)->getMinute())).append\
+        for (it=monthSet->begin(); it!=monthSet->end(); it++) {
+            new CalendarListItem((*it), QString::number((*it)->getDay()).append\
                                 (" ").append(((*it)->getName())), listWidget);
             connect(listWidget, SIGNAL(itemClicked(QListWidgetItem*)),
                     this, SLOT(slotListItemClicked(QListWidgetItem*)));

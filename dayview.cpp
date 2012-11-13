@@ -57,10 +57,11 @@ void DayView::slotDateChanged(QDateTime dateTime)
     listWidget->clear();
 
     if(daySet->size()==0) {
-        new CalendarListItem(NULL, tr("No event"), listWidget);
+        CalendarListItem *item = new CalendarListItem(NULL, tr("No events"), listWidget);
+        item->setFlags(Qt::ItemIsEnabled);
     } else {
         for (it=daySet->begin(); it!=daySet->end(); it++) {
-            CalendarListItem* item = new CalendarListItem((*it), QString::number((*it)->getHour()).append\
+            new CalendarListItem((*it), QString::number((*it)->getHour()).append\
                                 (":").append(QString::number((*it)->getMinute())).append\
                                 (" ").append(((*it)->getName())), listWidget);
             connect(listWidget, SIGNAL(itemClicked(QListWidgetItem*)),
