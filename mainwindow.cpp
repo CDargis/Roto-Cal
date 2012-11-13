@@ -7,6 +7,7 @@
 #include <time.h>
 
 #include "rotaryview.h"
+#include "QDebug"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow),
