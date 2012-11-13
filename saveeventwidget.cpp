@@ -128,15 +128,23 @@ void SaveEventWidget::slotSaveClicked()
 			delete(e); // delete event since identical already exists           
 		} else {                                                                
 			qDebug() << "Event " << e->getName() << " Added,"<< "Starts at" << \
-				e->getHour() << ":" << e->getMinute() << "w/set size = " << eventSet.getSize();
-			resetInput();                                                       
-			emit setScreenIndex(0);                                             
+				e->getHour() << ":" << e->getMinute() << "w/set size = " << eventSet.getSize();                                                     
+            emit closeScreen();
 		}                                                                       
 	}
 }
 
 void SaveEventWidget::slotCancelClicked()
 {
-	resetInput();
-	emit setScreenIndex(0);
+    emit closeScreen();
+}
+
+void SaveEventWidget::setInput(QDateTime start, QDateTime end, QString title,
+                               QString location, QString description)
+{
+    titleEdit->setText(title);
+    locationEdit->setText(location);
+    descEdit->setText(description);
+    sTimeEdit->setDateTime(start);
+    eTimeEdit->setDateTime(end);
 }

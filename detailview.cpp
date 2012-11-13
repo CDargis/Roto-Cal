@@ -6,5 +6,11 @@
 DetailView::DetailView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     RotaryView(pageGeometry, set, parent)
 {
-    QLabel* lab = new QLabel(tr("Detailed event view here..."), this);
+    lab = new QLabel(tr("Detailed event view here..."), this);
+}
+
+void DetailView::setCurrentEvent(Event* e)
+{
+    currentEvent = e;
+    lab->setText(e->getName());
 }

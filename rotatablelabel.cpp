@@ -37,7 +37,8 @@ void RotatableLabel::slotMouseMoved()
     double y = point.ry();
     if(y < startPoint.ry()) currentRotation -= 2;
     else currentRotation += 2;
-    currentRotation %= 360;
+    currentRotation = fmod(currentRotation, 360.00);
+    //currentRotation %= 360.00;
     startPoint = point;
     update();
 }
@@ -60,7 +61,7 @@ void RotatableLabel::paintEvent(QPaintEvent *pe)
     QLabel::paintEvent(pe);
 }
 
-void RotatableLabel::setCurrentRotation(int rotation)
+void RotatableLabel::setCurrentRotation(float rotation)
 {
     currentRotation = rotation;
     update();

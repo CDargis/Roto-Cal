@@ -46,10 +46,10 @@ HEADERS += \
            serialization.h \
            time1.h \
            time_t_read.h \
-           todoview.h \
     saveeventwidget.h \
     selectablelabel.h \
-    clickablelabel.h
+    clickablelabel.h \
+    calendarlistitem.h
 FORMS += mainwindow.ui
 SOURCES += \
            calendarmenu.cpp \
@@ -75,10 +75,10 @@ SOURCES += \
            serialization.cpp \
            time1.cpp \
            time_t_read.cpp \
-           todoview.cpp \
     saveeventwidget.cpp \
     selectablelabel.cpp \
-    clickablelabel.cpp
+    clickablelabel.cpp \
+    calendarlistitem.cpp
 RESOURCES += Resources.qrc
 
 OTHER_FILES += \

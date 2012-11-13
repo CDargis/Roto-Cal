@@ -39,7 +39,7 @@ QPixmap MonthLabel::paintMonthsOnPixmap(QPixmap pixmap)
 
 void MonthLabel::slotGrabMouseMove()
 {
-    int cRotation = getCurrentRotation();
+    float cRotation = getCurrentRotation();
     if(cRotation < 0)
         cRotation += 360;
     qDebug() << cRotation ;

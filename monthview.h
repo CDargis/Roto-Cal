@@ -7,6 +7,7 @@
 #include "rotaryview.h"
 #include "monthlabel.h"
 #include "calobject.h"
+#include "event.h"
 
 class MonthView : public RotaryView
 {
@@ -15,7 +16,7 @@ public:
     explicit MonthView(QRect& pageGeometry, Event_set& set, QWidget *parent);
     MonthLabel* monthLabel;
 signals:
-    
+    void eventClicked(Event* e);
 public slots:
     void setDate(QDate date);
     void slotDateChanged(QDateTime dateTime);

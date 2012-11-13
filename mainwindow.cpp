@@ -16,7 +16,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     QMenuBar* menuBar = new QMenuBar(this);
     menuBar->addAction(tr("Add Event"));
-    menuBar->addAction(tr("Add To-Do"));
     setMenuBar(menuBar);
     connect(menuBar, SIGNAL(triggered(QAction*)), this, SLOT(slotActionTriggered(QAction*)));
 
@@ -25,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
     saveEventWidget = new SaveEventWidget(eventSet, *cWidget,this);
     screens->addWidget(saveEventWidget);
     connect(cWidget, SIGNAL(setScreenIndex(int)), screens, SLOT(setCurrentIndex(int)));
-    connect(saveEventWidget, SIGNAL(setScreenIndex(int)), screens, SLOT(setCurrentIndex(int)));
+    connect(saveEventWidget, SIGNAL(closeScreen()), this, SLOT(slotAddWidgetClose()));
 
     Event* e1 = new Event;
     Event* e2 = new Event;
@@ -93,9 +92,17 @@ MainWindow::~MainWindow()
 void MainWindow::slotActionTriggered(QAction *a)
 {
     if(a->text().compare(tr("Add Event")) == 0)
+    {
+        saveEventWidget->setInput(cWidget->getCurrentDateTime(),
+                                  cWidget->getCurrentDateTime().addSecs(60*60));
         screens->setCurrentIndex(1);
-    else if(a->text().compare(tr("Add To-Do")) == 0)
-        return;
+    }
+}
+
+void MainWindow::slotAddWidgetClose()
+{
+    cWidget->pokeDateChange();
+    screens->setCurrentIndex(0);
 }
 
 //---------------------------------------------------------------------------------------------------

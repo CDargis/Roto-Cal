@@ -2,6 +2,7 @@
 #include "cmp_event_set.h"
 #include "event_set.h"
 #include "event.h"
+#include "calendarlistitem.h"
 
 #include <QLabel>
 
@@ -35,9 +36,6 @@ DayView::DayView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
                                 (pageHeight / 2) - ((rightArrow.height()) - rightArrow.height() / 8),
                                 rightArrow.width(), rightArrow.height());
 
-    //eventList = new QLabel(this);
-    //eventList->setGeometry(0, 0, screenWidth / 2, pageHeight);
-
     setDate(QDate::currentDate());
 }
 
@@ -50,28 +48,33 @@ void DayView::setDate(QDate date)
 void DayView::slotDateChanged(QDateTime dateTime)
 {
     Event* e = new Event;   
-
     Event_set& set = this->getEventSet();
-
     std::multiset<Event *, Cmp_event_set>* daySet;
-
     std::multiset<Event*, Cmp_event_set>::iterator it;
-
     e->setStartTime(dateTime.toTime_t());
     daySet = set.getDay(e);
 
     listWidget->clear();
 
     if(daySet->size()==0) {
-        new QListWidgetItem(tr("No Appt. Today"), listWidget);
+        new CalendarListItem(NULL, tr("No Appt. Today"), listWidget);
     } else {
         for (it=daySet->begin(); it!=daySet->end(); it++) {
-            new QListWidgetItem(QString::number((*it)->getHour()).append\
+            CalendarListItem* item = new CalendarListItem((*it), QString::number((*it)->getHour()).append\
                                 (":").append(QString::number((*it)->getMinute())).append\
                                 (" ").append(((*it)->getName())), listWidget);
+            connect(listWidget, SIGNAL(itemClicked(QListWidgetItem*)),
+                    this, SLOT(slotListItemClicked(QListWidgetItem*)));
         }
     }
-
     listWidget->updateGeometry();
     delete(e);
+}
+
+// This slot is called when an item in the QListWidget is clicked
+void DayView::slotListItemClicked(QListWidgetItem* item)
+{
+    CalendarListItem* cItem = static_cast<CalendarListItem*>(item);
+    if(cItem->event != NULL)
+        emit eventClicked(cItem->event);
 }
