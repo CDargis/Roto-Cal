@@ -57,7 +57,7 @@ void DayView::slotDateChanged(QDateTime dateTime)
     listWidget->clear();
 
     if(daySet->size()==0) {
-        new CalendarListItem(NULL, tr("No Appt. Today"), listWidget);
+        new CalendarListItem(NULL, tr("No event"), listWidget);
     } else {
         for (it=daySet->begin(); it!=daySet->end(); it++) {
             CalendarListItem* item = new CalendarListItem((*it), QString::number((*it)->getHour()).append\
