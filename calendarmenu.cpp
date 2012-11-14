@@ -5,19 +5,13 @@ CalendarMenu::CalendarMenu(int xOffset, int yOffset, int menuWidth, int menuHeig
 {
     this->menuWidth = menuWidth;
     this->menuHeight = menuHeight;
-    labelWidth = menuWidth / 4;
+    labelWidth = menuWidth / 3;
 
     setGeometry(xOffset, yOffset, menuWidth, menuHeight);
 
-    monthLabel = new SelectableLabel("Month", this);
-    dayLabel = new SelectableLabel("Day", this);
-    listLabel = new SelectableLabel("Event\nDetails", this);
-    toDoLabel = new SelectableLabel("To-Do", this);
-
-    connect(monthLabel, SIGNAL(clicked()), this, SLOT(slotMonthLabelClicked()));
-    connect(dayLabel, SIGNAL(clicked()), this, SLOT(slotDayLabelClicked()));
-    connect(listLabel, SIGNAL(clicked()), this, SLOT(slotListLabelClicked()));
-    connect(toDoLabel, SIGNAL(clicked()), this, SLOT(slotToDoLabelClicked()));
+    monthLabel = new SelectableLabel(tr("Month"), this);
+    dayLabel = new SelectableLabel(tr("Day"), this);
+    detailLabel = new SelectableLabel(tr("Event Details"), this);
 
     monthLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     monthLabel->setGeometry(0, 0, labelWidth, menuHeight);
@@ -29,23 +23,21 @@ CalendarMenu::CalendarMenu(int xOffset, int yOffset, int menuWidth, int menuHeig
     dayLabel->setSelectStyleSheet(true);
     dayLabel->setAlignment(Qt::AlignCenter);
 
-    listLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    listLabel->setGeometry(labelWidth*2, 0, labelWidth, menuHeight);
-    listLabel->setSelectStyleSheet(false);
-    listLabel->setAlignment(Qt::AlignCenter);
+    detailLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    detailLabel->setGeometry(labelWidth*2, 0, labelWidth, menuHeight);
+    detailLabel->setSelectStyleSheet(false);
+    detailLabel->setAlignment(Qt::AlignCenter);
 
-    toDoLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    toDoLabel->setGeometry(labelWidth*3, 0, labelWidth, menuHeight);
-    toDoLabel->setSelectStyleSheet(false);
-    toDoLabel->setAlignment(Qt::AlignCenter);
+    connect(monthLabel, SIGNAL(clicked()), this, SLOT(slotMonthLabelClicked()));
+    connect(dayLabel, SIGNAL(clicked()), this, SLOT(slotDayLabelClicked()));
+    connect(detailLabel, SIGNAL(clicked()), this, SLOT(slotDetailLabelClicked()));
 }
 
 void CalendarMenu::slotMonthLabelClicked()
 {
     monthLabel->setSelectStyleSheet(true);
     dayLabel->setSelectStyleSheet(false);
-    listLabel->setSelectStyleSheet(false);
-    toDoLabel->setSelectStyleSheet(false);
+    detailLabel->setSelectStyleSheet(false);
     emit labelClicked(0);
 }
 
@@ -53,25 +45,14 @@ void CalendarMenu::slotDayLabelClicked()
 {
     monthLabel->setSelectStyleSheet(false);
     dayLabel->setSelectStyleSheet(true);
-    listLabel->setSelectStyleSheet(false);
-    toDoLabel->setSelectStyleSheet(false);
+    detailLabel->setSelectStyleSheet(false);
     emit labelClicked(1);
 }
 
-void CalendarMenu::slotListLabelClicked()
+void CalendarMenu::slotDetailLabelClicked()
 {
     monthLabel->setSelectStyleSheet(false);
     dayLabel->setSelectStyleSheet(false);
-    listLabel->setSelectStyleSheet(true);
-    toDoLabel->setSelectStyleSheet(false);
+    detailLabel->setSelectStyleSheet(true);
     emit labelClicked(2);
-}
-
-void CalendarMenu::slotToDoLabelClicked()
-{
-    monthLabel->setSelectStyleSheet(false);
-    dayLabel->setSelectStyleSheet(false);
-    listLabel->setSelectStyleSheet(false);
-    toDoLabel->setSelectStyleSheet(true);
-    emit labelClicked(3);
 }

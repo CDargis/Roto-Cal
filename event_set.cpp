@@ -148,7 +148,8 @@ void Event_set::deleteSets()
 /* START GET EVENT SET FUNCTIONS */                                             
 /* returns ordered multiset of year containing Event object pointers */
 std::multiset<Event *, Cmp_event_set> * Event_set::getYear(Event * e)
-{                                                                               
+{
+    sorted_year_set.clear();
     SetIter lower, upper, it;                                                   
     lower = year_set.lower_bound(e);                                           
     upper = year_set.upper_bound(e);                                           
@@ -163,7 +164,8 @@ std::multiset<Event *, Cmp_event_set> * Event_set::getYear(Event * e)
                                                                                 
 /* returns ordered multiset of month containing Event object pointer */
 std::multiset<Event *, Cmp_event_set> * Event_set::getMonth(Event * e)
-{                                                                               
+{
+    sorted_month_set.clear();
     SetIter lower, upper, it;                                                   
     lower = month_set.lower_bound(e);                                          
     upper = month_set.upper_bound(e);                                          
@@ -178,16 +180,18 @@ std::multiset<Event *, Cmp_event_set> * Event_set::getMonth(Event * e)
 
 /* returns ordered multiset of day Event object pointers */
 std::multiset<Event *, Cmp_event_set> * Event_set::getDay(Event * e)
-{                                                                               
+{
+    sorted_day_set.clear();
     SetIter lower, upper, it;                                                   
     lower = day_set.lower_bound(e);                                            
-    upper = day_set.upper_bound(e);                                            
+    upper = day_set.upper_bound(e);
+
                                                                                 
 	/* iterate from lower to upper bounds to get set of day Event objects */
     for (it = lower; it != upper; it++) {                                       
-        sorted_day_set.insert((*it));                                             
-    }                                                                           
-    ms_ptr = &sorted_month_set;                                                          
+        sorted_day_set.insert((*it));
+    }
+    ms_ptr = &sorted_day_set;
     return ms_ptr;                                                              
 }                     
 /* END GET EVENT SET FUNCTIONS */

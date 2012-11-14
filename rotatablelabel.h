@@ -19,8 +19,8 @@ Q_OBJECT
 public:
     static const int PI = 3.14159265;
     explicit RotatableLabel(QWidget *parent = 0);
-    void setCurrentRotation(int rotation);
-    const int& getCurrentRotation() { return currentRotation; }
+    void setCurrentRotation(float rotation);
+    float getCurrentRotation() { return currentRotation; }
 signals:
     void mouseDown();
     void mouseMove();
@@ -37,7 +37,7 @@ protected:
     QPixmap originalPixmap;
 private:
     QPoint startPoint;
-    int currentRotation;
+    float currentRotation;
 };
 
 #endif // ROTATABLELABEL_H

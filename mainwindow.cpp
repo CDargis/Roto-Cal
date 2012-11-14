@@ -4,6 +4,8 @@
 #include <QCoreApplication>
 #include <QDesktopWidget>
 
+#include <time.h>
+
 #include "rotaryview.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -14,7 +16,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     QMenuBar* menuBar = new QMenuBar(this);
     menuBar->addAction(tr("Add Event"));
-    menuBar->addAction(tr("Add To-Do"));
     setMenuBar(menuBar);
     connect(menuBar, SIGNAL(triggered(QAction*)), this, SLOT(slotActionTriggered(QAction*)));
 
@@ -23,9 +24,66 @@ MainWindow::MainWindow(QWidget *parent)
     saveEventWidget = new SaveEventWidget(eventSet, *cWidget,this);
     screens->addWidget(saveEventWidget);
     connect(cWidget, SIGNAL(setScreenIndex(int)), screens, SLOT(setCurrentIndex(int)));
-    connect(saveEventWidget, SIGNAL(setScreenIndex(int)), screens, SLOT(setCurrentIndex(int)));
+    connect(saveEventWidget, SIGNAL(closeScreen()), this, SLOT(slotAddWidgetClose()));
+
+    Event* e1 = new Event;
+    Event* e2 = new Event;
+    Event* e3 = new Event;
+    Event* e4 = new Event;
+    Event* e5 = new Event;
+    Event* e6 = new Event;
+    Event* e7 = new Event;
+    Event* e8 = new Event;
+    Event* e9 = new Event;
+    Event* e10 = new Event;
+
+    e1->setName(tr("Dr. Who"));
+    e2->setName(tr("BIO 101"));
+    e3->setName(tr("Gaz B-day"));
+    e4->setName(tr("Dinner Date"));
+    e5->setName(tr("Meet The Feebles"));
+    e6->setName(tr("Naked Lunch"));
+    e7->setName(tr("Dinner Date"));
+    e8->setName(tr("Tom Yum"));
+    e9->setName(tr("Candy Bar"));
+    e9->setName(tr("Little Richard"));
+    e10->setName(tr("Animal Farm"));
+
+    e1->setStartTime(QDateTime::currentDateTime().toTime_t());
+    e1->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
+    e2->setStartTime(QDateTime::currentDateTime().addSecs(3600).toTime_t());
+    e2->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
+    e3->setStartTime(QDateTime::currentDateTime().addSecs(7200).toTime_t());
+    e3->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
+    e4->setStartTime(QDateTime::currentDateTime().addSecs(11800).toTime_t());
+    e4->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
+    e5->setStartTime(QDateTime::currentDateTime().addSecs(15400).toTime_t());
+    e5->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
+    e6->setStartTime(QDateTime::currentDateTime().addDays(19000).toTime_t());
+    e6->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
+    e7->setStartTime(QDateTime::currentDateTime().addDays(1).toTime_t());
+    e7->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
+    e8->setStartTime(QDateTime::currentDateTime().addDays(1).addSecs(7200).toTime_t());
+    e8->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
+    e9->setStartTime(QDateTime::currentDateTime().addDays(1).addSecs(11800).toTime_t());
+    e9->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
+    e10->setStartTime(QDateTime::currentDateTime().addDays(1).addSecs(15400).toTime_t());
+    e10->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
+
+    eventSet.insertEvent(e1);
+    eventSet.insertEvent(e2);
+    eventSet.insertEvent(e3);
+    eventSet.insertEvent(e4);
+    eventSet.insertEvent(e5);
+    eventSet.insertEvent(e6);
+    eventSet.insertEvent(e7);
+    eventSet.insertEvent(e8);
+    eventSet.insertEvent(e9);
+    eventSet.insertEvent(e10);
 
     setCentralWidget(screens);
+
+    cWidget->pokeDateChange();
 }
 
 MainWindow::~MainWindow()
@@ -36,9 +94,17 @@ MainWindow::~MainWindow()
 void MainWindow::slotActionTriggered(QAction *a)
 {
     if(a->text().compare(tr("Add Event")) == 0)
+    {
+        saveEventWidget->setInput(cWidget->getCurrentDateTime(),
+                                  cWidget->getCurrentDateTime().addSecs(60*60));
         screens->setCurrentIndex(1);
-    else if(a->text().compare(tr("Add To-Do")) == 0)
-        return;
+    }
+}
+
+void MainWindow::slotAddWidgetClose()
+{
+    cWidget->pokeDateChange();
+    screens->setCurrentIndex(0);
 }
 
 //---------------------------------------------------------------------------------------------------

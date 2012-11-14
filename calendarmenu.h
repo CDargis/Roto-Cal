@@ -22,8 +22,7 @@ signals:
 public slots:
     void slotMonthLabelClicked();
     void slotDayLabelClicked();
-    void slotListLabelClicked();
-    void slotToDoLabelClicked();
+    void slotDetailLabelClicked();
 private:
     int menuWidth;
     int labelWidth;
@@ -31,8 +30,7 @@ private:
 
     SelectableLabel* monthLabel;
     SelectableLabel* dayLabel;
-    SelectableLabel* listLabel;
-    SelectableLabel* toDoLabel;
+    SelectableLabel* detailLabel;
 };
 
 #endif // CALENDARMENU_H

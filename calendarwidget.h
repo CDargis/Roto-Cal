@@ -12,7 +12,6 @@
 #include "monthview.h"
 #include "dayview.h"
 #include "detailview.h"
-#include "todoview.h"
 #include "datedisplay.h"
 #include "calobject.h"
 #include "event_set.h"
@@ -24,10 +23,12 @@ public:
     explicit CalendarWidget(QRect screenRes, Event_set& set, QWidget *parent = 0);
     QDate getCurrentDate();
     QDateTime getCurrentDateTime();
+    void pokeDateChange();
 signals:
 
 public slots:
     void slotLabelClicked(int index);
+    void slotEventClicked(Event* e);
 private:
     QRect screen;
     QStackedWidget* rotaryViews;
@@ -38,7 +39,6 @@ private:
     MonthView* monthView;
     DayView* dayView;
     DetailView* detailView;
-    ToDoView* toDoView;
 };
 
 #endif // CALENDARWIDGET_H

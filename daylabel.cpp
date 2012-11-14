@@ -15,10 +15,10 @@ DayLabel::DayLabel(QPixmap pixmap, QWidget *parent) :
 
 void DayLabel::slotGrabMouseMove()
 {
-    int cRotation = getCurrentRotation();
+    float cRotation = getCurrentRotation();
     if(cRotation < 0)
         cRotation += 360;
-    float div = (float)cRotation / 11.612903226;
+    float div = cRotation / 11.612903226;
     int day = ((int)div) + 1;
     emit dayChanged(day);
 }

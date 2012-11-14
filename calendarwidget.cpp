@@ -24,15 +24,10 @@ CalendarWidget::CalendarWidget(QRect screenRes, Event_set &set, QWidget *parent)
     rotaryViews->addWidget(monthView);
 
     dayView = new DayView(pageGeometry, set, this);
-    //dayView->setDate(QDate::currentDate());
     rotaryViews->addWidget(dayView);
 
     detailView = new DetailView(pageGeometry, set, this);
-    //detailView->setDate(QDate::currentDate());
     rotaryViews->addWidget(detailView);
-
-    toDoView = new ToDoView(pageGeometry, set, this);
-    rotaryViews->addWidget(toDoView);
 
     connect(menu, SIGNAL(labelClicked(int)), this, SLOT(slotLabelClicked(int)));
     connect(monthView->monthLabel, SIGNAL(yearChanged(int)), dateDisplay, SLOT(slotyearChanged(int)));
@@ -40,6 +35,8 @@ CalendarWidget::CalendarWidget(QRect screenRes, Event_set &set, QWidget *parent)
     connect(dayView->dayLabel, SIGNAL(dayChanged(int)), dateDisplay, SLOT(slotdayChanged(int)));
     connect(dateDisplay, SIGNAL(dateChanged(QDateTime)), monthView, SLOT(slotDateChanged(QDateTime)));
     connect(dateDisplay, SIGNAL(dateChanged(QDateTime)), dayView, SLOT(slotDateChanged(QDateTime)));
+    connect(monthView, SIGNAL(eventClicked(Event*)), this, SLOT(slotEventClicked(Event*)));
+    connect(dayView, SIGNAL(eventClicked(Event*)), this, SLOT(slotEventClicked(Event*)));
     rotaryViews->setCurrentIndex(1);
 }
 
@@ -63,4 +60,19 @@ QDate CalendarWidget::getCurrentDate()
 QDateTime CalendarWidget::getCurrentDateTime()
 {
     return dateDisplay->getDateTime();
+}
+
+void CalendarWidget::slotEventClicked(Event* e)
+{
+    detailView->setCurrentEvent(e);
+    menu->slotDetailLabelClicked();   // Trigger the detail view menu item being clicked
+}
+
+// This function is used after a fresh event is inserted into the set by a user via
+// the AddEventWidget
+void CalendarWidget::pokeDateChange()
+{
+    QDateTime dt = this->getCurrentDateTime();
+    monthView->slotDateChanged(dt);
+    dayView->slotDateChanged(dt);
 }

@@ -3,6 +3,8 @@
 
 #include "rotaryview.h"
 #include "daylabel.h"
+#include "clickablelabel.h"
+#include "event.h"
 
 class DayView : public RotaryView
 {
@@ -11,12 +13,13 @@ public:
     explicit DayView(QRect& pageGeometry, Event_set& set, QWidget *parent = 0);
     DayLabel* dayLabel;
 signals:
-    
+    void eventClicked(Event* e);
 public slots:
     void setDate(QDate date);
     void slotDateChanged(QDateTime dateTime);
+    void slotListItemClicked(QListWidgetItem* item);
 private:
-    QLabel* eventList;
+    QListWidget* listWidget;
 };
 
 #endif // DAYVIEW_H

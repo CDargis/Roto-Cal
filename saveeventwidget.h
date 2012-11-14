@@ -15,11 +15,14 @@ class SaveEventWidget : public QWidget, CalObject
     Q_OBJECT
 public:
     explicit SaveEventWidget(Event_set& set, CalendarWidget& widget, QWidget *parent = 0);
+    void setInput(QDateTime start, QDateTime end, QString title = "",
+                  QString location = "", QString description = "");
 protected:
     void keyPressEvent(QKeyEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
 signals:
     void setScreenIndex(int index);
+    void closeScreen();
 public slots:
     void slotSaveClicked();
     void slotCancelClicked();
