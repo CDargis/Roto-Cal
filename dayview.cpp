@@ -35,8 +35,6 @@ DayView::DayView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     arrowIndicator->setGeometry((screenWidth / 2) - (rightArrow.width() / 2),
                                 (pageHeight / 2) - ((rightArrow.height()) - rightArrow.height() / 8),
                                 rightArrow.width(), rightArrow.height());
-
-    setDate(QDate::currentDate());
 }
 
 void DayView::setDate(QDate date)

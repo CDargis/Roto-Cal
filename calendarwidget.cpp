@@ -24,6 +24,7 @@ CalendarWidget::CalendarWidget(QRect screenRes, Event_set &set, QWidget *parent)
     rotaryViews->addWidget(monthView);
 
     dayView = new DayView(pageGeometry, set, this);
+    dayView->setDate(QDate::currentDate());
     rotaryViews->addWidget(dayView);
 
     detailView = new DetailView(pageGeometry, set, this);

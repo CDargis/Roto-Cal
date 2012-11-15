@@ -21,6 +21,7 @@ public:
     explicit RotatableLabel(QWidget *parent = 0);
     void setCurrentRotation(float rotation);
     float getCurrentRotation() { return currentRotation; }
+    float getAngle(QPoint point);
 signals:
     void mouseDown();
     void mouseMove();
@@ -36,8 +37,9 @@ protected:
     void paintEvent(QPaintEvent *pe);
     QPixmap originalPixmap;
 private:
-    QPoint startPoint;
+    QPoint mouseDownPoint;
     float currentRotation;
+    float oldRotation;
 };
 
 #endif // ROTATABLELABEL_H
