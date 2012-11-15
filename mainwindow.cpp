@@ -155,6 +155,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    // Memory cleanup!
+    eventSet.deleteSets();
     delete ui;
 }
 
