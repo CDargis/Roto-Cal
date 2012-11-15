@@ -27,7 +27,13 @@ void DateDisplay::slotyearChanged(int year)
 void DateDisplay::slotMonthChanged(int month)
 {
     QDate date = QDate::fromString(text());
-    date.setDate(date.year(), month, date.day());
+    int year = date.year();
+    int cMonth = date.month();
+    if(month == 1 && cMonth == 12)       // Going from december to january
+        year++;
+    if(month == 12 && cMonth == 1)       // Going from january to december
+        year--;
+    date.setDate(year, month, date.day());
     if(date.isValid())
         setText(date.toString());
     emit dateChanged(this->getDateTime());
