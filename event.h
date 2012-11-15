@@ -55,6 +55,17 @@ public:
    */
     Event(QString name, QString location, QString description, Date startDate, Time1 startTime, Date endDate, Time1 endTime);
 
+    //! Event constructor.
+   /*!
+   \param name a QString argument.
+   \param location a QString argument.
+   \param description a QString argument
+   \param startTime a time_t argument.
+   \param endTime a time_t argument.
+   \sa Event(), ~Event()
+   */
+    Event(QString name, QString location, QString description, time_t startTime, time_t endtime);
+
     //! Event destructor.
    /*!
    Event's destructor.
@@ -186,7 +197,7 @@ public:
     int getMonth() const {
         struct tm* time;
         time = localtime(&startTime);
-        return time->tm_mon;
+        return time->tm_mon + 1;
     }
 
     //! Get Day.
@@ -208,7 +219,7 @@ public:
     int getYear() const {
         struct tm* time;
         time = localtime(&startTime);
-        return time->tm_year;
+        return time->tm_year + 1900;
     }
 
     //! Get Minute.
@@ -231,6 +242,54 @@ public:
         struct tm* time;
         time = localtime(&startTime);
         return time->tm_hour;
+    }
+
+    //! Get Month as string.
+   /*!
+   \return Event month as string from time_t
+   \sa getDay(),getYear(),getMinute(),getHour()
+   */
+    QString getMonthString() const {
+        struct tm* time;
+        time = localtime(&startTime);
+        QString month = QString("%1").arg(time->tm_mon + 1, 2, 10, QChar('0')).toUpper();
+        return month;
+    }
+
+    //! Get Day as string.
+   /*!
+   \return Event day as string from time_t
+   \sa getMonth(),getYear(),getMinute(),getHour()
+   */
+    QString getDayString() const {
+        struct tm* time;
+        time = localtime(&startTime);
+        QString day = QString("%1").arg(time->tm_mday, 2, 10, QChar('0')).toUpper();
+        return day;
+    }
+
+    //! Get Minute as string.
+   /*!
+   \return Event minute as string from time_t
+   \sa getDay(),getMonth(),getYear(),getHour()
+   */
+    QString getMinuteString() const {
+        struct tm* time;
+        time = localtime(&startTime);
+        QString minute = QString("%1").arg(time->tm_min, 2, 10, QChar('0')).toUpper();
+        return minute;
+    }
+
+    //! Get hour as string.
+   /*!
+   \return Event hour as string from time_t
+   \sa getDay(),getMonth(),getYear(),getMinute()
+   */
+    QString getHourString() const {
+        struct tm* time;
+        time = localtime(&startTime);
+        QString minute = QString("%1").arg(time->tm_hour, 2, 10, QChar('0')).toUpper();
+        return minute;
     }
 
 };

@@ -21,6 +21,15 @@ Event::Event(QString name, QString location, QString description, Date startDate
     this->endTime = createTime(endDate, endTime);
 }
 
+Event::Event(QString name, QString location, QString description, time_t startTime, time_t endTime)
+{
+    this->name = name;
+    this->location = location;
+    this->description = description;
+    this->startTime = startTime;
+    this->endTime = endTime;
+}
+
 Event::~Event()
 {
 
@@ -99,4 +108,3 @@ QDataStream &operator>>(QDataStream &in, Event &event)
     event.setEndTime(endTime);
     return in;
 }
-

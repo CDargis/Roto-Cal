@@ -7,6 +7,9 @@
 #include <time.h>
 
 #include "rotaryview.h"
+#include "QDebug"
+
+#include "create_time_t.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow),
@@ -36,6 +39,39 @@ MainWindow::MainWindow(QWidget *parent)
     Event* e8 = new Event;
     Event* e9 = new Event;
     Event* e10 = new Event;
+
+    Event* e11 = new Event("Dentist","location here","description here",Create_time_t::createTime(1,12,2012,3,4,true),Create_time_t::createTime(1,12,2012,3,5,true));
+    Event* e12 = new Event("Chem 101","location here","description here",Create_time_t::createTime(2,5,2012,6,7,false),Create_time_t::createTime(2,5,2012,6,8,false));
+    Event* e13 = new Event("Mark Bday","location here","description here",Create_time_t::createTime(27,2,2012,50,5,true),Create_time_t::createTime(27,2,2012,0,6,true));
+    Event* e14 = new Event("Lunch","location here","description here",Create_time_t::createTime(3,3,2012,3,3,false),Create_time_t::createTime(3,3,2012,3,4,false));
+    Event* e15 = new Event("Digging Dirt","location here","description here",Create_time_t::createTime(3,10,2012,0,11,false),Create_time_t::createTime(3,10,2012,0,12,true));
+    Event* e16 = new Event("Day off","location here","description here",Create_time_t::createTime(4,4,2012,4,4,true),Create_time_t::createTime(4,4,2012,4,5,true));
+    Event* e17 = new Event("Party","location here","description here",Create_time_t::createTime(5,4,2012,30,8,true),Create_time_t::createTime(5,4,2012,30,9,true));
+    Event* e18 = new Event("Charity","location here","description here",Create_time_t::createTime(5,10,2012,0,3,false),Create_time_t::createTime(5,10,2012,0,4,false));
+    Event* e19 = new Event("Blues Clues","location here","description here",Create_time_t::createTime(5,10,2012,20,12,false),Create_time_t::createTime(5,10,2012,20,1,true));
+    Event* e20 = new Event("James Brown","location here","description here",Create_time_t::createTime(5,9,2012,10,7,false),Create_time_t::createTime(5,9,2012,10,8,false));
+
+    Event* e21 = new Event("Dr. Doom","location here","description here",Create_time_t::createTime(6,6,2012,10,6,true),Create_time_t::createTime(6,6,2012,10,7,true));
+    Event* e22 = new Event("Math 101","location here","description here",Create_time_t::createTime(6,6,2012,8,9,false),Create_time_t::createTime(6,6,2012,8,10,false));
+    Event* e23 = new Event("Chris Birthday","location here","description here",Create_time_t::createTime(7,7,2012,10,2,false),Create_time_t::createTime(7,7,2012,10,3,false));
+    Event* e24 = new Event("Gerron Birthday","location here","description here",Create_time_t::createTime(9,1,2012,0,12,false),Create_time_t::createTime(9,1,2012,0,0,true));
+    Event* e25 = new Event("Jay Birthday","location here","description here",Create_time_t::createTime(11,11,2012,0,12,false),Create_time_t::createTime(11,11,2012,0,12,true));
+    Event* e26 = new Event("Movie Night","location here","description here",Create_time_t::createTime(8,1,2012,0,6,true),Create_time_t::createTime(8,1,2012,0,7,true));
+    Event* e27 = new Event("4th of July","location here","description here",Create_time_t::createTime(29,7,2012,30,7,false),Create_time_t::createTime(29,7,2012,30,8,false));
+    Event* e28 = new Event("Christmas","location here","description here",Create_time_t::createTime(30,12,2012,3,4,true),Create_time_t::createTime(30,12,2012,3,5,true));
+    Event* e29 = new Event("Thanksgiving","location here","description here",Create_time_t::createTime(5,5,2012,10,5,false),Create_time_t::createTime(5,5,2012,10,5,false));
+    Event* e30 = new Event("Black Friday","location here","description here",Create_time_t::createTime(10,5,2012,6,7,false),Create_time_t::createTime(10,5,2012,6,8,false));
+
+    Event* e31 = new Event("Doctor","location here","description here",Create_time_t::createTime(11,11,2012,3,3,true),Create_time_t::createTime(11,11,2012,3,4,true));
+    Event* e32 = new Event("Gym","location here","description here",Create_time_t::createTime(7,7,2012,0,2,true),Create_time_t::createTime(7,7,2012,0,3,true));
+    Event* e33 = new Event("PPV fight","location here","description here",Create_time_t::createTime(30,7,2012,40,7,false),Create_time_t::createTime(30,7,2012,40,7,false));
+    Event* e34 = new Event("Heat vs Lakers","location here","description here",Create_time_t::createTime(2,2,2012,20,4,true),Create_time_t::createTime(2,2,2012,20,5,true));
+    Event* e35 = new Event("Magic Show","location here","description here",Create_time_t::createTime(12,12,2012,25,6,true),Create_time_t::createTime(12,12,2012,25,7,true));
+    Event* e36 = new Event("Book reading","location here","description here",Create_time_t::createTime(26,6,2012,45,5,true),Create_time_t::createTime(26,6,2012,45,6,true));
+    Event* e37 = new Event("Speech","location here","description here",Create_time_t::createTime(30,10,2012,15,6,true),Create_time_t::createTime(30,10,2012,30,6,true));
+    Event* e38 = new Event("Final exam","location here","description here",Create_time_t::createTime(3,3,2012,50,8,false),Create_time_t::createTime(3,3,2012,50,9,false));
+    Event* e39 = new Event("Finals","location here","description here",Create_time_t::createTime(3,10,2012,40,5,true),Create_time_t::createTime(3,10,2012,40,3,true));
+    Event* e40 = new Event("Shopping","location here","description here",Create_time_t::createTime(1,1,2012,10,1,true),Create_time_t::createTime(1,1,2012,10,2,true));
 
     e1->setName(tr("Dr. Who"));
     e2->setName(tr("BIO 101"));
@@ -80,6 +116,37 @@ MainWindow::MainWindow(QWidget *parent)
     eventSet.insertEvent(e8);
     eventSet.insertEvent(e9);
     eventSet.insertEvent(e10);
+
+    eventSet.insertEvent(e11);
+    eventSet.insertEvent(e12);
+    eventSet.insertEvent(e13);
+    eventSet.insertEvent(e14);
+    eventSet.insertEvent(e15);
+    eventSet.insertEvent(e16);
+    eventSet.insertEvent(e17);
+    eventSet.insertEvent(e18);
+    eventSet.insertEvent(e19);
+    eventSet.insertEvent(e20);
+    eventSet.insertEvent(e21);
+    eventSet.insertEvent(e22);
+    eventSet.insertEvent(e23);
+    eventSet.insertEvent(e24);
+    eventSet.insertEvent(e25);
+    eventSet.insertEvent(e26);
+    eventSet.insertEvent(e27);
+    eventSet.insertEvent(e28);
+    eventSet.insertEvent(e29);
+    eventSet.insertEvent(e30);
+    eventSet.insertEvent(e31);
+    eventSet.insertEvent(e32);
+    eventSet.insertEvent(e33);
+    eventSet.insertEvent(e34);
+    eventSet.insertEvent(e35);
+    eventSet.insertEvent(e36);
+    eventSet.insertEvent(e37);
+    eventSet.insertEvent(e38);
+    eventSet.insertEvent(e39);
+    eventSet.insertEvent(e40);
 
     setCentralWidget(screens);
 
