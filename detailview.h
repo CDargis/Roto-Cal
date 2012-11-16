@@ -18,7 +18,18 @@ signals:
 public slots:
     void setCurrentEvent(Event* e);
 private:
-    QLabel* lab;
+    QLabel* title;
+    QLabel* location;
+    QLabel* description;
+    QLabel* startTime;
+    QLabel* endTime;
+
+    QLabel* fieldTitle;
+    QLabel* fieldLocation;
+    QLabel* fieldDescription;
+    QLabel* fieldStartTime;
+    QLabel* fieldEndTime;
+
     Event* currentEvent;
 };
 
