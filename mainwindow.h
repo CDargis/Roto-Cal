@@ -34,6 +34,7 @@ public:
 public slots:
     void slotActionTriggered(QAction* a);
     void slotAddWidgetClose();
+    void slotEditEventClicked(Event* e);
 private:
     Ui::MainWindow *ui;
     QStackedWidget* screens;

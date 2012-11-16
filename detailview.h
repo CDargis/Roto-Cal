@@ -8,15 +8,18 @@
 #include <QHBoxLayout>
 #include <QLabel>
 
+#include "event.h"
+
 class DetailView : public RotaryView
 {
     Q_OBJECT
 public:
     explicit DetailView(QRect& pageGeometry, Event_set& set, QWidget *parent);
 signals:
-    
+    void editEventClicked(Event* e);
 public slots:
     void setCurrentEvent(Event* e);
+    void slotEditClicked();
 private:
     QLabel* title;
     QLabel* location;

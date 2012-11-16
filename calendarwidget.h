@@ -15,6 +15,7 @@
 #include "datedisplay.h"
 #include "calobject.h"
 #include "event_set.h"
+#include "event.h"
 
 class CalendarWidget : public QWidget, CalObject
 {
@@ -25,7 +26,7 @@ public:
     QDateTime getCurrentDateTime();
     void pokeDateChange();
 signals:
-
+    void editEvent(Event* e);
 public slots:
     void slotLabelClicked(int index);
     void slotEventClicked(Event* e);

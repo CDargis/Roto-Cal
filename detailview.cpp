@@ -48,6 +48,8 @@ DetailView::DetailView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
 
     QPushButton* editButton = new QPushButton(tr("Edit"), this);
     formLayout->addWidget(editButton);
+
+    connect(editButton, SIGNAL(clicked()), this, SLOT(slotEditClicked()));
 }
 
 void DetailView::setCurrentEvent(Event* e)
@@ -63,4 +65,9 @@ void DetailView::setCurrentEvent(Event* e)
                        toString(tr("ddd MMM yyyy hh:mm")));
     endTime->setText(qdt.fromTime_t(e->getEndTime()).\
                      toString(tr("ddd MMM yyyy hh:mm")));
+}
+
+void DetailView::slotEditClicked()
+{
+    emit editEventClicked(currentEvent);
 }
