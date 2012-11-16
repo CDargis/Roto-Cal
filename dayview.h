@@ -12,6 +12,7 @@ class DayView : public RotaryView
 public:
     explicit DayView(QRect& pageGeometry, Event_set& set, QWidget *parent = 0);
     DayLabel* dayLabel;
+    QLabel* glowMap;
 signals:
     void eventClicked(Event* e);
 public slots:

@@ -68,6 +68,7 @@ void DayView::slotDateChanged(QDateTime dateTime)
     }
     listWidget->updateGeometry();
     delete(e);
+
 }
 
 // This slot is called when an item in the QListWidget is clicked

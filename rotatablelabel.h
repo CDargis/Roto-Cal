@@ -40,6 +40,7 @@ private:
     QPoint mouseDownPoint;
     float currentRotation;
     float oldRotation;
+    bool mouseIsDown;
 };
 
 #endif // ROTATABLELABEL_H
