@@ -14,6 +14,8 @@
 SaveEventWidget::SaveEventWidget(Event_set &set, CalendarWidget& widget, QWidget *parent) :
 	QWidget(parent), CalObject(set), cWidget(widget)
 {
+    currentEvent = NULL;
+
 	lastPoint = QPoint(0, 0);
 	QVBoxLayout* mainLayout = new QVBoxLayout(this);
 
@@ -93,13 +95,13 @@ void SaveEventWidget::resetInput()
 
 void SaveEventWidget::slotSaveClicked()
 {
-    if(editMode) editEvent();
+    if(currentEvent) editEvent();
     else createNewEvent();
 }
 
 void SaveEventWidget::slotCancelClicked()
 {
-    emit closeScreen();
+    emit closeScreen(NULL);
 }
 
 void SaveEventWidget::setInput(QDateTime start, QDateTime end, QString title,
@@ -145,7 +147,7 @@ void SaveEventWidget::createNewEvent()
         } else {
             qDebug() << "Event " << e->getName() << " Added,"<< "Starts at" << \
                 e->getHour() << ":" << e->getMinute() << "w/set size = " << eventSet.getSize();
-            emit closeScreen();
+            emit closeScreen(NULL);
         }
     }
 }
@@ -153,5 +155,11 @@ void SaveEventWidget::createNewEvent()
 void SaveEventWidget::editEvent()
 {
     // Like a sir...
-    // Don't forget to emit closeScreen()
+    // You can now use currentEvent in this class
+    currentEvent->getDay();
+
+    // Make sure these lines are executed from every control path in this function
+    Event* tmp;           // THIS IS THE POINTER TO THE EVENT THAT WAS EDITED
+    currentEvent = NULL;
+    emit closeScreen(tmp);     // MAKE SURE YOU EMIT A POINTER TO A VALID EVENT UNLESS CANCEL WAS CLICKED
 }

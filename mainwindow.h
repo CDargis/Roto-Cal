@@ -33,7 +33,7 @@ public:
 
 public slots:
     void slotActionTriggered(QAction* a);
-    void slotAddWidgetClose();
+    void slotAddWidgetClose(Event *e);
     void slotEditEventClicked(Event* e);
 private:
     Ui::MainWindow *ui;

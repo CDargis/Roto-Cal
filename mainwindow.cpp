@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
     saveEventWidget = new SaveEventWidget(eventSet, *cWidget,this);
     screens->addWidget(saveEventWidget);
     connect(cWidget, SIGNAL(setScreenIndex(int)), screens, SLOT(setCurrentIndex(int)));
-    connect(saveEventWidget, SIGNAL(closeScreen()), this, SLOT(slotAddWidgetClose()));
+    connect(saveEventWidget, SIGNAL(closeScreen(Event*)), this, SLOT(slotAddWidgetClose(Event*)));
     connect(cWidget, SIGNAL(editEvent(Event*)), this, SLOT(slotEditEventClicked(Event*)));
 
     Event* e1 = new Event;
@@ -167,13 +167,16 @@ void MainWindow::slotActionTriggered(QAction *a)
     {
         saveEventWidget->setInput(cWidget->getCurrentDateTime(),
                                   cWidget->getCurrentDateTime().addSecs(60*60));
-        saveEventWidget->setEditMode(false);
         screens->setCurrentIndex(1);
     }
 }
 
-void MainWindow::slotAddWidgetClose()
+void MainWindow::slotAddWidgetClose(Event *e)
 {
+    if(e)
+    {
+        cWidget->emitEditEventSignal(e);
+    }
     cWidget->pokeDateChange();
     screens->setCurrentIndex(0);
 }
@@ -183,7 +186,7 @@ void MainWindow::slotEditEventClicked(Event *e)
     QDateTime start = QDateTime::fromTime_t(e->getStartTime());
     QDateTime end = QDateTime::fromTime_t(e->getEndTime());
     saveEventWidget->setInput(start, end, e->getName(), e->getLocation(), e->getDescription());
-    saveEventWidget->setEditMode(true);
+    saveEventWidget->setCurrentEvent(e);
     screens->setCurrentIndex(1);
 }
 
