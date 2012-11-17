@@ -153,4 +153,5 @@ void SaveEventWidget::createNewEvent()
 void SaveEventWidget::editEvent()
 {
     // Like a sir...
+    // Don't forget to emit closeScreen()
 }
