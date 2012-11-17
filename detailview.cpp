@@ -7,6 +7,8 @@
 DetailView::DetailView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     RotaryView(pageGeometry, set, parent)
 {
+    currentEvent = NULL;
+
     QFont fieldFnt;
     QFont fnt;
 
@@ -69,5 +71,6 @@ void DetailView::setCurrentEvent(Event* e)
 
 void DetailView::slotEditClicked()
 {
-    emit editEventClicked(currentEvent);
+    if(currentEvent)
+        emit editEventClicked(currentEvent);
 }
