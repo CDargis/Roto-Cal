@@ -21,6 +21,7 @@ signals:
 public slots:
     void setDate(QDate date);
     void slotDateChanged(QDateTime dateTime);
+    void slotYearChanged(QDateTime dateTime);
     void slotListItemClicked(QListWidgetItem* item);
 private:
     QListWidget* listWidget;

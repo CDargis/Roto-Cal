@@ -22,6 +22,7 @@ public:
     void setCurrentRotation(float rotation);
     float getCurrentRotation() { return currentRotation; }
     float getAngle(QPoint point);
+    virtual void setDate(QDate date) = 0;
 signals:
     void mouseDown();
     void mouseMove();

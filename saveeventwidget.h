@@ -17,6 +17,9 @@ public:
     explicit SaveEventWidget(Event_set& set, CalendarWidget& widget, QWidget *parent = 0);
     void setInput(QDateTime start, QDateTime end, QString title = "",
                   QString location = "", QString description = "");
+    void setEditMode(bool e) { editMode = e; }
+    void createNewEvent();
+    void editEvent();
 protected:
     void keyPressEvent(QKeyEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
@@ -29,6 +32,7 @@ public slots:
 private:
     void resetInput();
 
+    bool editMode;
     QLineEdit* titleEdit;
     QLineEdit* descEdit;
     QLineEdit* locationEdit;

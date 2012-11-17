@@ -48,3 +48,9 @@ void MonthLabel::slotGrabMouseMove()
         emit monthChanged(month + 1);
     }
 }
+
+void MonthLabel::setDate(QDate date)
+{
+    int month = date.month();
+    setCurrentRotation((month - 1) * 30);
+}

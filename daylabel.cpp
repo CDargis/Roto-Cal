@@ -8,8 +8,6 @@ DayLabel::DayLabel(QPixmap pixmap, QWidget *parent) :
     pixmap29Days = paintDaysOnPixmap(29, pixmap);
     pixmap30Days = paintDaysOnPixmap(30, pixmap);
     pixmap31Days = paintDaysOnPixmap(31, pixmap);
-    originalPixmap = pixmap31Days;
-    setPixmap(originalPixmap);
     connect(this, SIGNAL(mouseMove()), this, SLOT(slotGrabMouseMove()));
 }
 
@@ -18,7 +16,7 @@ void DayLabel::slotGrabMouseMove()
     float cRotation = getCurrentRotation();
     if(cRotation < 0)
         cRotation += 360;
-    float div = (cRotation / 11.612903226) + .5;
+    float div = (cRotation / rotationRange) + .5;
     int day = ((int)div) + 1;
     emit dayChanged(day);
 }
@@ -36,11 +34,12 @@ QPixmap DayLabel::paintDaysOnPixmap(int numDays, QPixmap pixmap)
     QFont f = p.font();
     f.setPointSize(10);
     p.setFont(f);
+    float rotation = 360.00 / (float)numDays;
     for(int i = 1; i <= numDays; i++)
     {
         p.drawText(xPos, yPos, QString::number(i));
         p.translate(xTranslate, yTranslate);
-        p.rotate(11.612903226);
+        p.rotate(rotation);
         p.translate(-xTranslate, -yTranslate);
     }
     return labeledMap;
@@ -58,4 +57,11 @@ void DayLabel::setDayPixmap(int days)
         originalPixmap = pixmap31Days;
     setPixmap(originalPixmap);
     update();
+}
+
+void DayLabel::setDate(QDate date)
+{
+    setDayPixmap(date.daysInMonth());
+    rotationRange = 360.00 / (float)date.daysInMonth();
+    setCurrentRotation((date.day() - 1) * rotationRange);
 }

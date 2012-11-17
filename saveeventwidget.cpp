@@ -73,11 +73,6 @@ SaveEventWidget::SaveEventWidget(Event_set &set, CalendarWidget& widget, QWidget
 
 void SaveEventWidget::mouseMoveEvent(QMouseEvent *e)
 {
-	// Scrolling down or up
-	//QPoint p = QWidget::mapFromGlobal(QCursor::pos());
-	//if(p.ry() < lastPoint.ry()) scroll(0, -5);
-	//else scroll(0, 5);
-	//lastPoint = p;
 	QWidget::mouseMoveEvent(e);
 }
 
@@ -98,40 +93,8 @@ void SaveEventWidget::resetInput()
 
 void SaveEventWidget::slotSaveClicked()
 {
-	Event* e;                                                                   
-	bool notDup;                                                                
-
-	if (titleEdit->text().isEmpty()) {                                          
-		QMessageBox mBox;                                                       
-		mBox.setText("Enter a Title");                                          
-		mBox.show();                                                            
-        mBox.move( this->width() / 2 - mBox.width() / 2, this->height() / 2 -\
-				mBox.height() / 2 );                                         
-		mBox.exec();                                                            
-	} else {                                                                    
-		e = new Event;                                                          
-		/* insert field data from widget to event object */                     
-		e->setName(titleEdit->text());                                          
-		e->setDescription(descEdit->text());                                    
-		e->setLocation(locationEdit->text());                                   
-		e->setStartTime(sTimeEdit->dateTime().toTime_t());                      
-		e->setEndTime(eTimeEdit->dateTime().toTime_t());
-
-		notDup = eventSet.insertEvent(e);                                       
-		if (!notDup) {                                                          
-			QMessageBox mBox;                                                   
-			mBox.setText("Duplicate Event");                                    
-			mBox.show();                                                        
-			mBox.move( this->width() / 2 - mBox.width() / 2, this->height() / 2\
-					- mBox.height() / 2 );                                   
-			mBox.exec();                                                        
-			delete(e); // delete event since identical already exists           
-		} else {                                                                
-			qDebug() << "Event " << e->getName() << " Added,"<< "Starts at" << \
-				e->getHour() << ":" << e->getMinute() << "w/set size = " << eventSet.getSize();                                                     
-            emit closeScreen();
-		}                                                                       
-	}
+    if(editMode) editEvent();
+    else createNewEvent();
 }
 
 void SaveEventWidget::slotCancelClicked()
@@ -147,4 +110,47 @@ void SaveEventWidget::setInput(QDateTime start, QDateTime end, QString title,
     descEdit->setText(description);
     sTimeEdit->setDateTime(start);
     eTimeEdit->setDateTime(end);
+}
+
+void SaveEventWidget::createNewEvent()
+{
+    Event* e;
+    bool notDup;
+
+    if (titleEdit->text().isEmpty()) {
+        QMessageBox mBox;
+        mBox.setText("Enter a Title");
+        mBox.show();
+        mBox.move( this->width() / 2 - mBox.width() / 2, this->height() / 2 -\
+                mBox.height() / 2 );
+        mBox.exec();
+    } else {
+        e = new Event;
+        /* insert field data from widget to event object */
+        e->setName(titleEdit->text());
+        e->setDescription(descEdit->text());
+        e->setLocation(locationEdit->text());
+        e->setStartTime(sTimeEdit->dateTime().toTime_t());
+        e->setEndTime(eTimeEdit->dateTime().toTime_t());
+
+        notDup = eventSet.insertEvent(e);
+        if (!notDup) {
+            QMessageBox mBox;
+            mBox.setText("Duplicate Event");
+            mBox.show();
+            mBox.move( this->width() / 2 - mBox.width() / 2, this->height() / 2\
+                    - mBox.height() / 2 );
+            mBox.exec();
+            delete(e); // delete event since identical already exists
+        } else {
+            qDebug() << "Event " << e->getName() << " Added,"<< "Starts at" << \
+                e->getHour() << ":" << e->getMinute() << "w/set size = " << eventSet.getSize();
+            emit closeScreen();
+        }
+    }
+}
+
+void SaveEventWidget::editEvent()
+{
+    // Like a sir...
 }

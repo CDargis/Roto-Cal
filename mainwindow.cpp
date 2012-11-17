@@ -167,6 +167,7 @@ void MainWindow::slotActionTriggered(QAction *a)
     {
         saveEventWidget->setInput(cWidget->getCurrentDateTime(),
                                   cWidget->getCurrentDateTime().addSecs(60*60));
+        saveEventWidget->setEditMode(false);
         screens->setCurrentIndex(1);
     }
 }
@@ -182,6 +183,7 @@ void MainWindow::slotEditEventClicked(Event *e)
     QDateTime start = QDateTime::fromTime_t(e->getStartTime());
     QDateTime end = QDateTime::fromTime_t(e->getEndTime());
     saveEventWidget->setInput(start, end, e->getName(), e->getLocation(), e->getDescription());
+    saveEventWidget->setEditMode(true);
     screens->setCurrentIndex(1);
 }
 
