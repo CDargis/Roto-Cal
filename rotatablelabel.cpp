@@ -6,6 +6,8 @@ RotatableLabel::RotatableLabel(QWidget *parent) : QLabel(parent)
     connect(this, SIGNAL(mouseMove()), this, SLOT(slotMouseMoved()));
     connect(this, SIGNAL(mouseUp()), this, SLOT(slotMouseUp()));
     currentRotation = 0;
+    oldRotation = 0;
+    mouseIsDown = false;
 }
 
 void RotatableLabel::mousePressEvent(QMouseEvent *ev)
@@ -28,24 +30,28 @@ void RotatableLabel::mouseReleaseEvent(QMouseEvent *ev)
 
 void RotatableLabel::slotMouseDown()
 {
-    startPoint = QWidget::mapFromGlobal(QCursor::pos());
+    mouseIsDown = true;
+    mouseDownPoint = QWidget::mapFromGlobal(QCursor::pos());
+    oldRotation = -currentRotation;
 }
 
 void RotatableLabel::slotMouseMoved()
 {
     QPoint point = QWidget::mapFromGlobal(QCursor::pos());
-    double y = point.ry();
-    if(y < startPoint.ry()) currentRotation -= 2;
-    else currentRotation += 2;
+    float currentAngle = this->getAngle(point);
+    float originalAngle = this->getAngle(mouseDownPoint);
+    currentRotation = currentAngle - originalAngle;
+    currentRotation += oldRotation;
     currentRotation = fmod(currentRotation, 360.00);
-    //currentRotation %= 360.00;
-    startPoint = point;
+    currentRotation = -currentRotation;
     update();
 }
 
 void RotatableLabel::slotMouseUp()
 {
-    startPoint = QPoint(0,0);
+    mouseIsDown = false;
+    // As soon as the mouse is up, start physics
+
 }
 
 void RotatableLabel::paintEvent(QPaintEvent *pe)
@@ -57,6 +63,18 @@ void RotatableLabel::paintEvent(QPaintEvent *pe)
     p.rotate(-currentRotation);
     p.translate(-pixmap.size().width() / 2, -pixmap.size().height() / 2);
     p.drawPixmap(0, 0, pixmap);
+
+    QRect r = rotatedMap.rect();
+    if(mouseIsDown)
+    {
+        p.setPen((QPen(Qt::blue, 5)));
+        p.drawEllipse(r.center(), (r.width() / 2) * .999, (r.height() / 2) * .999);
+    }
+    else
+    {
+        p.setPen((QPen(Qt::black, 5)));
+        p.drawEllipse(r.center(), (r.width() / 2), (r.height() / 2));
+    }
     this->setPixmap(rotatedMap);
     QLabel::paintEvent(pe);
 }
@@ -65,4 +83,11 @@ void RotatableLabel::setCurrentRotation(float rotation)
 {
     currentRotation = rotation;
     update();
+}
+
+float RotatableLabel::getAngle(QPoint point)
+{
+    float x = (float)(point.rx() - (originalPixmap.width() / 2));
+    float y = (float)((originalPixmap.height() / 2) - point.ry());
+    return atan2(x, y) * (180 / PI);
 }

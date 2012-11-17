@@ -6,10 +6,11 @@ MonthView::MonthView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     /* widget for dayview events */
     listWidget = new QListWidget(this);
     QFont fnt;
-    fnt.setPointSize(9);
+    fnt.setPointSize(8);
     listWidget->setFont(fnt);
     listWidget->setPalette(Qt::black);
-    listWidget->setSizePolicy (QSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored));
+    listWidget->setSizePolicy (QSizePolicy(QSizePolicy::Ignored,\
+                                           QSizePolicy::Ignored));
     listWidget->setMinimumSize(QSize(235, 800));
     listWidget->setMaximumWidth(235);
     listWidget->setMaximumHeight(1000);
@@ -49,11 +50,12 @@ void MonthView::slotDateChanged(QDateTime dateTime)
     listWidget->clear();
 
     if(monthSet->size()==0) {
-        CalendarListItem *item = new CalendarListItem(NULL, tr("No events"), listWidget);
+        CalendarListItem *item = new CalendarListItem(NULL, tr("No events"),\
+                                                      listWidget);
         item->setFlags(Qt::ItemIsEnabled);
     } else {
         for (it=monthSet->begin(); it!=monthSet->end(); it++) {
-            new CalendarListItem((*it), QString::number((*it)->getDay()).append\
+            new CalendarListItem((*it), (*it)->getDayString().append\
                                 (" ").append(((*it)->getName())), listWidget);
             connect(listWidget, SIGNAL(itemClicked(QListWidgetItem*)),
                     this, SLOT(slotListItemClicked(QListWidgetItem*)));
