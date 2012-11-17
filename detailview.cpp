@@ -9,11 +9,11 @@ DetailView::DetailView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
 {
     currentEvent = NULL;
 
-    QFont fieldFnt;
-    QFont fnt;
+    QString fieldStyleSheet, entryStyleSheet;
+    fieldStyleSheet = "font-size: 30px; font-weight: bold;";
+    entryStyleSheet = "font-size: 26px;";
 
-    fieldFnt.setPointSize(10);
-    fnt.setPointSize(8);
+
 
     fieldTitle = new QLabel(tr("Title"), this);
     fieldDescription = new QLabel(tr("Description"), this);
@@ -21,11 +21,11 @@ DetailView::DetailView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     fieldStartTime = new QLabel(tr("Start Time"), this);
     fieldEndTime = new QLabel(tr("End Time"), this);
 
-    fieldTitle->setFont(fieldFnt);
-    fieldDescription->setFont(fieldFnt);
-    fieldLocation->setFont(fieldFnt);
-    fieldStartTime->setFont(fieldFnt);
-    fieldEndTime->setFont(fieldFnt);
+    fieldTitle->setStyleSheet(fieldStyleSheet);
+    fieldDescription->setStyleSheet(fieldStyleSheet);
+    fieldLocation->setStyleSheet(fieldStyleSheet);
+    fieldStartTime->setStyleSheet(fieldStyleSheet);
+    fieldEndTime->setStyleSheet(fieldStyleSheet);
 
     QFormLayout* formLayout = new QFormLayout(this);
     formLayout->setSpacing(70);
@@ -36,11 +36,11 @@ DetailView::DetailView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     startTime = new QLabel(tr(""), this);
     endTime = new QLabel(tr(""), this);
 
-    title->setFont(fnt);
-    description->setFont(fnt);
-    location->setFont(fnt);
-    startTime->setFont(fnt);
-    endTime->setFont(fnt);
+    title->setStyleSheet(entryStyleSheet);
+    description->setStyleSheet(entryStyleSheet);
+    location->setStyleSheet(entryStyleSheet);
+    startTime->setStyleSheet(entryStyleSheet);
+    endTime->setStyleSheet(entryStyleSheet);
 
     formLayout->addRow(fieldTitle, title);
     formLayout->addRow(fieldDescription, description);
