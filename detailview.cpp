@@ -14,14 +14,14 @@ DetailView::DetailView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     entryStyleSheet = "font-size: 6pt;";
 
     fieldTitle = new QLabel(tr("Title"), this);
-    fieldDescription = new QLabel(tr("Description"), this);
     fieldLocation = new QLabel(tr("Location"), this);
+    fieldDescription = new QLabel(tr("Description"), this);
     fieldStartTime = new QLabel(tr("Start Time"), this);
     fieldEndTime = new QLabel(tr("End Time"), this);
 
     fieldTitle->setStyleSheet(fieldStyleSheet);
-    fieldDescription->setStyleSheet(fieldStyleSheet);
     fieldLocation->setStyleSheet(fieldStyleSheet);
+    fieldDescription->setStyleSheet(fieldStyleSheet);
     fieldStartTime->setStyleSheet(fieldStyleSheet);
     fieldEndTime->setStyleSheet(fieldStyleSheet);
 
@@ -29,20 +29,20 @@ DetailView::DetailView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     formLayout->setSpacing(30);
 
     title = new QLabel(tr(""), this);
-    description = new QLabel(tr(""), this);
     location = new QLabel(tr(""), this);
+    description = new QLabel(tr(""), this);
     startTime = new QLabel(tr(""), this);
     endTime = new QLabel(tr(""), this);
 
     title->setStyleSheet(entryStyleSheet);
-    description->setStyleSheet(entryStyleSheet);
     location->setStyleSheet(entryStyleSheet);
+    description->setStyleSheet(entryStyleSheet);
     startTime->setStyleSheet(entryStyleSheet);
     endTime->setStyleSheet(entryStyleSheet);
 
     formLayout->addRow(fieldTitle, title);
-    formLayout->addRow(fieldDescription, description);
     formLayout->addRow(fieldLocation, location);
+    formLayout->addRow(fieldDescription, description);
     formLayout->addRow(fieldStartTime, startTime);
     formLayout->addRow(fieldEndTime, endTime);
 
@@ -59,8 +59,8 @@ void DetailView::setCurrentEvent(Event* e)
     QDateTime qdt;
 
     title->setText(e->getName());
-    description->setText(e->getDescription());
     location->setText(e->getLocation());
+    description->setText(e->getDescription());
     startTime->setText(qdt.fromTime_t(e->getStartTime()).\
                        toString(tr("ddd MMM yyyy hh:mm")));
     endTime->setText(qdt.fromTime_t(e->getEndTime()).\
