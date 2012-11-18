@@ -62,9 +62,9 @@ void DetailView::setCurrentEvent(Event* e)
     location->setText(e->getLocation());
     description->setText(e->getDescription());
     startTime->setText(qdt.fromTime_t(e->getStartTime()).\
-                       toString(tr("ddd MMM yyyy hh:mm")));
+                       toString(tr("ddd MMM, dd yyyy hh:mm")));
     endTime->setText(qdt.fromTime_t(e->getEndTime()).\
-                     toString(tr("ddd MMM yyyy hh:mm")));
+                     toString(tr("ddd MMM, dd yyyy hh:mm")));
 }
 
 void DetailView::slotEditClicked()
