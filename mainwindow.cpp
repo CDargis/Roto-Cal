@@ -171,11 +171,13 @@ void MainWindow::slotActionTriggered(QAction *a)
     }
 }
 
+// When closing the Save Event Widget, need to check if an event was edited or created
+// and handle accordingly
 void MainWindow::slotAddWidgetClose(Event *e)
 {
     if(e)
     {
-        cWidget->emitEditEventSignal(e);
+        cWidget->emitEventEditedSignal(e);
     }
     cWidget->pokeDateChange();
     screens->setCurrentIndex(0);

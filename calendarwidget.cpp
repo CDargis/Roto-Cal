@@ -79,7 +79,7 @@ void CalendarWidget::pokeDateChange()
     dayView->slotDateChanged(dt);
 }
 
-void CalendarWidget::emitEditEventSignal(Event *e)
+void CalendarWidget::emitEventEditedSignal(Event *e)
 {
-    emit editEvent(e);
+    emit eventEdited(e);
 }

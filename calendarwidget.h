@@ -25,7 +25,7 @@ public:
     QDate getCurrentDate();
     QDateTime getCurrentDateTime();
     void pokeDateChange();
-    void emitEditEventSignal(Event* e);
+    void emitEventEditedSignal(Event* e);
 signals:
     void editEvent(Event* e);
     void eventEdited(Event* e);
