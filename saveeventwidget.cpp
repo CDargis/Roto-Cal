@@ -126,6 +126,14 @@ void SaveEventWidget::createNewEvent()
         mBox.move( this->width() / 2 - mBox.width() / 2, this->height() / 2 -\
                    mBox.height() / 2 );
         mBox.exec();
+    } else if (!checkStartTime(sTimeEdit->dateTime().toTime_t(),\
+                               eTimeEdit->dateTime().toTime_t())){
+        QMessageBox mBox;
+        mBox.setText("Start Time occurs after End Time");
+        mBox.show();
+        mBox.move( this->width() / 2 - mBox.width() / 2, this->height() / 2 -\
+                   mBox.height() / 2 );
+        mBox.exec();
     } else {
         e = new Event;
         /* insert field data from widget to event object */
@@ -159,20 +167,31 @@ void SaveEventWidget::editEvent()
                                 descEdit->text(), sTimeEdit->dateTime().toTime_t(),
                                 eTimeEdit->dateTime().toTime_t());
 
+    /* check start/end time for conflicts */
+    if (!checkStartTime(tmpEvent->getStartTime(),\
+                        tmpEvent->getEndTime())) {
+        QMessageBox mBox;
+        mBox.setText("Start Time occurs after End Time");
+        mBox.show();
+        mBox.move( this->width() / 2 - mBox.width() / 2, this->height() / 2 -\
+                   mBox.height() / 2 );
+        mBox.exec();
+        delete(tmpEvent); // delete tmp (no need to update data structure)
+        emit closeScreen(currentEvent);
     /* title or starttime changed */
-    if (currentEvent->getName() != tmpEvent->getName() ||\
-            currentEvent->getStartTime() != tmpEvent->getStartTime()) {
+    } else if (currentEvent->getName() != tmpEvent->getName() ||\
+               currentEvent->getStartTime() != tmpEvent->getStartTime()) {
         /* if duplicate of another event */
         if ((duplicate = eventSet.editEvent(currentEvent, tmpEvent))) {
             QMessageBox mBox;
             mBox.setText("Edited event duplicate of existing event");
             mBox.show();
             mBox.move(this->width() / 2 - mBox.width() / 2, this->height() / 2\
-                       - mBox.height() / 2);
+                      - mBox.height() / 2);
             mBox.exec();
             delete(tmpEvent); // delete tmp (no need to update data structure)
             emit closeScreen(currentEvent);
-        /* insert successful */
+            /* insert successful */
         } else {
             currentEvent = NULL;
             emit closeScreen(tmpEvent);
@@ -193,9 +212,15 @@ void SaveEventWidget::editEvent()
         mBox.setText("No changes made to event");
         mBox.show();
         mBox.move(this->width() / 2 - mBox.width() / 2, this->height() / 2\
-                   - mBox.height() / 2);
+                  - mBox.height() / 2);
         mBox.exec();
         delete(tmpEvent); // delete tmp (no need to update data structure)
         emit closeScreen(currentEvent);
     }
+}
+
+bool SaveEventWidget::checkStartTime(time_t start, time_t end) {
+    if (end < start)
+        return false;
+    return true;
 }
