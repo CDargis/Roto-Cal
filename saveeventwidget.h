@@ -31,6 +31,7 @@ public slots:
     void slotCancelClicked();
 private:
     void resetInput();
+    bool checkStartTime(time_t start, time_t end);
 
     Event* currentEvent;
     QLineEdit* titleEdit;
