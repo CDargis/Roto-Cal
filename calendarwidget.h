@@ -25,8 +25,10 @@ public:
     QDate getCurrentDate();
     QDateTime getCurrentDateTime();
     void pokeDateChange();
+    void emitEventEditedSignal(Event* e);
 signals:
     void editEvent(Event* e);
+    void eventEdited(Event* e);
 public slots:
     void slotLabelClicked(int index);
     void slotEventClicked(Event* e);

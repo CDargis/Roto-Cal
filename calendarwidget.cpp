@@ -39,6 +39,7 @@ CalendarWidget::CalendarWidget(QRect screenRes, Event_set &set, QWidget *parent)
     connect(monthView, SIGNAL(eventClicked(Event*)), this, SLOT(slotEventClicked(Event*)));
     connect(dayView, SIGNAL(eventClicked(Event*)), this, SLOT(slotEventClicked(Event*)));
     connect(detailView, SIGNAL(editEventClicked(Event*)), SIGNAL(editEvent(Event*)));
+    connect(this, SIGNAL(eventEdited(Event*)), this, SLOT(slotEventClicked(Event*)));
     rotaryViews->setCurrentIndex(1);
 }
 
@@ -48,7 +49,6 @@ void CalendarWidget::slotLabelClicked(int index)
         case 0: monthView->setDate(this->getCurrentDate()); break;
         case 1: dayView->setDate(this->getCurrentDate()); break;
         case 2: break;
-        case 3: break;
         default: break;
     }
     rotaryViews->setCurrentIndex(index);
@@ -77,4 +77,9 @@ void CalendarWidget::pokeDateChange()
     QDateTime dt = this->getCurrentDateTime();
     monthView->slotDateChanged(dt);
     dayView->slotDateChanged(dt);
+}
+
+void CalendarWidget::emitEventEditedSignal(Event *e)
+{
+    emit eventEdited(e);
 }

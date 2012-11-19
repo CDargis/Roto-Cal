@@ -23,10 +23,10 @@ Event_set::~Event_set() {}
 bool Event_set::insertEvent(Event * e)
 {                                                                               
     if (!insertToYear(e))                                        
-        return false;                                                           
+        return true;
     insertToMonth(e);                                            
     insertToDay(e);                                              
-    return true;                                                                
+    return false;
 }                                                                               
                                                                                 
 /* inserts event into year */
@@ -205,10 +205,10 @@ bool Event_set::editEvent(Event * current_e, Event * new_e)
 {                                                                               
     /* if same start time / title already exists */                             
     if (findDuplicate(new_e))                                                   
-        return false;                                                           
+        return true;
     deleteEvent(current_e);                                                     
     insertEvent(new_e);                                                         
-    return true;                                                                
+    return false;
 }                                                                               
                                                                                 
 /* finds duplicate objects using day set */

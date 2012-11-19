@@ -13,6 +13,8 @@ public:
     explicit DayLabel(QPixmap pixmap, QWidget *parent = 0);
     static QPixmap paintDaysOnPixmap(int numDays, QPixmap pixmap);
     void setDayPixmap(int days);
+    void setDate(QDate date);
+    float getRotationRange() { return rotationRange; }
 protected:
     QPixmap pixmap28Days;
     QPixmap pixmap29Days;
@@ -23,6 +25,7 @@ signals:
 public slots:
     void slotGrabMouseMove();
 protected:
+    float rotationRange;
 
 };
 

@@ -21,9 +21,9 @@ class Event_set
     public:                                                                     
 		~Event_set();
 		short getSize(); // for debugging purposes
-		/** inserts event into year, month, day sets                                    
+        /** inserts event into year, month, day sets if not duplicate
  		 *  @param e Event object pointer                                                
- 		 *  @returns false if already exists 
+         *  @returns true if duplicate
 		 */
         bool insertEvent(Event * e);                                              
 		/** deletes event from year, month, day sets                                    
@@ -31,10 +31,10 @@ class Event_set
  		 *  @returns false if Event not found
 		 */
         bool deleteEvent(Event * e);                                              
-		/** edits event in year, month, day sets
+        /** edits event in year, month, day sets unless duplicate exists
 		 *  @param current_e event to be edited
 		 *  @param new_e new event to replace edited event
-		 *  @returns false if Event with date, time, and title already exists 
+         *  @returns true if Event with date, time, and title already exists
 		 */
         bool editEvent(Event * current_e, Event * new_e);                                       
 		/** delete all sets, and call delete on all event objects

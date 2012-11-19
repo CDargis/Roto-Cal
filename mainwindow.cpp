@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
     saveEventWidget = new SaveEventWidget(eventSet, *cWidget,this);
     screens->addWidget(saveEventWidget);
     connect(cWidget, SIGNAL(setScreenIndex(int)), screens, SLOT(setCurrentIndex(int)));
-    connect(saveEventWidget, SIGNAL(closeScreen()), this, SLOT(slotAddWidgetClose()));
+    connect(saveEventWidget, SIGNAL(closeScreen(Event*)), this, SLOT(slotAddWidgetClose(Event*)));
     connect(cWidget, SIGNAL(editEvent(Event*)), this, SLOT(slotEditEventClicked(Event*)));
 
     Event* e1 = new Event;
@@ -171,8 +171,14 @@ void MainWindow::slotActionTriggered(QAction *a)
     }
 }
 
-void MainWindow::slotAddWidgetClose()
+// When closing the Save Event Widget, need to check if an event was edited or created
+// and handle accordingly
+void MainWindow::slotAddWidgetClose(Event *e)
 {
+    if(e)
+    {
+        cWidget->emitEventEditedSignal(e);
+    }
     cWidget->pokeDateChange();
     screens->setCurrentIndex(0);
 }
@@ -182,6 +188,7 @@ void MainWindow::slotEditEventClicked(Event *e)
     QDateTime start = QDateTime::fromTime_t(e->getStartTime());
     QDateTime end = QDateTime::fromTime_t(e->getEndTime());
     saveEventWidget->setInput(start, end, e->getName(), e->getLocation(), e->getDescription());
+    saveEventWidget->setCurrentEvent(e);
     screens->setCurrentIndex(1);
 }
 

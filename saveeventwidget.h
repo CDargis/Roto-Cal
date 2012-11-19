@@ -17,18 +17,22 @@ public:
     explicit SaveEventWidget(Event_set& set, CalendarWidget& widget, QWidget *parent = 0);
     void setInput(QDateTime start, QDateTime end, QString title = "",
                   QString location = "", QString description = "");
+    void setCurrentEvent(Event *e) { currentEvent = e; }
+    void createNewEvent();
+    void editEvent();
 protected:
     void keyPressEvent(QKeyEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
 signals:
     void setScreenIndex(int index);
-    void closeScreen();
+    void closeScreen(Event* e);
 public slots:
     void slotSaveClicked();
     void slotCancelClicked();
 private:
     void resetInput();
 
+    Event* currentEvent;
     QLineEdit* titleEdit;
     QLineEdit* descEdit;
     QLineEdit* locationEdit;

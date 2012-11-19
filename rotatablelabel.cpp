@@ -33,6 +33,7 @@ void RotatableLabel::slotMouseDown()
     mouseIsDown = true;
     mouseDownPoint = QWidget::mapFromGlobal(QCursor::pos());
     oldRotation = -currentRotation;
+    update();
 }
 
 void RotatableLabel::slotMouseMoved()
@@ -50,6 +51,7 @@ void RotatableLabel::slotMouseMoved()
 void RotatableLabel::slotMouseUp()
 {
     mouseIsDown = false;
+    update();
     // As soon as the mouse is up, start physics
 
 }
@@ -57,14 +59,13 @@ void RotatableLabel::slotMouseUp()
 void RotatableLabel::paintEvent(QPaintEvent *pe)
 {
     QPixmap pixmap(originalPixmap);
-    QPixmap rotatedMap(pixmap.size());
-    QPainter p(&rotatedMap);
+    QPainter p(this);
     p.translate(pixmap.size().width() / 2, pixmap.size().height() / 2);
     p.rotate(-currentRotation);
     p.translate(-pixmap.size().width() / 2, -pixmap.size().height() / 2);
     p.drawPixmap(0, 0, pixmap);
 
-    QRect r = rotatedMap.rect();
+    QRect r = pixmap.rect();
     if(mouseIsDown)
     {
         p.setPen((QPen(Qt::blue, 5)));
@@ -75,8 +76,6 @@ void RotatableLabel::paintEvent(QPaintEvent *pe)
         p.setPen((QPen(Qt::black, 5)));
         p.drawEllipse(r.center(), (r.width() / 2), (r.height() / 2));
     }
-    this->setPixmap(rotatedMap);
-    QLabel::paintEvent(pe);
 }
 
 void RotatableLabel::setCurrentRotation(float rotation)

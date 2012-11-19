@@ -40,8 +40,7 @@ DayView::DayView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
 
 void DayView::setDate(QDate date)
 {
-    dayLabel->setDayPixmap(date.daysInMonth());
-    dayLabel->setCurrentRotation((date.day() - 1) * 11.612903226);
+    dayLabel->setDate(date);
 }
 
 void DayView::slotDateChanged(QDateTime dateTime)
