@@ -10,8 +10,8 @@ DetailView::DetailView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     currentEvent = NULL;
 
     QString fieldStyleSheet, entryStyleSheet;
-    fieldStyleSheet = "font-size: 8pt; font-weight: bold;";
-    entryStyleSheet = "font-size: 6pt;";
+    fieldStyleSheet = "font-size: 9pt; font-weight: bold;";
+    entryStyleSheet = "font-size: 8pt;";
 
     fieldTitle = new QLabel(tr("Title"), this);
     fieldLocation = new QLabel(tr("Location"), this);
@@ -26,7 +26,7 @@ DetailView::DetailView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     fieldEndTime->setStyleSheet(fieldStyleSheet);
 
     QFormLayout* formLayout = new QFormLayout(this);
-    formLayout->setSpacing(30);
+    formLayout->setSpacing(40);
 
     title = new QLabel(tr(""), this);
     location = new QLabel(tr(""), this);
