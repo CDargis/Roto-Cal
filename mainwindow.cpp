@@ -31,8 +31,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(saveEventWidget, SIGNAL(closeScreen(Event*)), this, SLOT(slotAddWidgetClose(Event*)));
     connect(cWidget, SIGNAL(editEvent(Event*)), this, SLOT(slotEditEventClicked(Event*)));
 
-    //Load/Deserialization of events
-    Serialization::save(eventSet.toSerialize());
+    //Deserialization of events
+    Serialization::load(eventSet);
 
     Event* e1 = new Event;
     Event* e2 = new Event;
@@ -215,7 +215,7 @@ MainWindow::~MainWindow()
 {
 
     //Serialization of events
-    Serialization::load(eventSet);
+    Serialization::save(eventSet.toSerialize());
 
     // Memory cleanup!
     eventSet.deleteSets();
