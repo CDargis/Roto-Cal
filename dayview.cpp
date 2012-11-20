@@ -45,12 +45,13 @@ void DayView::setDate(QDate date)
 
 void DayView::slotDateChanged(QDateTime dateTime)
 {
-    Event* e = new Event;   
+    Event e;
+    Event* e_ptr = &e;
     Event_set& set = this->getEventSet();
     std::multiset<Event *, Cmp_event_set>* daySet;
     std::multiset<Event*, Cmp_event_set>::iterator it;
-    e->setStartTime(dateTime.toTime_t());
-    daySet = set.getDay(e);
+    e_ptr->setStartTime(dateTime.toTime_t());
+    daySet = set.getDay(e_ptr);
 
     listWidget->clear();
 
@@ -68,8 +69,6 @@ void DayView::slotDateChanged(QDateTime dateTime)
         }
     }
     listWidget->updateGeometry();
-    delete(e);
-
 }
 
 // This slot is called when an item in the QListWidget is clicked
