@@ -73,7 +73,7 @@ void RotatableLabel::paintEvent(QPaintEvent *pe)
     }
     else
     {
-        p.setPen((QPen(Qt::black, 5)));
+        p.setPen((QPen(Qt::black, 8)));
         p.drawEllipse(r.center(), (r.width() / 2), (r.height() / 2));
     }
 }
@@ -89,4 +89,9 @@ float RotatableLabel::getAngle(QPoint point)
     float x = (float)(point.rx() - (originalPixmap.width() / 2));
     float y = (float)((originalPixmap.height() / 2) - point.ry());
     return atan2(x, y) * (180 / PI);
+}
+
+float RotatableLabel::scaleRange(float in, float oldMin, float oldMax, float newMin, float newMax)
+{
+    return (((newMax - newMin) * (in - oldMin)) / (oldMax - oldMin)) + newMin;
 }

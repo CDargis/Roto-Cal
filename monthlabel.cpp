@@ -49,8 +49,42 @@ void MonthLabel::slotGrabMouseMove()
     }
 }
 
-void MonthLabel::setDate(QDate date)
+void MonthLabel::setDate(QDate date, Event_set& eventSet)
 {
+    int numEvents = 20;
+
+    QPainter p(&originalPixmap);
+    QConicalGradient grad(originalPixmap.rect().center(), 180);
+    float rot = 0;
+    grad.setColorAt(rot, Qt::yellow);
+    rot = 0.083333333;
+    for(int i = 1; i < 12; i++)
+    {
+        float num = RotatableLabel::scaleRange(qrand() % numEvents, 0, numEvents, 0, 255);
+        qDebug() << num;
+        grad.setColorAt(rot, QColor::fromRgb(255, (int)num , 0));
+        rot += 0.083333333;
+    }
+    grad.setColorAt(rot, Qt::yellow);
+    p.setBrush(grad);
+    p.drawEllipse(0, 0, originalPixmap.size().width(), originalPixmap.size().height());
+
+    int xPos = originalPixmap.width() * .04;
+    int yPos = originalPixmap.height() / 2;
+    int xTranslate = originalPixmap.width() / 2;
+    int yTranslate = yPos;
+    QPen wPen(Qt::white);
+    p.setPen(wPen);
+    QFont f = p.font();
+    f.setPointSize(18);
+    p.setFont(f);
+    for(int i = 0; i < 12; i++)
+    {
+        p.drawText(xPos, yPos + 10, months[i]);
+        p.translate(xTranslate, yTranslate);
+        p.rotate(30);
+        p.translate(-xTranslate, -yTranslate);
+    }
     int month = date.month();
     setCurrentRotation((month - 1) * 30);
 }

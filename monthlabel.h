@@ -12,7 +12,7 @@ class MonthLabel : public RotatableLabel
 public:
     explicit MonthLabel(QPixmap pixmap,QWidget *parent = 0);
     static QPixmap paintMonthsOnPixmap(QPixmap pixmap);
-    void setDate(QDate date);
+    void setDate(QDate date, Event_set& eventSet);
     static const QString months[12];
 signals:
     void monthChanged(int month);

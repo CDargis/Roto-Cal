@@ -40,7 +40,7 @@ DayView::DayView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
 
 void DayView::setDate(QDate date)
 {
-    dayLabel->setDate(date);
+    dayLabel->setDate(date, this->getEventSet());
 }
 
 void DayView::slotDateChanged(QDateTime dateTime)
@@ -69,7 +69,6 @@ void DayView::slotDateChanged(QDateTime dateTime)
     }
     listWidget->updateGeometry();
     delete(e);
-
 }
 
 // This slot is called when an item in the QListWidget is clicked

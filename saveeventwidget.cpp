@@ -17,15 +17,15 @@ SaveEventWidget::SaveEventWidget(Event_set &set, CalendarWidget& widget, QWidget
     currentEvent = NULL;
 
     lastPoint = QPoint(0, 0);
-    QVBoxLayout* mainLayout = new QVBoxLayout(this);
+    QVBoxLayout* mainLayout = new QVBoxLayout;
 
-    QFormLayout* form = new QFormLayout(this);
+    QFormLayout* form = new QFormLayout;
     QLabel* addTitle = new QLabel(tr("Save an Event"), this);
     QFont font = addTitle->font();
     font.setBold(true);
     font.setPointSize(12);
     addTitle->setFont(font);
-    QGridLayout* centerTitle = new QGridLayout(this);
+    QGridLayout* centerTitle = new QGridLayout;
     centerTitle->addWidget(addTitle);
     form->addRow(centerTitle);
 
@@ -38,7 +38,7 @@ SaveEventWidget::SaveEventWidget(Event_set &set, CalendarWidget& widget, QWidget
     descEdit = new QLineEdit(this);
     form->addRow(tr("Description:"), descEdit);
 
-    QVBoxLayout* sTimeInput = new QVBoxLayout(this);
+    QVBoxLayout* sTimeInput = new QVBoxLayout;
     QLabel* sTime = new QLabel(tr("Start Time:"), this);
     sTimeEdit = new QDateTimeEdit(this);
     sTimeEdit->setDisplayFormat(tr("d MMM yyyy HH:mm"));
@@ -47,7 +47,7 @@ SaveEventWidget::SaveEventWidget(Event_set &set, CalendarWidget& widget, QWidget
     sTimeInput->addWidget(sTimeEdit);
     form->addRow(sTimeInput);
 
-    QVBoxLayout* eTimeInput = new QVBoxLayout(this);
+    QVBoxLayout* eTimeInput = new QVBoxLayout;
     QLabel* eTime = new QLabel(tr("End Time:"), this);
     eTimeEdit = new QDateTimeEdit(this);
     eTimeEdit->setDisplayFormat(tr("d MMM yyyy HH:mm"));
@@ -56,7 +56,7 @@ SaveEventWidget::SaveEventWidget(Event_set &set, CalendarWidget& widget, QWidget
     eTimeInput->addWidget(eTimeEdit);
     form->addRow(eTimeInput);
 
-    QHBoxLayout* buttonLayout = new QHBoxLayout(this);
+    QHBoxLayout* buttonLayout = new QHBoxLayout;
     QPushButton* saveButton = new QPushButton(tr("Save"), this);
     QPushButton* cancelButton = new QPushButton(tr("Cancel"), this);
     buttonLayout->addWidget(saveButton);
