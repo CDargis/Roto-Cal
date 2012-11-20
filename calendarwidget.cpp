@@ -66,7 +66,6 @@ void CalendarWidget::slotLabelClicked(int index)
         case 2: break;
         default: break;
     }
-    this->pokeDateChange();
     rotaryViews->setCurrentIndex(index);
 }
 
