@@ -27,7 +27,6 @@ MainWindow::MainWindow(QWidget *parent)
     screens->addWidget(cWidget);
     saveEventWidget = new SaveEventWidget(eventSet, *cWidget,this);
     screens->addWidget(saveEventWidget);
-    connect(cWidget, SIGNAL(setScreenIndex(int)), screens, SLOT(setCurrentIndex(int)));
     connect(saveEventWidget, SIGNAL(closeScreen(Event*)), this, SLOT(slotAddWidgetClose(Event*)));
     connect(cWidget, SIGNAL(editEvent(Event*)), this, SLOT(slotEditEventClicked(Event*)));
 
