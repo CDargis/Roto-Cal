@@ -25,14 +25,14 @@ QPixmap DayLabel::paintDaysOnPixmap(int numDays, QPixmap pixmap)
 {
     QPixmap labeledMap(pixmap);
     QPainter p(&labeledMap);
-    int xPos = pixmap.width() * .035;
+    int xPos = pixmap.width() * .04;
     int yPos = pixmap.height() / 2;
     int xTranslate = pixmap.width() / 2;
     int yTranslate = yPos;
     QPen wPen(Qt::white);
     p.setPen(wPen);
     QFont f = p.font();
-    f.setPointSize(10);
+    f.setPointSize(16);
     p.setFont(f);
     float rotation = 360.00 / (float)numDays;
     for(int i = 1; i <= numDays; i++)
