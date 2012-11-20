@@ -54,12 +54,14 @@ void CalendarWidget::slotLabelClicked(int index)
             dayView->active = false;
             monthView->active = true;
             monthView->setDate(this->getCurrentDate());
+            monthView->slotDateChanged(this->getCurrentDateTime());
             break;
         }
         case 1:
         {
             monthView->active = false;
             dayView->active = true;
+            dayView->slotDateChanged(this->getCurrentDateTime());
             dayView->setDate(this->getCurrentDate());
             break;
         }
