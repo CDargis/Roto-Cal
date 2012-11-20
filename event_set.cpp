@@ -16,6 +16,7 @@
 #include "cmp_event_year.h"                                                     
 #include "cmp_event_set.h"
 #include "event.h"
+#include "create_time_t.h"
 #include "event_set.h"
 
 Event_set::~Event_set() {}
@@ -168,13 +169,13 @@ std::multiset<Event *, Cmp_event_set> * Event_set::getMonth(Event * e)
     sorted_month_set.clear();
     SetIter lower, upper, it;                                                   
     lower = month_set.lower_bound(e);                                          
-    upper = month_set.upper_bound(e);                                          
+    upper = month_set.upper_bound(e);
                                                                                 
 	/* iterate from lower to upper bounds to get set of month Event objects */
-    for (it = lower; it != upper; it++) {                                       
+    for (it = lower; it != upper; it++) {
         sorted_month_set.insert((*it));                                           
     }                                                                           
-    ms_ptr = &sorted_month_set;                                                        
+    ms_ptr = &sorted_month_set;
     return ms_ptr;                                                              
 }   
 
@@ -232,6 +233,57 @@ bool Event_set::findDuplicate(Event * e)
 short Event_set::getSize()                                                      
 {                                                                               
 	    return year_set.size();                                                     
+}
+
+/* return number of events in year */
+int Event_set::getNumOfEventsInYear(int year)
+{
+    Event tmp;
+    Event* tmp_ptr = &tmp;
+
+    time_t startTime;
+    Create_time_t t;
+
+    startTime = t.createTime(1,1,year,1,1,true);
+    tmp.setStartTime(startTime);
+
+    int result = 0;
+
+    SetIter lower, upper, it;
+    lower = year_set.lower_bound(tmp_ptr);
+    upper = year_set.upper_bound(tmp_ptr);
+
+    /* iterate from lower to upper bounds to get number year Event objects */
+    for (it = lower; it != upper; it++) {
+        result++;
+    }
+    return result;
+}
+
+/* returns number of events in month */
+int Event_set::getNumOfEventsInMonth(int month, int year)
+{
+    Event tmp;
+    Event* tmp_ptr = &tmp;
+
+    time_t startTime;
+    Create_time_t t;
+
+    startTime = t.createTime(1,month,year,1,1,true);
+    tmp.setStartTime(startTime);
+
+    int result = 0;
+
+    SetIter lower, upper, it;
+    lower = month_set.lower_bound(tmp_ptr);
+    upper = month_set.upper_bound(tmp_ptr);
+
+    /* iterate from lower to upper bounds to get number month,
+     * year Event objects */
+    for (it = lower; it != upper; it++) {
+        result++;
+    }
+    return result;
 }
 
 /* for serialization */

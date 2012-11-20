@@ -10,6 +10,7 @@
 #include "QDebug"
 
 #include "create_time_t.h"
+#include "serialization.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow),
@@ -28,6 +29,9 @@ MainWindow::MainWindow(QWidget *parent)
     screens->addWidget(saveEventWidget);
     connect(saveEventWidget, SIGNAL(closeScreen(Event*)), this, SLOT(slotAddWidgetClose(Event*)));
     connect(cWidget, SIGNAL(editEvent(Event*)), this, SLOT(slotEditEventClicked(Event*)));
+
+    //Deserialization of events
+    Serialization::load(eventSet);
 
     Event* e1 = new Event;
     Event* e2 = new Event;
@@ -73,6 +77,18 @@ MainWindow::MainWindow(QWidget *parent)
     Event* e39 = new Event("Finals","location here","description here",Create_time_t::createTime(3,10,2012,40,5,true),Create_time_t::createTime(3,10,2012,40,3,true));
     Event* e40 = new Event("Shopping","location here","description here",Create_time_t::createTime(1,1,2012,10,1,true),Create_time_t::createTime(1,1,2012,10,2,true));
 
+    //Events to fill current date to check scrolling.
+    Event* e41 = new Event;
+    Event* e42 = new Event;
+    Event* e43 = new Event;
+    Event* e44 = new Event;
+    Event* e45 = new Event;
+    Event* e46 = new Event;
+    Event* e47 = new Event;
+    Event* e48 = new Event;
+    Event* e49 = new Event;
+    Event* e50 = new Event;
+
     e1->setName(tr("Dr. Who"));
     e2->setName(tr("BIO 101"));
     e3->setName(tr("Gaz B-day"));
@@ -82,8 +98,18 @@ MainWindow::MainWindow(QWidget *parent)
     e7->setName(tr("Dinner Date"));
     e8->setName(tr("Tom Yum"));
     e9->setName(tr("Candy Bar"));
-    e9->setName(tr("Little Richard"));
     e10->setName(tr("Animal Farm"));
+
+    e41->setName(tr("Pacos"));
+    e42->setName(tr("Hockey"));
+    e43->setName(tr("Bears"));
+    e44->setName(tr("Sale"));
+    e45->setName(tr("Meet The Fock"));
+    e46->setName(tr("Return 1"));
+    e47->setName(tr("Infinite Loop"));
+    e48->setName(tr("Stack overflow"));
+    e49->setName(tr("Rejection"));
+    e50->setName(tr("Butterfinger"));
 
     e1->setStartTime(QDateTime::currentDateTime().toTime_t());
     e1->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
@@ -105,6 +131,26 @@ MainWindow::MainWindow(QWidget *parent)
     e9->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
     e10->setStartTime(QDateTime::currentDateTime().addDays(1).addSecs(15400).toTime_t());
     e10->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
+    e41->setStartTime(QDateTime::currentDateTime().toTime_t());
+    e41->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
+    e42->setStartTime(QDateTime::currentDateTime().addSecs(3600).toTime_t());
+    e42->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
+    e43->setStartTime(QDateTime::currentDateTime().addSecs(7200).toTime_t());
+    e43->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
+    e44->setStartTime(QDateTime::currentDateTime().addSecs(11800).toTime_t());
+    e44->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
+    e45->setStartTime(QDateTime::currentDateTime().addSecs(15400).toTime_t());
+    e45->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
+    e46->setStartTime(QDateTime::currentDateTime().addDays(19000).toTime_t());
+    e46->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
+    e47->setStartTime(QDateTime::currentDateTime().addDays(1).toTime_t());
+    e47->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
+    e48->setStartTime(QDateTime::currentDateTime().addDays(1).addSecs(7200).toTime_t());
+    e48->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
+    e49->setStartTime(QDateTime::currentDateTime().addDays(1).addSecs(11800).toTime_t());
+    e49->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
+    e50->setStartTime(QDateTime::currentDateTime().addDays(1).addSecs(15400).toTime_t());
+    e50->setEndTime(QDateTime::currentDateTime().addSecs(60*60).toTime_t());
 
     eventSet.insertEvent(e1);
     eventSet.insertEvent(e2);
@@ -148,6 +194,17 @@ MainWindow::MainWindow(QWidget *parent)
     eventSet.insertEvent(e39);
     eventSet.insertEvent(e40);
 
+    eventSet.insertEvent(e41);
+    eventSet.insertEvent(e42);
+    eventSet.insertEvent(e43);
+    eventSet.insertEvent(e44);
+    eventSet.insertEvent(e45);
+    eventSet.insertEvent(e46);
+    eventSet.insertEvent(e47);
+    eventSet.insertEvent(e48);
+    eventSet.insertEvent(e49);
+    eventSet.insertEvent(e50);
+
     setCentralWidget(screens);
 
     cWidget->pokeDateChange();
@@ -155,6 +212,10 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+
+    //Serialization of events
+    Serialization::save(eventSet.toSerialize());
+
     // Memory cleanup!
     eventSet.deleteSets();
     delete ui;

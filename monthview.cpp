@@ -3,6 +3,7 @@
 MonthView::MonthView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     RotaryView(pageGeometry, set, parent)
 {
+    active = false;
     /* widget for dayview events */
     listWidget = new QListWidget(this);
     QFont fnt;
@@ -39,12 +40,15 @@ void MonthView::setDate(QDate date)
 
 void MonthView::slotDateChanged(QDateTime dateTime)
 {
-    Event* e = new Event;
+    if(!active)
+        return;
+    Event e;
+    Event* e_ptr = &e;
     Event_set& set = this->getEventSet();
     std::multiset<Event *, Cmp_event_set>* monthSet;
     std::multiset<Event*, Cmp_event_set>::iterator it;
-    e->setStartTime(dateTime.toTime_t());
-    monthSet = set.getMonth(e);
+    e_ptr->setStartTime(dateTime.toTime_t());
+    monthSet = set.getMonth(e_ptr);
 
     listWidget->clear();
 
@@ -61,7 +65,6 @@ void MonthView::slotDateChanged(QDateTime dateTime)
         }
     }
     listWidget->updateGeometry();
-    delete(e);
 }
 
 // This slot is called when an item in the QListWidget is clicked

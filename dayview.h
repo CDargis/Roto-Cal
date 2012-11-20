@@ -13,6 +13,7 @@ public:
     explicit DayView(QRect& pageGeometry, Event_set& set, QWidget *parent = 0);
     DayLabel* dayLabel;
     QLabel* glowMap;
+    bool active;
 signals:
     void eventClicked(Event* e);
 public slots:
