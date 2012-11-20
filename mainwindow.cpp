@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(cWidget, SIGNAL(editEvent(Event*)), this, SLOT(slotEditEventClicked(Event*)));
 
     //Deserialization of events
-    Serialization::load(eventSet);
+    //Serialization::load(eventSet);
 
     Event* e1 = new Event;
     Event* e2 = new Event;
