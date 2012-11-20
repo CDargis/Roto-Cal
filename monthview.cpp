@@ -39,12 +39,13 @@ void MonthView::setDate(QDate date)
 
 void MonthView::slotDateChanged(QDateTime dateTime)
 {
-    Event* e = new Event;
+    Event e;
+    Event* e_ptr = &e;
     Event_set& set = this->getEventSet();
     std::multiset<Event *, Cmp_event_set>* monthSet;
     std::multiset<Event*, Cmp_event_set>::iterator it;
-    e->setStartTime(dateTime.toTime_t());
-    monthSet = set.getMonth(e);
+    e_ptr->setStartTime(dateTime.toTime_t());
+    monthSet = set.getMonth(e_ptr);
 
     listWidget->clear();
 
@@ -61,7 +62,6 @@ void MonthView::slotDateChanged(QDateTime dateTime)
         }
     }
     listWidget->updateGeometry();
-    delete(e);
 }
 
 // This slot is called when an item in the QListWidget is clicked
