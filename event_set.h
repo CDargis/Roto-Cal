@@ -40,6 +40,16 @@ class Event_set
 		/** delete all sets, and call delete on all event objects
 		 */
         void deleteSets();
+        /** returns number of Event objects in a year
+         *  @param e int year in yyyy format
+         *  @returns integer representation of number of events in input year
+         */
+        int getNumOfEventsInYear(int year);
+        /** returns number of Event objects in a year
+         *  @param e int year in yyyy format
+         *  @returns integer representation of number of events in input year
+         */
+        int getNumOfEventsInMonth(int month, int year);
 		/** returns ordered multiset of year containing Event object pointers 
 		 *  @param e event object of year to select for
 		 *  @returns ordered multiset by year, month, day, hour, and minute
