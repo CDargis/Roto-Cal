@@ -46,8 +46,20 @@ CalendarWidget::CalendarWidget(QRect screenRes, Event_set &set, QWidget *parent)
 void CalendarWidget::slotLabelClicked(int index)
 {
     switch(index) {
-        case 0: monthView->setDate(this->getCurrentDate()); break;
-        case 1: dayView->setDate(this->getCurrentDate()); break;
+        case 0:
+        {
+            dayView->active = false;
+            monthView->active = true;
+            monthView->setDate(this->getCurrentDate());
+            break;
+        }
+        case 1:
+        {
+            monthView->active = false;
+            dayView->active = true;
+            dayView->setDate(this->getCurrentDate());
+            break;
+        }
         case 2: break;
         default: break;
     }

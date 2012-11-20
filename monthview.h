@@ -16,6 +16,7 @@ class MonthView : public RotaryView
 public:
     explicit MonthView(QRect& pageGeometry, Event_set& set, QWidget *parent);
     MonthLabel* monthLabel;
+    bool active;
 signals:
     void eventClicked(Event* e);
 public slots:

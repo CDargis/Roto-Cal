@@ -3,6 +3,7 @@
 MonthView::MonthView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     RotaryView(pageGeometry, set, parent)
 {
+    active = false;
     /* widget for dayview events */
     listWidget = new QListWidget(this);
     QFont fnt;
@@ -39,6 +40,8 @@ void MonthView::setDate(QDate date)
 
 void MonthView::slotDateChanged(QDateTime dateTime)
 {
+    if(!active)
+        return;
     Event e;
     Event* e_ptr = &e;
     Event_set& set = this->getEventSet();
