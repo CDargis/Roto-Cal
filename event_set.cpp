@@ -285,6 +285,32 @@ int Event_set::getNumOfEventsInMonth(int month, int year)
     return result;
 }
 
+/* returns number of events in day */
+int Event_set::getNumOfEventsInDay(int day, int month, int year)
+{
+    Event tmp;
+    Event* tmp_ptr = &tmp;
+
+    time_t startTime;
+    Create_time_t t;
+
+    startTime = t.createTime(day,month,year,1,1,true);
+    tmp.setStartTime(startTime);
+
+    int result = 0;
+
+    SetIter lower, upper, it;
+    lower = day_set.lower_bound(tmp_ptr);
+    upper = day_set.upper_bound(tmp_ptr);
+
+    /* iterate from lower to upper bounds to get number day, month,
+     * year Event objects */
+    for (it = lower; it != upper; it++) {
+        result++;
+    }
+    return result;
+}
+
 /* for serialization */
 std::multiset<Event *, Cmp_event_day>& Event_set::toSerialize()
 {

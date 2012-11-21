@@ -45,15 +45,20 @@ class Event_set
          *  @returns integer representation of number of events in input year
          */
         int getNumOfEventsInYear(int year);
-        /** returns number of Event objects in a year
-         *  @param e int year in yyyy format
-         *  @returns integer representation of number of events in input year
+        /** returns number of Event objects in a month
+         *  @param e int day, int year in yyyy format
+         *  @returns integer representation of number of events in input month
          */
         int getNumOfEventsInMonth(int month, int year);
+        /** returns number of Event objects in a day
+         *  @param e int year in yyyy format
+         *  @returns integer representation of number of events in input day
+         */
+        int getNumOfEventsInDay(int month, int year, int day);
 		/** returns ordered multiset of year containing Event object pointers 
 		 *  @param e event object of year to select for
 		 *  @returns ordered multiset by year, month, day, hour, and minute
-		 */ 
+         */
         std::multiset<Event *, Cmp_event_set> getYear(Event * e);
 		/** returns ordered multiset of month containing Event object pointers 
 		 *  @param e event object of year, and month to select for
