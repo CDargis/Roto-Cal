@@ -5,6 +5,7 @@
 #define MONTHLABEL_H
 
 #include "rotatablelabel.h"
+#include "event_set.h"
 
 class MonthLabel : public RotatableLabel
 {

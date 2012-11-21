@@ -77,5 +77,6 @@ void MonthView::slotListItemClicked(QListWidgetItem* item)
 
 void MonthView::slotYearChanged(QDateTime dateTime)
 {
-    setDate(dateTime.date());
+    if(active)
+        setDate(dateTime.date());
 }

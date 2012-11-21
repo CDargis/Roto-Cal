@@ -25,6 +25,7 @@ public:
     virtual void setDate(QDate date, Event_set& eventSet) = 0;
     static const int PI = 3.14159265;
     static float scaleRange(float in, float oldMin, float oldMax, float newMin, float newMax);
+    static QColor scaleFromSize(float x, float size);
 signals:
     void mouseDown();
     void mouseMove();
