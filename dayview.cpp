@@ -18,9 +18,9 @@ DayView::DayView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     listWidget->setPalette(Qt::black);
     listWidget->setSizePolicy (QSizePolicy(QSizePolicy::Ignored,\
                                            QSizePolicy::Ignored));
-    listWidget->setMinimumSize(QSize(235, 800));
+    listWidget->setMinimumSize(QSize(235, 700));
     listWidget->setMaximumWidth(235);
-    listWidget->setMaximumHeight(1000);
+    listWidget->setMaximumHeight(800);
     listWidget->show();
 
     int pageHeight = geometry().height();
@@ -51,19 +51,19 @@ void DayView::slotDateChanged(QDateTime dateTime)
     Event e;
     Event* e_ptr = &e;
     Event_set& set = this->getEventSet();
-    std::multiset<Event *, Cmp_event_set>* daySet;
+    std::multiset<Event *, Cmp_event_set> daySet;
     std::multiset<Event*, Cmp_event_set>::iterator it;
     e_ptr->setStartTime(dateTime.toTime_t());
     daySet = set.getDay(e_ptr);
 
     listWidget->clear();
 
-    if(daySet->size()==0) {
+    if(daySet.size()==0) {
         CalendarListItem *item = new CalendarListItem(NULL, tr("No events"),\
                                                       listWidget);
         item->setFlags(Qt::ItemIsEnabled);
     } else {
-        for (it=daySet->begin(); it!=daySet->end(); it++) {
+        for (it=daySet.begin(); it!=daySet.end(); it++) {
             new CalendarListItem((*it), (*it)->getHourString().append\
                                 (":").append((*it)->getMinuteString()).append\
                                 (" ").append(((*it)->getName())), listWidget);
