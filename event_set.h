@@ -54,17 +54,17 @@ class Event_set
 		 *  @param e event object of year to select for
 		 *  @returns ordered multiset by year, month, day, hour, and minute
 		 */ 
-        std::multiset<Event *, Cmp_event_set> * getYear(Event * e);              
+        std::multiset<Event *, Cmp_event_set> getYear(Event * e);
 		/** returns ordered multiset of month containing Event object pointers 
 		 *  @param e event object of year, and month to select for
 		 *  @returns ordered multiset by year, month, day, hour, and minute
 		 */ 
-        std::multiset<Event *, Cmp_event_set> * getMonth(Event * e);             
+        std::multiset<Event *, Cmp_event_set> getMonth(Event * e);
 		/** returns ordered multiset of day containing Event object pointers 
 		 *  @param e event object of year, month, and day to select for
 		 *  @returns ordered multiset by year, month, day, hour, and minute
 		 */ 
-        std::multiset<Event *, Cmp_event_set> * getDay(Event * e);
+        std::multiset<Event *, Cmp_event_set> getDay(Event * e);
         /** returns ordered multiset of day containing Event object pointers
          *  @returns set of all stored event objects for serialization
          */
@@ -72,13 +72,9 @@ class Event_set
     private:                                                                    
 		/* general use multiset iterator  */
 		typedef std::multiset<Event*>::iterator SetIter;                
-        std::multiset<Event*, Cmp_event_set> * ms_ptr;
         std::multiset<Event*, Cmp_event_year> year_set;                
         std::multiset<Event*, Cmp_event_month> month_set;              
         std::multiset<Event*, Cmp_event_day> day_set;                  
-        std::multiset<Event*, Cmp_event_set> sorted_year_set;
-        std::multiset<Event*, Cmp_event_set> sorted_month_set;
-        std::multiset<Event*, Cmp_event_set> sorted_day_set;
 		/* called in insertion function */
         bool insertToYear(Event *);                                     
         bool insertToMonth(Event *);                                    
