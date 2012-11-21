@@ -4,5 +4,7 @@
         <file>dial.png</file>
         <file>blank_circle.png</file>
         <file>rightArrow.png</file>
+        <file>upArrow.png</file>
+        <file>downArrow.png</file>
     </qresource>
 </RCC>
