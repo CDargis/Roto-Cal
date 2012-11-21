@@ -189,7 +189,7 @@ std::multiset<Event *, Cmp_event_set> Event_set::getDay(Event * e)
     upper = day_set.upper_bound(e);
 
 	/* iterate from lower to upper bounds to get set of day Event objects */
-    for (it = lower; it != upper; it++) {                                       
+    for (it = lower; it != upper; it++) {
         sorted_day_set.insert((*it));
     }
     return sorted_day_set;

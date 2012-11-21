@@ -59,7 +59,7 @@ void DayLabel::setDayPixmap(int days)
     update();
 }
 
-void DayLabel::setDate(QDate date)
+void DayLabel::setDate(QDate date, Event_set& eventSet)
 {
     setDayPixmap(date.daysInMonth());
     rotationRange = 360.00 / (float)date.daysInMonth();

@@ -15,6 +15,7 @@ DateDisplay::DateDisplay(int xOffset, int yOffset, int width, int height, Event_
     setText(today.toString());
 }
 
+// Currently not being used
 void DateDisplay::slotyearChanged(int year)
 {
     QDate date = QDate::fromString(text());
@@ -26,16 +27,19 @@ void DateDisplay::slotyearChanged(int year)
 
 void DateDisplay::slotMonthChanged(int month)
 {
+    bool newYear = false;
     QDate date = QDate::fromString(text());
     int year = date.year();
     int cMonth = date.month();
     if(month == 1 && cMonth == 12)       // Going from december to january
-        year++;
+        { year++; newYear = true; }
     if(month == 12 && cMonth == 1)       // Going from january to december
-        year--;
+        { year--; newYear = true; }
     date.setDate(year, month, date.day());
     if(date.isValid())
         setText(date.toString());
+    if(newYear)
+        emit yearRolled(this->getDateTime());  // Emit signal that year changed
     emit dateChanged(this->getDateTime());
 }
 

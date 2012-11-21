@@ -17,6 +17,7 @@ public:
     QDateTime getDateTime();
 signals:
     void dateChanged(QDateTime dateTime);
+    void yearRolled(QDateTime newDateDate);
 public slots:
     void slotyearChanged(int year);
     void slotMonthChanged(int month);

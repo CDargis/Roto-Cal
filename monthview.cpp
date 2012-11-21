@@ -35,7 +35,7 @@ MonthView::MonthView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
 
 void MonthView::setDate(QDate date)
 {
-    monthLabel->setDate(date);
+    monthLabel->setDate(date, this->getEventSet());
 }
 
 void MonthView::slotDateChanged(QDateTime dateTime)
@@ -77,5 +77,6 @@ void MonthView::slotListItemClicked(QListWidgetItem* item)
 
 void MonthView::slotYearChanged(QDateTime dateTime)
 {
-    setDate(dateTime.date());
+    if(active)
+        setDate(dateTime.date());
 }

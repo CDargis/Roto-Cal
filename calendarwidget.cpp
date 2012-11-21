@@ -40,6 +40,7 @@ CalendarWidget::CalendarWidget(QRect screenRes, Event_set &set, QWidget *parent)
     connect(dayView, SIGNAL(eventClicked(Event*)), this, SLOT(slotEventClicked(Event*)));
     connect(detailView, SIGNAL(editEventClicked(Event*)), SIGNAL(editEvent(Event*)));
     connect(this, SIGNAL(eventEdited(Event*)), this, SLOT(slotEventClicked(Event*)));
+    connect(dateDisplay, SIGNAL(yearRolled(QDateTime)), monthView, SLOT(slotYearChanged(QDateTime)));
 
     // Set day view as current view
     dayView->active = true;
@@ -54,12 +55,14 @@ void CalendarWidget::slotLabelClicked(int index)
             dayView->active = false;
             monthView->active = true;
             monthView->setDate(this->getCurrentDate());
+            monthView->slotDateChanged(this->getCurrentDateTime());
             break;
         }
         case 1:
         {
             monthView->active = false;
             dayView->active = true;
+            dayView->slotDateChanged(this->getCurrentDateTime());
             dayView->setDate(this->getCurrentDate());
             break;
         }
@@ -91,7 +94,9 @@ void CalendarWidget::pokeDateChange()
 {
     QDateTime dt = this->getCurrentDateTime();
     monthView->slotDateChanged(dt);
+    monthView->setDate(this->getCurrentDate());
     dayView->slotDateChanged(dt);
+    dayView->setDate(this->getCurrentDate());
 }
 
 void CalendarWidget::emitEventEditedSignal(Event *e)
