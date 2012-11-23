@@ -13,7 +13,7 @@ void DayLabel::slotGrabMouseMove()
     float cRotation = getCurrentRotation();
     if(cRotation < 0)
         cRotation += 360;
-    float div = (cRotation / rotationRange) + .75;
+    float div = (cRotation / rotationRange) + .5;
     int day = ((int)div) + 1;
     emit dayChanged(day);
 }
