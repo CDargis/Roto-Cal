@@ -177,7 +177,7 @@ void SaveEventWidget::editEvent()
                    mBox.height() / 2 );
         mBox.exec();
         delete(tmpEvent); // delete tmp (no need to update data structure)
-        emit closeScreen(currentEvent);
+        //emit closeScreen(currentEvent);
     /* title or starttime changed */
     } else if (currentEvent->getName() != tmpEvent->getName() ||\
                currentEvent->getStartTime() != tmpEvent->getStartTime()) {
