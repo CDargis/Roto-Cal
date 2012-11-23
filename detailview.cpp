@@ -48,8 +48,11 @@ DetailView::DetailView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
 
     QPushButton* editButton = new QPushButton(tr("Edit"), this);
     formLayout->addWidget(editButton);
+    QPushButton* deleteButton = new QPushButton(tr("Delete"), this);
+    formLayout->addWidget(deleteButton);
 
     connect(editButton, SIGNAL(clicked()), this, SLOT(slotEditClicked()));
+    //connect(deleteButton, SIGNAL(clicked()), this, SLOT(slotDeleteClicked()));
 }
 
 void DetailView::setCurrentEvent(Event* e)
@@ -72,3 +75,13 @@ void DetailView::slotEditClicked()
     if(currentEvent)
         emit editEventClicked(currentEvent);
 }
+
+void DetailView::slotDeleteClicked()
+{
+    Event_set& set = this->getEventSet();
+    set.deleteEvent(currentEvent);
+    //currentEvent = NULL;
+
+    //emit deleteEventClicked(currentEvent);
+}
+

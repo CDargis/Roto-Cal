@@ -17,9 +17,11 @@ public:
     explicit DetailView(QRect& pageGeometry, Event_set& set, QWidget *parent);
 signals:
     void editEventClicked(Event* e);
+    void deleteEventClicked(Event* e);
 public slots:
     void setCurrentEvent(Event* e);
     void slotEditClicked();
+    void slotDeleteClicked();
 private:
     QLabel* title;
     QLabel* location;
