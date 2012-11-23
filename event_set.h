@@ -54,7 +54,7 @@ class Event_set
          *  @param e int year in yyyy format
          *  @returns integer representation of number of events in input day
          */
-        int getNumOfEventsInDay(int month, int year, int day);
+        int getNumOfEventsInDay(int day, int month, int year);
 		/** returns ordered multiset of year containing Event object pointers 
 		 *  @param e event object of year to select for
 		 *  @returns ordered multiset by year, month, day, hour, and minute
