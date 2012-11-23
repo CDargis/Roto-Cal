@@ -51,24 +51,24 @@ void MonthLabel::slotGrabMouseMove()
 
 void MonthLabel::setDate(QDate date, Event_set& eventSet)
 {
-    int numEvents = eventSet.getNumOfEventsInYear(date.year());
+    int totalEvents = eventSet.getNumOfEventsInYear(date.year());
     //qDebug() << numEvents;
 
     QPainter p(&originalPixmap);
     QConicalGradient grad(originalPixmap.rect().center(), 180);
     float rot = 0;
     float firstNum = RotatableLabel::scaleRange(eventSet.getNumOfEventsInMonth(1, date.year()),
-                                                0, numEvents, 125, 255);
+                                                0, totalEvents, 125, 255);
     QColor firstColor = QColor::fromRgb((int)firstNum, 255 - (int)firstNum, 255);
     grad.setColorAt(rot, firstColor);
     rot = 0.083333333;
     for(int i = 12; i > 1; i--)
     {
         //qDebug() << "month: " << i << " - " << eventSet.getNumOfEventsInMonth(i, date.year());
-        float num = RotatableLabel::scaleRange(eventSet.getNumOfEventsInMonth(i, date.year()),
-                                               0, numEvents, 125, 255);
+        float scaledNumberOfEvents = RotatableLabel::scaleRange(eventSet.getNumOfEventsInMonth(i, date.year()),
+                                               0, totalEvents, 125, 255);
         //qDebug() << num;
-        grad.setColorAt(rot, QColor::fromRgb((int)num, 255 - (int)num , 255));
+        grad.setColorAt(rot, QColor::fromRgb((int)scaledNumberOfEvents, 255 - (int)scaledNumberOfEvents , 255));
         rot += 0.083333333;
     }
     grad.setColorAt(rot, firstColor);
