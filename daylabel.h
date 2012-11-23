@@ -21,9 +21,6 @@ public:
      */
     explicit DayLabel(QPixmap pixmap, QWidget *parent = 0);
 
-    static QPixmap paintDaysOnPixmap(int numDays, QPixmap pixmap);
-    void setDayPixmap(int days);
-
     /**
      * @brief setDate set the current date of the object
      * @param date the date to be set
@@ -35,11 +32,6 @@ public:
      * @return the current rotation range that triggers day chagne signals
      */
     float getRotationRange() { return rotationRange; }
-protected:
-    QPixmap pixmap28Days;
-    QPixmap pixmap29Days;
-    QPixmap pixmap30Days;
-    QPixmap pixmap31Days;
 signals:
     /**
      * @brief dayChanged emited whenever the wheel is rotated

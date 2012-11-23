@@ -6,33 +6,8 @@ const QString MonthLabel::months[] = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", 
 
 MonthLabel::MonthLabel(QPixmap pixmap, QWidget *parent) : RotatableLabel(parent)
 {
-    QPixmap paintedPixmap = paintMonthsOnPixmap(pixmap);
-    originalPixmap = paintedPixmap;
-    setPixmap(originalPixmap);
+    originalPixmap = pixmap;
     connect(this, SIGNAL(mouseMove()), this, SLOT(slotGrabMouseMove()));
-}
-
-QPixmap MonthLabel::paintMonthsOnPixmap(QPixmap pixmap)
-{
-    QPixmap labeledMap(pixmap);
-    QPainter p(&labeledMap);
-    int xPos = pixmap.width() * .04;
-    int yPos = pixmap.height() / 2;
-    int xTranslate = pixmap.width() / 2;
-    int yTranslate = yPos;
-    QPen wPen(Qt::white);
-    p.setPen(wPen);
-    QFont f = p.font();
-    f.setPointSize(16);
-    p.setFont(f);
-    for(int i = 0; i < 12; i++)
-    {
-        p.drawText(xPos, yPos, months[i]);
-        p.translate(xTranslate, yTranslate);
-        p.rotate(30);
-        p.translate(-xTranslate, -yTranslate);
-    }
-    return labeledMap;
 }
 
 void MonthLabel::slotGrabMouseMove()

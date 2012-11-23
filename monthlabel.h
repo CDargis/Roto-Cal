@@ -22,8 +22,6 @@ public:
      */
     explicit MonthLabel(QPixmap pixmap,QWidget *parent = 0);
 
-    static QPixmap paintMonthsOnPixmap(QPixmap pixmap);
-
     /**
      * @brief setDate set the current date of the object
      * @param date the date to be set
