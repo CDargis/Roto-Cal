@@ -19,16 +19,21 @@ DateDisplay::DateDisplay(int xOffset, int yOffset, int width, int height, Event_
 void DateDisplay::slotyearChanged(int year)
 {
     QDate date = QDate::fromString(text());
+    QDate originalDate(date);
     date.setDate(year, date.month(), date.day());
     if(date.isValid())
         setText(date.toString());
-    emit dateChanged(this->getDateTime());
+
+    // Only emit date change if the date actually changed
+    if(date != originalDate)
+        emit dateChanged(this->getDateTime());
 }
 
 void DateDisplay::slotMonthChanged(int month)
 {
     bool newYear = false;
     QDate date = QDate::fromString(text());
+    QDate originalDate(date);
     int year = date.year();
     int cMonth = date.month();
     if(month == 1 && cMonth == 12)       // Going from december to january
@@ -40,18 +45,25 @@ void DateDisplay::slotMonthChanged(int month)
         setText(date.toString());
     if(newYear)
         emit yearRolled(this->getDateTime());  // Emit signal that year changed
-    emit dateChanged(this->getDateTime());
+
+    // Only emit date change if the date actually changed
+    if(date != originalDate)
+        emit dateChanged(this->getDateTime());
 }
 
 void DateDisplay::slotdayChanged(int day)
 {
     QDate date = QDate::fromString(text());
+    QDate originalDate(date);
     if(day > date.daysInMonth())
         return;
     date.setDate(date.year(), date.month(), day);
     if(date.isValid())
         setText(date.toString());
-    emit dateChanged(this->getDateTime());
+
+    // Only emit date change if the date actually changed
+    if(date != originalDate)
+        emit dateChanged(this->getDateTime());
 }
 
 QDate DateDisplay::getDate()
