@@ -10,15 +10,36 @@
 
 #include "event.h"
 
+/**
+ * @brief The DetailView class.
+ * This class is used to represent the details of an event and present them to the user
+ */
 class DetailView : public RotaryView
 {
     Q_OBJECT
 public:
+    /**
+     * @brief DetailView constructor for the object
+     * @param pageGeometry the geometry the object uses
+     * @param set a reference to the Event_set object
+     * @param parent a pointer to the objets parent
+     */
     explicit DetailView(QRect& pageGeometry, Event_set& set, QWidget *parent);
 signals:
+    /**
+     * @brief editEventClicked emited when a user clicks the edit event button
+     * @param e a pointer to the event to be edited
+     */
     void editEventClicked(Event* e);
 public slots:
+    /**
+     * @brief setCurrentEvent slot called when a user clicks an item to be edited
+     * @param e a pointer to the event that is to be displayed
+     */
     void setCurrentEvent(Event* e);
+    /**
+     * @brief slotEditClicked slot is called when a user clicks edit
+     */
     void slotEditClicked();
 private:
     QLabel* title;
