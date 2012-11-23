@@ -31,6 +31,7 @@ signals:
      * @param e a pointer to the event to be edited
      */
     void editEventClicked(Event* e);
+    void deleteEventClicked(Event* e);
 public slots:
     /**
      * @brief setCurrentEvent slot called when a user clicks an item to be edited
@@ -41,6 +42,7 @@ public slots:
      * @brief slotEditClicked slot is called when a user clicks edit
      */
     void slotEditClicked();
+    void slotDeleteClicked();
 private:
     QLabel* title;
     QLabel* location;
