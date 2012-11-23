@@ -1,5 +1,8 @@
 android/
+html/
+latex/
 
+Doxyfile
 .DS_Store
 .obj
 *.moc
