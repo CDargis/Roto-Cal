@@ -29,7 +29,7 @@ public:
      * @brief getEventSet get the Event_set reference
      * @return a reference to the Event_set object
      */
-    virtual Event_set& getEventSet() { return eventSet; }
+    Event_set& getEventSet() { return eventSet; }
 signals:
     
 public slots:

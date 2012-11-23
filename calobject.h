@@ -22,18 +22,14 @@ public:
      * @brief getEventSet get a reference to the event set
      * @return a referenc to the Event_set object
      */
-    virtual Event_set& getEventSet() { return eventSet; }
+    Event_set& getEventSet() { return eventSet; }
 protected:
     /**
      * @brief eventSet The current event set object
      */
     Event_set& eventSet;
 signals:
-    /**
-     * @brief setScreenIndex Set the current screen index
-     * @param index of which screen to be displayed
-     */
-    void setScreenIndex(int index);
+
 public slots:
     /**
      * @brief setDate set the date of a calendar object
