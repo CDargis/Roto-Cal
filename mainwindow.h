@@ -16,6 +16,7 @@ namespace Ui {
 /**
  * @brief The MainWindow class
  * The main window of the application
+ * @author Chris Dargis
  */
 class MainWindow : public QMainWindow
 {

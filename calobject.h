@@ -1,6 +1,3 @@
-// @authors Chris Dargis
-// @Copyright 2012
-
 #ifndef CALOBJECT_H
 #define CALOBJECT_H
 
@@ -18,6 +15,7 @@ public:
     /**
      * @brief CalObject constructor
      * @param set a reference to the Event_set object
+     * @author Chris Dargis
      */
     explicit CalObject(Event_set& set);
     /**

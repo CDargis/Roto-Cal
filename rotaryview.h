@@ -12,6 +12,7 @@
 /**
  * @brief The RotaryView class.
  * This class is used as a base class for each "view" of the calendar.
+ * @author Chris Dargis
  */
 class RotaryView : public QWidget, CalObject
 {

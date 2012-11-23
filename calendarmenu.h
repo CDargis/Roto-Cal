@@ -1,6 +1,3 @@
-// @authors Chris Dargis
-// @Copyright 2012
-
 #ifndef CALENDARMENU_H
 #define CALENDARMENU_H
 
@@ -12,6 +9,7 @@
 /**
  * @brief The CalendarMenu class.
  * This class encapsulates the menu located at the top of the screen.
+ * @author Chris Dargis
  */
 class CalendarMenu : public QWidget
 {

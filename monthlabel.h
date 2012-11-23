@@ -10,6 +10,7 @@
 /**
  * @brief The MonthLabel class.
  * This class represents the rotation dial found in the month view
+ * @author Chris Dargis
  */
 class MonthLabel : public RotatableLabel
 {

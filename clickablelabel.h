@@ -7,6 +7,7 @@
  * @brief The ClickableLabel class.
  * Subclass of QLabel.
  * Emits a clicked() signal
+ * @author Chris Dargis
  */
 class ClickableLabel : public QLabel
 {

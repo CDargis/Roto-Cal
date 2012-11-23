@@ -13,6 +13,8 @@
 /**
  * @brief The DetailView class.
  * This class is used to represent the details of an event and present them to the user
+ * @author Chris Dargis
+ * @author Jay Moreau
  */
 class DetailView : public RotaryView
 {

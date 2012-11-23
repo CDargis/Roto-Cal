@@ -9,6 +9,7 @@
 /**
  * @brief The DayLabel class.
  * This class represents the rotation dial found in the day view
+ * @author Chris Dargis
  */
 class DayLabel : public RotatableLabel
 {

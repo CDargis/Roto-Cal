@@ -10,6 +10,7 @@
  * @brief The SelectableLabel class.
  * The class represents a label that is "selectable".
  * Once the label is clicked, it changes a color to indicate it is selected
+ * @author Chris Dargis
  */
 class SelectableLabel : public ClickableLabel
 {

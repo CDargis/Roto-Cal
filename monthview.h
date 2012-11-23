@@ -13,6 +13,8 @@
 /**
  * @brief The MonthView class.
  * The class represents the "Month View" of the calendar
+ * @author Chris Dargis
+ * @author Jay Moreau
  */
 class MonthView : public RotaryView
 {

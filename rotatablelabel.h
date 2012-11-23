@@ -14,6 +14,7 @@
 /**
  * @brief The RotatableLabel class.
  * This class represents a label that can be rotated by moving your finger over the object.
+ * @author Chris Dargis
  */
 class RotatableLabel : public QLabel
 {

@@ -9,6 +9,7 @@
  * @brief The CalendarListItem class.
  *        Subclassed from QListWidgetItem.
  *        Used to tie a pointer to an event to a item in a QListWidget.
+ * @author Chris Dargis
  */
 class CalendarListItem : public QListWidgetItem
 {

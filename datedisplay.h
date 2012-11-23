@@ -11,6 +11,7 @@
 /**
  * @brief The DateDisplay class.
  * This class represents the current date of the calendar.
+ * @author Chris Dargis
  */
 class DateDisplay : public QLabel, CalObject
 {

@@ -9,6 +9,8 @@
 /**
  * @brief The DayView class.
  * This class represents the "Day View" of the calendar.
+ * @author Chris Dargis
+ * @author Jay Moreau
  */
 class DayView : public RotaryView
 {

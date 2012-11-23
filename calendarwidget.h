@@ -1,6 +1,3 @@
-// @authors Chris Dargis
-// @Copyright 2012
-
 #ifndef CALENDARWIDGET_H
 #define CALENDARWIDGET_H
 
@@ -20,6 +17,7 @@
 /**
  * @brief The CalendarWidget class.
  * This class encapsulates the calendar application
+ * @author Chris Dargis
  */
 class CalendarWidget : public QWidget, CalObject
 {
