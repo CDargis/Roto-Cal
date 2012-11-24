@@ -35,7 +35,7 @@ DayView::DayView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     rightArrow = rightArrow.scaled(scalar, scalar);
     arrowIndicator->setPixmap(rightArrow);
     arrowIndicator->setGeometry((screenWidth / 2) - (rightArrow.width() / 2),
-                                (pageHeight / 2) - ((rightArrow.height()) - rightArrow.height() / 3),
+                                (pageHeight / 2) - ((rightArrow.height()) - rightArrow.height() / 8),
                                 rightArrow.width(), rightArrow.height());
 }
 

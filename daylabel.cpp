@@ -13,9 +13,15 @@ void DayLabel::slotGrabMouseMove()
     float cRotation = getCurrentRotation();
     if(cRotation < 0)
         cRotation += 360;
-    float div = (cRotation / rotationRange) + .5;
-    int day = ((int)div) + 1;
-    emit dayChanged(day);
+    float mod = fmod(cRotation, rotationRange);
+    //qDebug() << rotationRange << " - " << mod;
+    if(mod < 2 || mod > 8)
+    {
+        qDebug() << "true";
+        float day = (cRotation / rotationRange) + .5;
+        setCurrentRotation((int)day * rotationRange);
+        emit dayChanged((int)day + 1);
+    }
 }
 
 void DayLabel::setDate(QDate date, Event_set& eventSet)
@@ -55,7 +61,7 @@ void DayLabel::setDate(QDate date, Event_set& eventSet)
     float rotation = 360.00 / (float)daysInMoth;
     for(int i = 1; i <= daysInMoth; i++)
     {
-        p.drawText(xPos, yPos + 10, QString::number(i));
+        p.drawText(xPos, yPos, QString::number(i));
         p.translate(xTranslate, yTranslate);
         p.rotate(rotation);
         p.translate(-xTranslate, -yTranslate);

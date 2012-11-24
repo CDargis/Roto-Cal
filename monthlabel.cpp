@@ -16,7 +16,7 @@ void MonthLabel::slotGrabMouseMove()
     if(cRotation < 0)
         cRotation += 360;
     int mod = (int)cRotation % 30;
-    if(mod < 5 || mod >25)
+    if(mod < 5 || mod > 25)
     {
         int month = (int)(round(cRotation / 30));
         setCurrentRotation(month * 30);
