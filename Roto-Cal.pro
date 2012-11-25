@@ -50,7 +50,8 @@ HEADERS += \
     selectablelabel.h \
     clickablelabel.h \
     calendarlistitem.h \
-    create_time_t.h
+    create_time_t.h \
+    holiday.h
 FORMS += mainwindow.ui
 SOURCES += \
            calendarmenu.cpp \
@@ -80,7 +81,8 @@ SOURCES += \
     selectablelabel.cpp \
     clickablelabel.cpp \
     calendarlistitem.cpp \
-    create_time_t.cpp
+    create_time_t.cpp \
+    holiday.cpp
 RESOURCES += Resources.qrc
 
 OTHER_FILES += \
