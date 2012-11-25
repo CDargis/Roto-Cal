@@ -1,4 +1,5 @@
 #include "monthview.h"
+#include <QDebug>
 
 MonthView::MonthView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     RotaryView(pageGeometry, set, parent)
@@ -16,6 +17,12 @@ MonthView::MonthView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     listWidget->setMaximumWidth(235);
     listWidget->setMaximumHeight(800);
     listWidget->show();
+
+    /* initialize current date (year) */
+    currDate.setDate(QDate::currentDate().year(),QDate::currentDate().month(),\
+                         QDate::currentDate().day());
+    holiday = new Holiday(this);
+    holiday->setYear(currDate);
 
     int pageHeight = geometry().height();
     int screenWidth = geometry().width();
@@ -51,17 +58,62 @@ void MonthView::slotDateChanged(QDateTime dateTime)
     monthSet = set.getMonth(e_ptr);
 
     listWidget->clear();
+    listWidget->setSortingEnabled(true);
+    listWidget->sortItems(Qt::AscendingOrder);
 
-    if(monthSet.size()==0) {
+    /* check if year rolled over and reinitialize holiday data structs */
+    if(currDate.year() != dateTime.date().year()) {
+        holiday->setYear(dateTime.date());
+        currDate.setDate(dateTime.date().year(),dateTime.date().month(),\
+                         dateTime.date().day());
+    /* update current date */
+    } else {
+        currDate.setDate(dateTime.date().year(),dateTime.date().month(),\
+                         dateTime.date().day());
+    }
+
+    QVector< QList<QString> > monthVector = holiday->getMonthVector();
+
+    QColor foreGround;
+    QColor backGround;
+    foreGround.setRgb(0, 0, 0); // black
+    backGround.setRgb(255, 0, 0); // red
+
+    /* no events, no holidays */
+    if(monthSet.size()==0 && monthVector[currDate.month()-1].isEmpty()) {
         CalendarListItem *item = new CalendarListItem(NULL, tr("No events"),\
                                                       listWidget);
         item->setFlags(Qt::ItemIsEnabled);
-    } else {
+    /* events and holidays */
+    } else if (monthSet.size()!=0 && !monthVector[currDate.month()-1].isEmpty()) {
+        for(int i=0; i<monthVector[currDate.month()-1].size(); i++) {
+            CalendarListItem * item =\
+                    new CalendarListItem(NULL, monthVector[currDate.month()-1].at(i), listWidget);
+            item->setFlags(Qt::ItemIsEnabled);
+            item->setBackgroundColor(backGround);
+            item->setForeground(foreGround);
+        }
         for (it=monthSet.begin(); it!=monthSet.end(); it++) {
             new CalendarListItem((*it), (*it)->getDayString().append\
                                 (" ").append(((*it)->getName())), listWidget);
             connect(listWidget, SIGNAL(itemClicked(QListWidgetItem*)),
                     this, SLOT(slotListItemClicked(QListWidgetItem*)));
+        }
+    /* events, no holidays */
+    } else if (monthSet.size()!=0 && monthVector[currDate.month()-1].isEmpty()) {
+        for (it=monthSet.begin(); it!=monthSet.end(); it++) {
+            new CalendarListItem((*it), (*it)->getDayString().append\
+                                (" ").append(((*it)->getName())), listWidget);
+            connect(listWidget, SIGNAL(itemClicked(QListWidgetItem*)),
+                    this, SLOT(slotListItemClicked(QListWidgetItem*)));
+        }
+    } else {
+        for(int i=0; i<monthVector[currDate.month()-1].size(); i++) {
+            CalendarListItem * item =\
+                    new CalendarListItem(NULL, monthVector[currDate.month()-1].at(i), listWidget);
+            item->setFlags(Qt::ItemIsEnabled);
+            item->setBackgroundColor(backGround);
+            item->setForeground(foreGround);
         }
     }
     listWidget->updateGeometry();

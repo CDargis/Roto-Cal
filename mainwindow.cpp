@@ -61,9 +61,9 @@ MainWindow::MainWindow(QWidget *parent)
     Event* e24 = new Event("Gerron Birthday","location here","description here",Create_time_t::createTime(9,1,2012,0,12,false),Create_time_t::createTime(9,1,2012,0,0,true));
     Event* e25 = new Event("Jay Birthday","location here","description here",Create_time_t::createTime(11,11,2012,0,12,false),Create_time_t::createTime(11,11,2012,0,12,true));
     Event* e26 = new Event("Movie Night","location here","description here",Create_time_t::createTime(8,1,2012,0,6,true),Create_time_t::createTime(8,1,2012,0,7,true));
-    Event* e27 = new Event("4th of July","location here","description here",Create_time_t::createTime(29,7,2012,30,7,false),Create_time_t::createTime(29,7,2012,30,8,false));
-    Event* e28 = new Event("Christmas","location here","description here",Create_time_t::createTime(30,12,2012,3,4,true),Create_time_t::createTime(30,12,2012,3,5,true));
-    Event* e29 = new Event("Thanksgiving","location here","description here",Create_time_t::createTime(5,5,2012,10,5,false),Create_time_t::createTime(5,5,2012,10,5,false));
+    Event* e27 = new Event("Not 4th of July","location here","description here",Create_time_t::createTime(29,7,2012,30,7,false),Create_time_t::createTime(29,7,2012,30,8,false));
+    Event* e28 = new Event("Oranges","location here","description here",Create_time_t::createTime(30,12,2012,3,4,true),Create_time_t::createTime(30,12,2012,3,5,true));
+    Event* e29 = new Event("Cranberry","location here","description here",Create_time_t::createTime(5,5,2012,10,5,false),Create_time_t::createTime(5,5,2012,10,5,false));
     Event* e30 = new Event("Black Friday","location here","description here",Create_time_t::createTime(10,5,2012,6,7,false),Create_time_t::createTime(10,5,2012,6,8,false));
 
     Event* e31 = new Event("Doctor","location here","description here",Create_time_t::createTime(11,11,2012,3,3,true),Create_time_t::createTime(11,11,2012,3,4,true));

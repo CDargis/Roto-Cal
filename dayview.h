@@ -5,6 +5,7 @@
 #include "daylabel.h"
 #include "clickablelabel.h"
 #include "event.h"
+#include "holiday.h"
 
 /**
  * @brief The DayView class.
@@ -55,6 +56,8 @@ public slots:
     void slotListItemClicked(QListWidgetItem* item);
 private:
     QListWidget* listWidget;
+    Holiday* holiday;
+    QDate currDate;
 };
 
 #endif // DAYVIEW_H
