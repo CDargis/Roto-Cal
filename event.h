@@ -16,10 +16,12 @@
 #include <string>
 #include <iostream>
 
-//! Event Class.
-/*!
-Event class for calendar which inclues name, location, description, startTime, endTime.
+
+/**
+ * @brief Event class which contains name, location, description, startTime, endTime
+ * @author Gerron Thurman
 */
+
 class Event
 {
 private:

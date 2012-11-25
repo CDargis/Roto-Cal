@@ -10,9 +10,9 @@
 
 #include <string>
 
-//! Date class.
-/*!
-A Date class that contains day, month, and year.
+/**
+ * @brief Date class containing day, month, and year
+ * @author Gerron Thurman
 */
 class Date{
 

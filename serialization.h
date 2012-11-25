@@ -8,9 +8,9 @@
 #include "event.h"
 #include "event_set.h"
 
-//! Serialization Class.
-/*!
-Serialization class for serialization and deserialization.
+/**
+ * @brief Serialization class used for serialization and deserialiation of Events
+ * @author Gerron Thurman
 */
 class Serialization
 {

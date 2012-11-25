@@ -4,6 +4,10 @@
 #include "time1.h"
 #include "date.h"
 
+/**
+ * @brief Create_time_t which is used to create C's time_t objects
+ * @author Gerron Thurman
+*/
 class Create_time_t
 {
 public:
