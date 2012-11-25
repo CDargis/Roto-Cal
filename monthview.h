@@ -9,6 +9,7 @@
 #include "calobject.h"
 #include "event.h"
 #include "calendarlistitem.h"
+#include "holiday.h"
 
 /**
  * @brief The MonthView class.
@@ -64,6 +65,8 @@ public slots:
     void slotListItemClicked(QListWidgetItem* item);
 private:
     QListWidget* listWidget;
+    QDate currDate;
+    Holiday* holiday;
 };
 
 #endif // MONTHVIEW_H
