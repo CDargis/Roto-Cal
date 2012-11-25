@@ -1,6 +1,3 @@
-// @authors Chris Dargis
-// @Copyright 2012
-
 #ifndef MONTHLABEL_H
 #define MONTHLABEL_H
 

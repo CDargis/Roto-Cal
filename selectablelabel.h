@@ -1,6 +1,3 @@
-// @authors Chris Dargis
-// @Copyright 2012
-
 #ifndef SELECTABLELABEL_H
 #define SELECTABLELABEL_H
 

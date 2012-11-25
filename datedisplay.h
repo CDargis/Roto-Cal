@@ -1,6 +1,3 @@
-// @authors Chris Dargis
-// @Copyright 2012
-
 #ifndef DATEDISPLAY_H
 #define DATEDISPLAY_H
 

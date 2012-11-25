@@ -1,6 +1,3 @@
-// @authors Chris Dargis
-// @Copyright 2012
-
 #ifndef ROTARYVIEW_H
 #define ROTARYVIEW_H
 

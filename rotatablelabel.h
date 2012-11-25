@@ -1,6 +1,3 @@
-// @authors Chris Dargis
-// @Copyright 2012
-
 #ifndef ROTATABLELABEL_H
 #define ROTATABLELABEL_H
 

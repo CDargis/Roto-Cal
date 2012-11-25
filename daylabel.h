@@ -1,6 +1,3 @@
-// @authors Chris Dargis
-// @Copyright 2012
-
 #ifndef DAYLABEL_H
 #define DAYLABEL_H
 

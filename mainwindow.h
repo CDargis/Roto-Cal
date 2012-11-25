@@ -1,6 +1,3 @@
-// @authors Chris Dargis
-// @Copyright 2012
-
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 

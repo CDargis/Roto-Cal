@@ -1,6 +1,3 @@
-// @authors Chris Dargis
-// @Copyright 2012
-
 #ifndef MONTHVIEW_H
 #define MONTHVIEW_H
 
