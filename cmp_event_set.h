@@ -1,14 +1,14 @@
-/**                                                                             
- * \file Cmp_event_set.h                                                            
- *                                                                              
- * \author Jason Moreau                                                         
- * \date Oct 2012                                                               
- *                                                                              
- */
 #ifndef _cmp_event_set_
 #define _cmp_event_set_
 #include <ctime>
 #include "event.h"
+
+/**
+ * @brief The cmp_event_set class.
+ * This class contains comparison functors for event sets
+ * @author Jason Moreau
+ */
+
 class Cmp_event_set
 {                                                                               
     public:                                                                                                                   

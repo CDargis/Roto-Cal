@@ -1,11 +1,3 @@
-/**
- * \file Event_set.h
- *
- * \author Jason Moreau
- * \date Oct 2012
- *
- */
-
 #ifndef _event_set_
 #define _event_set_
 
@@ -15,6 +7,12 @@
 #include "cmp_event_year.h"
 #include "cmp_event_month.h"
 #include "cmp_event_day.h"
+
+/**
+ * @brief The event_set class.
+ * This class is used to store and retrieve calendar events
+ * @author Jason Moreau
+ */
 
 class Event_set
 {                                                                               

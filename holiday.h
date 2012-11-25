@@ -8,14 +8,32 @@
 #include <QVector>
 #include <vector>
 
+/**
+ * @brief class for holidays (creation and retrieval)
+ * @author Jason Moreau
+*/
+
 class Holiday : public QObject
 {
     Q_OBJECT
 public:
     explicit Holiday(QObject *parent = 0);
+    /** sets year for holidays
+     *  @param e QDate year object
+     */
     void setYear(QDate year);
+    /** returns monthVector QVector of QLists
+     *  @returns QVector of QLists
+     */
     QVector< QList<QString> > getMonthVector();
+    /** returns map size for debugging
+     *  @returns integer of map size
+     */
     int getMapSize();
+    /** for looking up dates in map
+     *  @param e QDate object
+     *  @returns QList of holidays in date
+     */
     QList<QString> hDayLookup(QDate date);
 private:
     void initVector();

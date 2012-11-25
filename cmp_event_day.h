@@ -1,15 +1,15 @@
-/**                                                                             
- * \file Cmp_event_day.h                                                            
- *                                                                              
- * \author Jason Moreau                                                         
- * \date Oct 2012                                                               
- *                                                                              
- */
 #ifndef _cmp_event_day_
 #define _cmp_event_day_
 #include <ctime>
 #include "time_t_read.h"
 #include "event.h"
+
+/**
+ * @brief The cmp_event_day class.
+ * This class contains comparison functors for days in event_set.
+ * @author Jason Moreau
+ */
+
 class Cmp_event_day                                                             
 {                                                                               
     public:                                                                     
