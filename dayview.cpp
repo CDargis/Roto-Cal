@@ -23,6 +23,12 @@ DayView::DayView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     listWidget->setMaximumHeight(800);
     listWidget->show();
 
+    /* set current date */
+    currDate.setDate(QDate::currentDate().year(),QDate::currentDate().month(),\
+                         QDate::currentDate().day());
+    holiday = new Holiday(this);
+    holiday->setYear(currDate); // initialize holiday data structures
+
     int pageHeight = geometry().height();
     int screenWidth = geometry().width();
     QPixmap pixmap(tr(":/images/blank_circle.png"));
@@ -58,17 +64,63 @@ void DayView::slotDateChanged(QDateTime dateTime)
 
     listWidget->clear();
 
-    if(daySet.size()==0) {
+    /* check if year rolled over and reinitialize holiday data structs */
+    if(currDate.year() != dateTime.date().year()) {
+        holiday->setYear(dateTime.date());
+        currDate.setDate(dateTime.date().year(),dateTime.date().month(),\
+                         dateTime.date().day());
+    /* same year, just update current date */
+    } else {
+        currDate.setDate(dateTime.date().year(),dateTime.date().month(),\
+                         dateTime.date().day());
+    }
+
+    /* get list of holidays for current date */
+    QList<QString> list = holiday->hDayLookup(currDate);
+
+    QColor foreGround;
+    QColor backGround;
+    foreGround.setRgb(0, 0, 0); // black
+    backGround.setRgb(255, 0, 0); // red
+
+    /* not events and no nolidays */
+    if(daySet.size()==0 && list.isEmpty()) {
         CalendarListItem *item = new CalendarListItem(NULL, tr("No events"),\
                                                       listWidget);
         item->setFlags(Qt::ItemIsEnabled);
-    } else {
+    /* events but no holidays */
+    } else if (daySet.size()!=0 && list.isEmpty()) {
         for (it=daySet.begin(); it!=daySet.end(); it++) {
             new CalendarListItem((*it), (*it)->getHourString().append\
                                 (":").append((*it)->getMinuteString()).append\
                                 (" ").append(((*it)->getName())), listWidget);
             connect(listWidget, SIGNAL(itemClicked(QListWidgetItem*)),
                     this, SLOT(slotListItemClicked(QListWidgetItem*)));
+        }
+    /* events and holidays */
+    } else if (daySet.size()!=0 && !list.isEmpty()) {
+        for (int i=0; i < list.size(); i++) {
+            CalendarListItem *item = new CalendarListItem(NULL, list.at(i),\
+                                                          listWidget);
+            item->setFlags(Qt::ItemIsEnabled);
+            item->setBackgroundColor(backGround);
+            item->setForeground(foreGround);
+        }
+        for (it=daySet.begin(); it!=daySet.end(); it++) {
+            new CalendarListItem((*it), (*it)->getHourString().append\
+                                (":").append((*it)->getMinuteString()).append\
+                                (" ").append(((*it)->getName())), listWidget);
+            connect(listWidget, SIGNAL(itemClicked(QListWidgetItem*)),
+                    this, SLOT(slotListItemClicked(QListWidgetItem*)));
+        }
+    /* no events but holidays */
+    } else {
+        for (int i=0; i < list.size(); i++) {
+            CalendarListItem *item = new CalendarListItem(NULL, list.at(i),\
+                                                          listWidget);
+            item->setFlags(Qt::ItemIsEnabled);
+            item->setBackgroundColor(backGround);
+            item->setForeground(foreGround);
         }
     }
     listWidget->updateGeometry();
