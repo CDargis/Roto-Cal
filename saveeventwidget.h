@@ -15,7 +15,7 @@
  * This class is used and displayed as a separate "window" when the user wishes to
  * create or edit an event.
  * @author Chris Dargis
- * @author Jay Moreau
+ * @author Jason Moreau
  */
 class SaveEventWidget : public QWidget, CalObject
 {
