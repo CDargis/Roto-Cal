@@ -11,9 +11,9 @@
 #include <QtCore>
 
 
-//! Time class.
-/*!
-Class to contain time as int hour, int minute, bool am, bool pm
+/**
+ * @brief Time1 class which contains the time as hour, minute, am and pm
+ * @author Gerron Thurman
 */
 class Time1{
 	protected:
