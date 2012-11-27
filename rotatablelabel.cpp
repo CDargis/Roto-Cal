@@ -101,7 +101,7 @@ QColor RotatableLabel::getColorFromRange(float x, float totalEvents)
     if(x == 0 || totalEvents == 0) return QColor::fromRgb(50, 165, 240);   // Base shade of blue
     float perc = x / totalEvents;
     perc *= 100;
-    if(perc < 5) return QColor::fromRgb(0, 255, 255);
-    if(perc < 25) return QColor::fromRgb(255, 255, 0);
-    return QColor::fromRgb(255, 0, 25);
+    if(perc < 5) return QColor::fromRgb(0, 255, 255); // Cyan
+    if(perc < 25) return QColor::fromRgb(255, 255, 0); // yellow
+    return QColor::fromRgb(255, 0, 25);       // red
 }

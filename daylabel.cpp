@@ -26,18 +26,17 @@ void DayLabel::slotGrabMouseMove()
 void DayLabel::setDate(QDate date, Event_set& eventSet)
 {
     int totalEvents = eventSet.getNumOfEventsInMonth(date.month(), date.year());
-    int daysInMoth = date.daysInMonth();
-    double rotationStep = 1.0 / (double)daysInMoth;
+    int daysInMonth = date.daysInMonth();
+    double rotationStep = 1.0 / (double)daysInMonth;
     qDebug() << rotationStep;
     QPainter p(&originalPixmap);
     QConicalGradient grad(originalPixmap.rect().center(), 180);
     double rot = 0;
-    float firstNum = RotatableLabel::scaleRange(eventSet.getNumOfEventsInDay(1, date.month(), date.year()),
-                                                0, totalEvents, 125, 255);
+    int firstNum = eventSet.getNumOfEventsInDay(1, date.month(), date.year());
     QColor firstColor =  RotatableLabel::getColorFromRange(firstNum, totalEvents);
     grad.setColorAt(rot, firstColor);
     rot = rotationStep;
-    for(int i = daysInMoth; i > 1; i--)
+    for(int i = daysInMonth; i > 1; i--)
     {
         int numEvents = eventSet.getNumOfEventsInDay(i, date.month(), date.year());
         QColor col = RotatableLabel::getColorFromRange(numEvents, totalEvents);
@@ -52,15 +51,18 @@ void DayLabel::setDate(QDate date, Event_set& eventSet)
     int yPos = originalPixmap.height() / 2;
     int xTranslate = originalPixmap.width() / 2;
     int yTranslate = yPos;
-    QPen wPen(Qt::white);
+    QPen wPen(Qt::black);
     p.setPen(wPen);
     QFont f = p.font();
     f.setPointSize(16);
-    p.setFont(f);
-    float rotation = 360.00 / (float)daysInMoth;
-    for(int i = 1; i <= daysInMoth; i++)
+    f.setStyleStrategy(QFont::ForceOutline);
+    p.setBrush(QBrush(QColor(Qt::white)));
+    float rotation = 360.00 / (float)daysInMonth;
+    for(int i = 1; i <= daysInMonth; i++)
     {
-        p.drawText(xPos, yPos, QString::number(i));
+        QPainterPath path;
+        path.addText(xPos, yPos + 10, f, QString::number(i));
+        p.drawPath(path);
         p.translate(xTranslate, yTranslate);
         p.rotate(rotation);
         p.translate(-xTranslate, -yTranslate);
