@@ -17,7 +17,6 @@ void DayLabel::slotGrabMouseMove()
     //qDebug() << rotationRange << " - " << mod;
     if(mod < 2 || mod > 8)
     {
-        qDebug() << "true";
         float day = (cRotation / rotationRange) + .5;
         setCurrentRotation((int)day * rotationRange);
         emit dayChanged((int)day + 1);
@@ -28,21 +27,21 @@ void DayLabel::setDate(QDate date, Event_set& eventSet)
 {
     int totalEvents = eventSet.getNumOfEventsInMonth(date.month(), date.year());
     int daysInMoth = date.daysInMonth();
-    float rotationStep = 1.0 / (float)daysInMoth;
+    double rotationStep = 1.0 / (double)daysInMoth;
     qDebug() << rotationStep;
     QPainter p(&originalPixmap);
     QConicalGradient grad(originalPixmap.rect().center(), 180);
-    float rot = 0;
+    double rot = 0;
     float firstNum = RotatableLabel::scaleRange(eventSet.getNumOfEventsInDay(1, date.month(), date.year()),
                                                 0, totalEvents, 125, 255);
-    QColor firstColor =  QColor::fromRgb((int)firstNum, 255 - (int)firstNum, 255);
+    QColor firstColor =  RotatableLabel::getColorFromRange(firstNum, totalEvents);
     grad.setColorAt(rot, firstColor);
     rot = rotationStep;
     for(int i = daysInMoth; i > 1; i--)
     {
         int numEvents = eventSet.getNumOfEventsInDay(i, date.month(), date.year());
-        float scaledNumberOfEvents = RotatableLabel::scaleRange(numEvents, 0, totalEvents, 125, 255);
-        grad.setColorAt(rot, QColor::fromRgb((int)scaledNumberOfEvents, 255 - (int)scaledNumberOfEvents , 255));
+        QColor col = RotatableLabel::getColorFromRange(numEvents, totalEvents);
+        grad.setColorAt(rot, col);
         rot += rotationStep;
     }
     grad.setColorAt(rot, firstColor);

@@ -27,23 +27,19 @@ void MonthLabel::slotGrabMouseMove()
 void MonthLabel::setDate(QDate date, Event_set& eventSet)
 {
     int totalEvents = eventSet.getNumOfEventsInYear(date.year());
-    //qDebug() << numEvents;
 
     QPainter p(&originalPixmap);
     QConicalGradient grad(originalPixmap.rect().center(), 180);
     float rot = 0;
-    float firstNum = RotatableLabel::scaleRange(eventSet.getNumOfEventsInMonth(1, date.year()),
-                                                0, totalEvents, 125, 255);
-    QColor firstColor = QColor::fromRgb((int)firstNum, 255 - (int)firstNum, 255);
+    int firstNum = eventSet.getNumOfEventsInMonth(1, date.year());
+    QColor firstColor = RotatableLabel::getColorFromRange(firstNum, totalEvents);
     grad.setColorAt(rot, firstColor);
     rot = 0.083333333;
     for(int i = 12; i > 1; i--)
     {
-        //qDebug() << "month: " << i << " - " << eventSet.getNumOfEventsInMonth(i, date.year());
-        float scaledNumberOfEvents = RotatableLabel::scaleRange(eventSet.getNumOfEventsInMonth(i, date.year()),
-                                               0, totalEvents, 125, 255);
-        //qDebug() << num;
-        grad.setColorAt(rot, QColor::fromRgb((int)scaledNumberOfEvents, 255 - (int)scaledNumberOfEvents , 255));
+        int numEvents = eventSet.getNumOfEventsInMonth(i, date.year());
+        QColor col = RotatableLabel::getColorFromRange(numEvents, totalEvents);
+        grad.setColorAt(rot, col);
         rot += 0.083333333;
     }
     grad.setColorAt(rot, firstColor);
@@ -54,14 +50,18 @@ void MonthLabel::setDate(QDate date, Event_set& eventSet)
     int yPos = originalPixmap.height() / 2;
     int xTranslate = originalPixmap.width() / 2;
     int yTranslate = yPos;
-    QPen wPen(Qt::white);
+    QPen wPen(Qt::black);
     p.setPen(wPen);
     QFont f = p.font();
     f.setPointSize(18);
-    p.setFont(f);
+    f.setStyleStrategy(QFont::ForceOutline);
+    p.setBrush(QBrush(QColor(Qt::white)));
     for(int i = 0; i < 12; i++)
     {
-        p.drawText(xPos, yPos + 10, months[i]);
+        QPainterPath path;
+        path.addText(xPos, yPos + 10, f, months[i]);
+        //p.drawText(xPos, yPos + 10, months[i]);
+        p.drawPath(path);
         p.translate(xTranslate, yTranslate);
         p.rotate(30);
         p.translate(-xTranslate, -yTranslate);

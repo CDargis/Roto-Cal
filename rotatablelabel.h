@@ -54,6 +54,7 @@ public:
      * @return in scaled from [oldMin, oldMax] to [newMin, newMax]
      */
     static float scaleRange(float in, float oldMin, float oldMax, float newMin, float newMax);
+    static QColor getColorFromRange(float x, float totalEvents);
     /**
      * @brief PI 3.14...
      */

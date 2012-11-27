@@ -29,7 +29,6 @@ CalendarWidget::CalendarWidget(QRect screenRes, Event_set &set, QWidget *parent)
     rotaryViews->addWidget(detailView);
 
     connect(menu, SIGNAL(labelClicked(int)), this, SLOT(slotLabelClicked(int)));
-    connect(monthView->monthLabel, SIGNAL(yearChanged(int)), dateDisplay, SLOT(slotyearChanged(int)));
     connect(monthView->monthLabel, SIGNAL(monthChanged(int)), dateDisplay, SLOT(slotMonthChanged(int)));
     connect(dayView->dayLabel, SIGNAL(dayChanged(int)), dateDisplay, SLOT(slotdayChanged(int)));
     connect(dateDisplay, SIGNAL(dateChanged(QDateTime)), monthView, SLOT(slotDateChanged(QDateTime)));

@@ -68,12 +68,12 @@ void RotatableLabel::paintEvent(QPaintEvent *pe)
     QRect r = pixmap.rect();
     if(mouseIsDown)
     {
-        p.setPen((QPen(Qt::blue, 7)));
+        p.setPen((QPen(QColor::fromRgb(210, 0, 170), 6)));
         p.drawEllipse(r.center(), (r.width() / 2) * .999, (r.height() / 2) * .999);
     }
     else
     {
-        p.setPen((QPen(Qt::black, 8)));
+        p.setPen((QPen(Qt::black, 9)));
         p.drawEllipse(r.center(), (r.width() / 2), (r.height() / 2));
     }
 }
@@ -94,4 +94,14 @@ float RotatableLabel::getAngle(QPoint point)
 float RotatableLabel::scaleRange(float in, float oldMin, float oldMax, float newMin, float newMax)
 {
     return (((newMax - newMin) * (in - oldMin)) / (oldMax - oldMin)) + newMin;
+}
+
+QColor RotatableLabel::getColorFromRange(float x, float totalEvents)
+{
+    if(x == 0 || totalEvents == 0) return QColor::fromRgb(50, 165, 240);   // Base shade of blue
+    float perc = x / totalEvents;
+    perc *= 100;
+    if(perc < 5) return QColor::fromRgb(0, 255, 255);
+    if(perc < 25) return QColor::fromRgb(255, 255, 0);
+    return QColor::fromRgb(255, 0, 25);
 }
