@@ -33,7 +33,7 @@ void DayLabel::setDate(QDate date, Event_set& eventSet)
     QConicalGradient grad(originalPixmap.rect().center(), 180);
     double rot = 0;
     int firstNum = eventSet.getNumOfEventsInDay(1, date.month(), date.year());
-    QColor firstColor =  RotatableLabel::getColorFromRange(firstNum, totalEvents);
+    QColor firstColor = RotatableLabel::getColorFromRange(firstNum, totalEvents);
     grad.setColorAt(rot, firstColor);
     rot = rotationStep;
     for(int i = daysInMonth; i > 1; i--)

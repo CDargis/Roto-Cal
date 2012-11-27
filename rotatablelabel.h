@@ -54,6 +54,12 @@ public:
      * @return in scaled from [oldMin, oldMax] to [newMin, newMax]
      */
     static float scaleRange(float in, float oldMin, float oldMax, float newMin, float newMax);
+    /**
+     * @brief getColorFromRange get a QColor from a range of x to totalEvents
+     * @param x the number of events in a specific time period
+     * @param totalEvents the total number of events that x is scaled from
+     * @return a QColor that represents how busy the time period is
+     */
     static QColor getColorFromRange(float x, float totalEvents);
     /**
      * @brief PI 3.14...
