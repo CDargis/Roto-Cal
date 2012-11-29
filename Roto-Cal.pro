@@ -51,7 +51,8 @@ HEADERS += \
     clickablelabel.h \
     calendarlistitem.h \
     create_time_t.h \
-    holiday.h
+    holiday.h \
+    cdlineedit.h
 FORMS += mainwindow.ui
 SOURCES += \
            calendarmenu.cpp \
@@ -82,7 +83,8 @@ SOURCES += \
     clickablelabel.cpp \
     calendarlistitem.cpp \
     create_time_t.cpp \
-    holiday.cpp
+    holiday.cpp \
+    cdlineedit.cpp
 RESOURCES += Resources.qrc
 
 OTHER_FILES += \

@@ -3,9 +3,9 @@
 
 #include "calobject.h"
 #include "calendarwidget.h"
+#include "cdlineedit.h"
 
 #include <QWidget>
-#include <QLineEdit>
 #include <QTextEdit>
 #include <QDateTimeEdit>
 #include <QScrollArea>
@@ -53,11 +53,6 @@ public:
     void editEvent();
 protected:
     /**
-     * @brief keyPressEvent intercepting key press events
-     * @param e a pointer to the event that was fired
-     */
-    void keyPressEvent(QKeyEvent *e);
-    /**
      * @brief mouseMoveEvent intercepting the moues move event
      * @param e a pointer to the event that was fired
      */
@@ -82,9 +77,9 @@ private:
     bool checkStartTime(time_t start, time_t end);
 
     Event* currentEvent;
-    QLineEdit* titleEdit;
-    QLineEdit* descEdit;
-    QLineEdit* locationEdit;
+    CDLineEdit* titleEdit;
+    CDLineEdit* descEdit;
+    CDLineEdit* locationEdit;
     QDateTimeEdit* sTimeEdit;
     QDateTimeEdit* eTimeEdit;
     QPoint lastPoint;

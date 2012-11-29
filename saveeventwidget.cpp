@@ -29,13 +29,13 @@ SaveEventWidget::SaveEventWidget(Event_set &set, CalendarWidget& widget, QWidget
     centerTitle->addWidget(addTitle);
     form->addRow(centerTitle);
 
-    titleEdit = new QLineEdit(this);
+    titleEdit = new CDLineEdit(this);
     form->addRow(tr("Title:"), titleEdit);
 
-    locationEdit = new QLineEdit(this);
+    locationEdit = new CDLineEdit(this);
     form->addRow(tr("Location:"), locationEdit);
 
-    descEdit = new QLineEdit(this);
+    descEdit = new CDLineEdit(this);
     form->addRow(tr("Description:"), descEdit);
 
     QVBoxLayout* sTimeInput = new QVBoxLayout;
@@ -76,12 +76,6 @@ SaveEventWidget::SaveEventWidget(Event_set &set, CalendarWidget& widget, QWidget
 void SaveEventWidget::mouseMoveEvent(QMouseEvent *e)
 {
     QWidget::mouseMoveEvent(e);
-}
-
-void SaveEventWidget::keyPressEvent(QKeyEvent *e)
-{
-    qDebug() << e->key();
-    QWidget::keyPressEvent(e);
 }
 
 void SaveEventWidget::resetInput()
