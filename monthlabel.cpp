@@ -4,9 +4,8 @@
 const QString MonthLabel::months[] = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP",
                                     "OCT", "NOV", "DEC"};
 
-MonthLabel::MonthLabel(QPixmap pixmap, QWidget *parent) : RotatableLabel(parent)
+MonthLabel::MonthLabel(QPixmap pixmap, QWidget *parent) : RotatableLabel(pixmap, parent)
 {
-    originalPixmap = pixmap;
     connect(this, SIGNAL(mouseMove()), this, SLOT(slotGrabMouseMove()));
 }
 

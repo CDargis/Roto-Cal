@@ -18,10 +18,11 @@ class RotatableLabel : public QLabel
 Q_OBJECT
 public:
     /**
-     * @brief RotatableLabel constructor for the object
+     * @brief RotatableLabel constructor for rotatable label
+     * @param originalMap the pixmap that will be rotated
      * @param parent a pointer to the parent of the object
      */
-    explicit RotatableLabel(QWidget *parent = 0);
+    explicit RotatableLabel(QPixmap originalMap, QWidget* parent = 0);
     /**
      * @brief setCurrentRotation set the current rotation of the label
      * @param rotation to be set

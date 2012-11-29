@@ -2,9 +2,8 @@
 #include <QDebug>
 
 DayLabel::DayLabel(QPixmap pixmap, QWidget *parent) :
-    RotatableLabel(parent)
+    RotatableLabel(pixmap, parent)
 {
-    originalPixmap = pixmap;
     connect(this, SIGNAL(mouseMove()), this, SLOT(slotGrabMouseMove()));
 }
 

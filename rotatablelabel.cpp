@@ -1,6 +1,7 @@
 #include "rotatablelabel.h"
 
-RotatableLabel::RotatableLabel(QWidget *parent) : QLabel(parent)
+RotatableLabel::RotatableLabel(QPixmap originalMap, QWidget *parent)
+    : QLabel(parent), originalPixmap(originalMap)
 {
     connect(this, SIGNAL(mouseDown()), this, SLOT(slotMouseDown()));
     connect(this, SIGNAL(mouseMove()), this, SLOT(slotMouseMoved()));
@@ -52,8 +53,6 @@ void RotatableLabel::slotMouseUp()
 {
     mouseIsDown = false;
     update();
-    // As soon as the mouse is up, start physics
-
 }
 
 void RotatableLabel::paintEvent(QPaintEvent *pe)
