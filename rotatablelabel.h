@@ -113,10 +113,6 @@ protected:
      * @param pe
      */
     void paintEvent(QPaintEvent *pe);
-    /**
-     * @brief originalPixmap represents the original (unrotated) pixmap of the label
-     */
-    QPixmap originalPixmap;
 private:
     QPoint mouseDownPoint;
     float currentRotation;

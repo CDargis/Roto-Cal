@@ -13,7 +13,6 @@ void DayLabel::slotGrabMouseMove()
     if(cRotation < 0)
         cRotation += 360;
     float mod = fmod(cRotation, rotationRange);
-    //qDebug() << rotationRange << " - " << mod;
     if(mod < 2 || mod > 8)
     {
         float day = (cRotation / rotationRange) + .5;
@@ -27,7 +26,7 @@ void DayLabel::setDate(QDate date, Event_set& eventSet)
     int totalEvents = eventSet.getNumOfEventsInMonth(date.month(), date.year());
     int daysInMonth = date.daysInMonth();
     double rotationStep = 1.0 / (double)daysInMonth;
-    qDebug() << rotationStep;
+    QPixmap originalPixmap(*(this->pixmap()));
     QPainter p(&originalPixmap);
     QConicalGradient grad(originalPixmap.rect().center(), 180);
     double rot = 0;
@@ -68,6 +67,7 @@ void DayLabel::setDate(QDate date, Event_set& eventSet)
     }
 
     // Setting the pixmap
+    this->setPixmap(originalPixmap);
     rotationRange = 360.00 / (float)date.daysInMonth();
     setCurrentRotation((date.day() - 1) * rotationRange);
 }

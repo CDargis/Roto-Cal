@@ -1,7 +1,7 @@
 #include "rotatablelabel.h"
 
 RotatableLabel::RotatableLabel(QPixmap originalMap, QWidget *parent)
-    : QLabel(parent), originalPixmap(originalMap)
+    : QLabel(parent)
 {
     connect(this, SIGNAL(mouseDown()), this, SLOT(slotMouseDown()));
     connect(this, SIGNAL(mouseMove()), this, SLOT(slotMouseMoved()));
@@ -9,6 +9,7 @@ RotatableLabel::RotatableLabel(QPixmap originalMap, QWidget *parent)
     currentRotation = 0;
     oldRotation = 0;
     mouseIsDown = false;
+    setPixmap(originalMap);
 }
 
 void RotatableLabel::mousePressEvent(QMouseEvent *ev)
@@ -57,7 +58,7 @@ void RotatableLabel::slotMouseUp()
 
 void RotatableLabel::paintEvent(QPaintEvent *pe)
 {
-    QPixmap pixmap(originalPixmap);
+    QPixmap pixmap(*(this->pixmap()));
     QPainter p(this);
     p.translate(pixmap.size().width() / 2, pixmap.size().height() / 2);
     p.rotate(-currentRotation);
@@ -85,6 +86,7 @@ void RotatableLabel::setCurrentRotation(float rotation)
 
 float RotatableLabel::getAngle(QPoint point)
 {
+    QPixmap originalPixmap(*(this->pixmap()));
     float x = (float)(point.rx() - (originalPixmap.width() / 2));
     float y = (float)((originalPixmap.height() / 2) - point.ry());
     return atan2(x, y) * (180 / PI);

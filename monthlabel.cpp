@@ -26,7 +26,7 @@ void MonthLabel::slotGrabMouseMove()
 void MonthLabel::setDate(QDate date, Event_set& eventSet)
 {
     int totalEvents = eventSet.getNumOfEventsInYear(date.year());
-
+    QPixmap originalPixmap(*(this->pixmap()));
     QPainter p(&originalPixmap);
     QConicalGradient grad(originalPixmap.rect().center(), 180);
     float rot = 0;
@@ -59,12 +59,12 @@ void MonthLabel::setDate(QDate date, Event_set& eventSet)
     {
         QPainterPath path;
         path.addText(xPos, yPos + 10, f, months[i]);
-        //p.drawText(xPos, yPos + 10, months[i]);
         p.drawPath(path);
         p.translate(xTranslate, yTranslate);
         p.rotate(30);
         p.translate(-xTranslate, -yTranslate);
     }
+    this->setPixmap(originalPixmap);
     int month = date.month();
     setCurrentRotation((month - 1) * 30);
 }
