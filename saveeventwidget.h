@@ -52,11 +52,7 @@ public:
      */
     void editEvent();
 protected:
-    /**
-     * @brief mouseMoveEvent intercepting the moues move event
-     * @param e a pointer to the event that was fired
-     */
-    void mouseMoveEvent(QMouseEvent *e);
+
 signals:
     /**
      * @brief closeScreen emited when the save/edit screen is to be closed
@@ -73,7 +69,6 @@ public slots:
      */
     void slotCancelClicked();
 private:
-    void resetInput();
     bool checkStartTime(time_t start, time_t end);
 
     Event* currentEvent;
@@ -82,7 +77,6 @@ private:
     CDLineEdit* locationEdit;
     QDateTimeEdit* sTimeEdit;
     QDateTimeEdit* eTimeEdit;
-    QPoint lastPoint;
 
     CalendarWidget& cWidget;
 };

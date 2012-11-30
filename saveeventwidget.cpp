@@ -1,7 +1,6 @@
 #include "saveeventwidget.h"
 
 #include <QDebug>
-
 #include <QKeyEvent>
 #include <QVBoxLayout>
 #include <QFormLayout>
@@ -11,12 +10,14 @@
 #include <QPushButton>
 #include <QButtonGroup>
 
+// Constructor for the save event widget
+// Initialize the parent objects. Set the current event to NULL because no event is being edited yet
+// Setup all of the layouts and initialize the GUI objects
 SaveEventWidget::SaveEventWidget(Event_set &set, CalendarWidget& widget, QWidget *parent) :
     QWidget(parent), CalObject(set), cWidget(widget)
 {
     currentEvent = NULL;
 
-    lastPoint = QPoint(0, 0);
     QVBoxLayout* mainLayout = new QVBoxLayout;
 
     QFormLayout* form = new QFormLayout;
@@ -31,10 +32,8 @@ SaveEventWidget::SaveEventWidget(Event_set &set, CalendarWidget& widget, QWidget
 
     titleEdit = new CDLineEdit(this);
     form->addRow(tr("Title:"), titleEdit);
-
     locationEdit = new CDLineEdit(this);
     form->addRow(tr("Location:"), locationEdit);
-
     descEdit = new CDLineEdit(this);
     form->addRow(tr("Description:"), descEdit);
 
@@ -65,39 +64,30 @@ SaveEventWidget::SaveEventWidget(Event_set &set, CalendarWidget& widget, QWidget
     mainLayout->addLayout(form);
     mainLayout->addLayout(buttonLayout);
 
+    // Connect the clicked signals from the buttons to their appropriate handlers
     connect(saveButton, SIGNAL(clicked()), this, SLOT(slotSaveClicked()));
     connect(cancelButton, SIGNAL(clicked()), this, SLOT(slotCancelClicked()));
     mainLayout->setSizeConstraint(QLayout::SetMinAndMaxSize);
 
-    resetInput();
     setLayout(mainLayout);
 }
 
-void SaveEventWidget::mouseMoveEvent(QMouseEvent *e)
-{
-    QWidget::mouseMoveEvent(e);
-}
-
-void SaveEventWidget::resetInput()
-{
-    titleEdit->setText(tr(""));
-    locationEdit->setText(tr(""));
-    descEdit->setText(tr(""));
-    sTimeEdit->setDateTime(cWidget.getCurrentDateTime());
-    eTimeEdit->setDateTime(cWidget.getCurrentDateTime().addSecs(60*60));
-}
-
+// slot for the save button being clicked. If the current event object is null, then the
+// user is not editing an event and is therefore creating a new one
 void SaveEventWidget::slotSaveClicked()
 {
     if(currentEvent) editEvent();
     else createNewEvent();
 }
 
+// Handler for the cancel button being clicked. Just need to emit the signal to change the screen index
 void SaveEventWidget::slotCancelClicked()
 {
     emit closeScreen(NULL);
 }
 
+// This function presets the input fields to the parameters passed through the function
+// Used to either clear the input fields or input a current event object's data into the field
 void SaveEventWidget::setInput(QDateTime start, QDateTime end, QString title,
                                QString location, QString description)
 {
@@ -108,6 +98,8 @@ void SaveEventWidget::setInput(QDateTime start, QDateTime end, QString title,
     eTimeEdit->setDateTime(end);
 }
 
+// This function is called when the user wishes to create a new event
+// Do some error checking on the user's input and handle accordingly
 void SaveEventWidget::createNewEvent()
 {
     Event* e;
@@ -152,6 +144,8 @@ void SaveEventWidget::createNewEvent()
     }
 }
 
+// This function is called when a user wishes to edit an event
+// Do some error checking on the user's input and handle accordingly
 void SaveEventWidget::editEvent()
 {
     bool duplicate = false;
@@ -213,6 +207,7 @@ void SaveEventWidget::editEvent()
     }
 }
 
+// This function checks whether or not the end time occurs before the start time
 bool SaveEventWidget::checkStartTime(time_t start, time_t end) {
     if (end < start)
         return false;

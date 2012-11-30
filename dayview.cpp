@@ -6,6 +6,8 @@
 
 #include <QLabel>
 
+// Constructor for DayView Class. Initialize parent class with geometry and acess to
+// Event_set object.
 DayView::DayView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     RotaryView(pageGeometry, set, parent)
 {
@@ -29,12 +31,15 @@ DayView::DayView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     holiday = new Holiday(this);
     holiday->setYear(currDate); // initialize holiday data structures
 
+    // Determine height and width of view. Initialize the day pixmap
+    // Set the geometry of the DayLabel so that only half of the wheel is displayed
     int pageHeight = geometry().height();
     int screenWidth = geometry().width();
     QPixmap pixmap(tr(":/images/blank_circle.png"));
     dayLabel = new DayLabel(pixmap.scaled(pageHeight, pageHeight), this);
     dayLabel->setGeometry(screenWidth / 2, 0, screenWidth, pageHeight);
 
+    // Setup the right arrow indicator that indicates which day the user is selecting
     QPixmap rightArrow(tr(":/images/rightArrow.png"));
     QLabel* arrowIndicator = new QLabel(this);
     int scalar = pageHeight * .050;
@@ -45,15 +50,21 @@ DayView::DayView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
                                 rightArrow.width(), rightArrow.height());
 }
 
+// Forward the setDate function to the label to handle
 void DayView::setDate(QDate date)
 {
     dayLabel->setDate(date, this->getEventSet());
 }
 
+// This slot is called from the DateDisplay object. It is called when there is a date
+// change caused by a wheel rotation. Need to determine which events are to be displayed
+// within the time parameters of the current wheel position
 void DayView::slotDateChanged(QDateTime dateTime)
 {
+    // Return if the view is not currently active
     if(!active)
         return;
+
     Event e;
     Event* e_ptr = &e;
     Event_set& set = this->getEventSet();
@@ -127,6 +138,7 @@ void DayView::slotDateChanged(QDateTime dateTime)
 }
 
 // This slot is called when an item in the QListWidget is clicked
+// Need to emit the emitClicked() signal if the pointer is not null
 void DayView::slotListItemClicked(QListWidgetItem* item)
 {
     CalendarListItem* cItem = static_cast<CalendarListItem*>(item);

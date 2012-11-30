@@ -47,11 +47,6 @@ signals:
     void yearRolled(QDateTime newDateTime);
 public slots:
     /**
-     * @brief slotyearChanged slot is called when the year is changed from outside the display
-     * @param year the new year
-     */
-    void slotyearChanged(int year);
-    /**
      * @brief slotMonthChanged slot is called when the month dial is rolled
      * @param month the new month
      */

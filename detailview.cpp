@@ -5,6 +5,8 @@
 #include <QFormLayout>
 #include <QMessageBox>
 
+// Constructor for DetailView Class. Initialize parent class with geometry and acess to
+// Event_set object.
 DetailView::DetailView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     RotaryView(pageGeometry, set, parent)
 {
@@ -14,12 +16,13 @@ DetailView::DetailView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     fieldStyleSheet = "font-size: 9pt; font-weight: bold;";
     entryStyleSheet = "font-size: 8pt;";
 
+    // Initialize the non-editable QLabels that display the event information
     fieldTitle = new QLabel(tr("Title"), this);
     fieldLocation = new QLabel(tr("Location"), this);
     fieldDescription = new QLabel(tr("Description"), this);
     fieldStartTime = new QLabel(tr("Start Time"), this);
     fieldEndTime = new QLabel(tr("End Time"), this);
-
+    // Set the style sheets for each of the QLabels
     fieldTitle->setStyleSheet(fieldStyleSheet);
     fieldLocation->setStyleSheet(fieldStyleSheet);
     fieldDescription->setStyleSheet(fieldStyleSheet);
@@ -52,10 +55,13 @@ DetailView::DetailView(QRect &pageGeometry, Event_set &set, QWidget *parent) :
     QPushButton* deleteButton = new QPushButton(tr("Delete"), this);
     formLayout->addWidget(deleteButton);
 
+    // Connect the click events to their function handlers
     connect(editButton, SIGNAL(clicked()), this, SLOT(slotEditClicked()));
     connect(deleteButton, SIGNAL(clicked()), this, SLOT(slotDeleteClicked()));
 }
 
+// Set the current event of this object. Take the information that is contained in the
+// event object and populate the view for the user
 void DetailView::setCurrentEvent(Event* e)
 {
     currentEvent = e;
@@ -70,7 +76,6 @@ void DetailView::setCurrentEvent(Event* e)
     else
     {
         QDateTime qdt;
-
         title->setText(e->getName());
         location->setText(e->getLocation());
         description->setText(e->getDescription());
@@ -81,12 +86,17 @@ void DetailView::setCurrentEvent(Event* e)
     }
 }
 
+// This slot handles when the edit button is clicked
+// If the pointer of the current event is non-null, need to emit the edit-event signal
 void DetailView::slotEditClicked()
 {
     if(currentEvent)
         emit editEventClicked(currentEvent);
 }
 
+// Handler for the delete button being clicked
+// If the pointer to the current event is non-null, then carry about to delete the object
+// from the underlying data structure
 void DetailView::slotDeleteClicked()
 {
     if(currentEvent == NULL)

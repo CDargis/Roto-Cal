@@ -14,11 +14,14 @@ const QString SelectableLabel::SELECTED_STYLE_SHEET = "QLabel { background-color
                                                    "border-bottom: 3px solid black;"
                                                    "border-style: outset; }";
 
+// Constructor for a selectable label. Simply call the constructor of the parent class
 SelectableLabel::SelectableLabel(const QString &text, QWidget *parent) :
     ClickableLabel(text, parent)
 {
 }
 
+// Set the style sheet of the label. If the parameter is true, then the style sheet is set
+// in a way to display the label as "selected". Otherwise set the basic color scheme
 void SelectableLabel::setSelectStyleSheet(bool selected)
 {
     if(selected)
