@@ -39,21 +39,18 @@ SaveEventWidget::SaveEventWidget(Event_set &set, CalendarWidget& widget, QWidget
 
     QVBoxLayout* sTimeInput = new QVBoxLayout;
     QLabel* sTime = new QLabel(tr("Start Time:"), this);
-    sTimeEdit = new QDateTimeEdit(this);
-    sTimeEdit->setDisplayFormat(tr("d MMM yyyy HH:mm"));
-    sTimeEdit->showMaximized();
+
+    sGWidget = new GDateTimeEdit(this);
     sTimeInput->addWidget(sTime);
-    sTimeInput->addWidget(sTimeEdit);
     form->addRow(sTimeInput);
+    form->addRow(sGWidget);
 
     QVBoxLayout* eTimeInput = new QVBoxLayout;
     QLabel* eTime = new QLabel(tr("End Time:"), this);
-    eTimeEdit = new QDateTimeEdit(this);
-    eTimeEdit->setDisplayFormat(tr("d MMM yyyy HH:mm"));
-    eTimeEdit->showMaximized();
+    eGWidget = new GDateTimeEdit(this);
     eTimeInput->addWidget(eTime);
-    eTimeInput->addWidget(eTimeEdit);
     form->addRow(eTimeInput);
+    form->addRow(eGWidget);
 
     QHBoxLayout* buttonLayout = new QHBoxLayout;
     QPushButton* saveButton = new QPushButton(tr("Save"), this);
@@ -94,8 +91,8 @@ void SaveEventWidget::setInput(QDateTime start, QDateTime end, QString title,
     titleEdit->setText(title);
     locationEdit->setText(location);
     descEdit->setText(description);
-    sTimeEdit->setDateTime(start);
-    eTimeEdit->setDateTime(end);
+    sGWidget->setDateTime(start);
+    eGWidget->setDateTime(end);
 }
 
 // This function is called when the user wishes to create a new event
@@ -112,8 +109,8 @@ void SaveEventWidget::createNewEvent()
         mBox.move( this->width() / 2 - mBox.width() / 2, this->height() / 2 -\
                    mBox.height() / 2 );
         mBox.exec();
-    } else if (!checkStartTime(sTimeEdit->dateTime().toTime_t(),\
-                               eTimeEdit->dateTime().toTime_t())){
+    } else if (!checkStartTime(sGWidget->getDateTime().toTime_t(),\
+                               eGWidget->getDateTime().toTime_t())){
         QMessageBox mBox;
         mBox.setText("Start Time occurs after End Time");
         mBox.show();
@@ -126,8 +123,8 @@ void SaveEventWidget::createNewEvent()
         e->setName(titleEdit->text());
         e->setDescription(descEdit->text());
         e->setLocation(locationEdit->text());
-        e->setStartTime(sTimeEdit->dateTime().toTime_t());
-        e->setEndTime(eTimeEdit->dateTime().toTime_t());
+        e->setStartTime(sGWidget->getDateTime().toTime_t());
+        e->setEndTime(eGWidget->getDateTime().toTime_t());
 
         duplicate = eventSet.insertEvent(e);
         if (duplicate) {
@@ -152,8 +149,13 @@ void SaveEventWidget::editEvent()
 
     /* populate event with editeventwidget data fields */
     Event* tmpEvent = new Event(titleEdit->text(), locationEdit->text(),\
-                                descEdit->text(), sTimeEdit->dateTime().toTime_t(),
-                                eTimeEdit->dateTime().toTime_t());
+                                descEdit->text(), sGWidget->getDateTime().toTime_t(),
+                                eGWidget->getDateTime().toTime_t());
+
+    //qDebug() << sGWidget->getDateTime().toTime_t();
+    //qDebug() << currentEvent->getStartTime();
+    //qDebug() << sGWidget->getDateTime();;
+    //qDebug() << QDateTime::currentDateTime();
 
     /* check start/end time for conflicts */
     if (!checkStartTime(tmpEvent->getStartTime(),\

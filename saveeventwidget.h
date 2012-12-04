@@ -10,6 +10,8 @@
 #include <QDateTimeEdit>
 #include <QScrollArea>
 
+#include "gdatetimeedit.h"
+
 /**
  * @brief The SaveEventWidget class.
  * This class is used and displayed as a separate "window" when the user wishes to
@@ -75,8 +77,8 @@ private:
     CDLineEdit* titleEdit;
     CDLineEdit* descEdit;
     CDLineEdit* locationEdit;
-    QDateTimeEdit* sTimeEdit;
-    QDateTimeEdit* eTimeEdit;
+    GDateTimeEdit* sGWidget;
+    GDateTimeEdit* eGWidget;
 
     CalendarWidget& cWidget;
 };

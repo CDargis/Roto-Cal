@@ -40,6 +40,23 @@ public:
 
     //! Create time_t for Event (static).
    /*!
+   \param QDate argument
+   \param a QTime argument.
+   \return time_t created from QDate and QTime
+   \sa militaryHour(Time1 time)
+   */
+    static time_t createTime(QDate date, QTime time);
+
+    //! Create time_t for Event (static).
+   /*!
+   \param QDateTime argument
+   \return time_t created from QDateTime
+   \sa militaryHour(Time1 time)
+   */
+    static time_t createTime(QDateTime dt);
+
+    //! Create time_t for Event (static).
+   /*!
    \param int day
    \param int month
    \param int minute
