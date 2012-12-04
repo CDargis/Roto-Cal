@@ -3,8 +3,8 @@
 
 // Date Display inherits from QLabel and CalObject
 // Initialize parent classes and set the geomtry of the object. Also set the text to the current date
-DateDisplay::DateDisplay(int xOffset, int yOffset, int width, int height, Event_set &set, QWidget *parent)
-    : QLabel(parent), CalObject(set)
+DateDisplay::DateDisplay(int xOffset, int yOffset, int width, int height, QWidget *parent)
+    : QLabel(parent)
 {
     setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     setGeometry(xOffset, yOffset, width, height);

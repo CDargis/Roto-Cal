@@ -10,7 +10,7 @@
  * This class represents the current date of the calendar.
  * @author Chris Dargis
  */
-class DateDisplay : public QLabel, CalObject
+class DateDisplay : public QLabel
 {
     Q_OBJECT
 public:
@@ -23,7 +23,7 @@ public:
      * @param set a reference to the Event_set object
      * @param parent a pointer to the object's parent
      */
-    explicit DateDisplay(int xOffset, int yOffset, int width, int height, Event_set& set, QWidget* parent = 0);
+    explicit DateDisplay(int xOffset, int yOffset, int width, int height, QWidget* parent = 0);
     /**
      * @brief getDate get the current date of the object
      * @return the current date of the calendar

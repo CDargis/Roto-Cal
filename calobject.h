@@ -35,7 +35,7 @@ public slots:
      * @brief setDate set the date of a calendar object
      * @param date to be set
      */
-    virtual void setDate(QDate date);
+    virtual void setDate(QDate date) = 0;
 };
 
 #endif // CALOBJECT_H

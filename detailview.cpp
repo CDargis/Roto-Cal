@@ -120,3 +120,7 @@ void DetailView::slotDeleteClicked()
     this->setCurrentEvent(NULL);
 }
 
+void DetailView::setDate(QDate date)
+{
+    // This function is currently not used
+}
