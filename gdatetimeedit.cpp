@@ -292,7 +292,12 @@ void GDateTimeEdit::yearUpSlot()
     int yearN = year->text().toInt(&ok, 10);
     QDate date = QDate(yearN+1,monthConverter(month->text()),day->text().toInt(&ok, 10));
     if(date.isValid()){
-       year->setNum(yearN+1);
+        if(yearN == 2037){
+            year->setNum(2037);
+        }
+        else{
+            year->setNum(yearN+1);
+           }
     }
     else{qDebug() << "Invalid Date";}
 }
@@ -304,8 +309,8 @@ void GDateTimeEdit::yearDownSlot()
     int yearN = year->text().toInt(&ok, 10);
     QDate date = QDate(yearN-1,monthConverter(month->text()),day->text().toInt(&ok, 10));
     if(date.isValid()){
-        if(yearN == 0){
-            year->setNum(0);
+        if(yearN == 1970){
+            year->setNum(1970);
         }
         else{
             year->setNum(yearN-1);
