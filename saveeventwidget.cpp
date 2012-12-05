@@ -137,8 +137,6 @@ void SaveEventWidget::createNewEvent()
             delete(e); // delete event since identical already exists
         } else {
             qDebug() << "size after new" << eventSet.getSize();
-
-
             emit closeScreen(NULL);
         }
     }
@@ -155,11 +153,6 @@ void SaveEventWidget::editEvent()
                                 descEdit->text(), sGWidget->getDateTime().toTime_t(),
                                 eGWidget->getDateTime().toTime_t());
 
-    //qDebug() << sGWidget->getDateTime().toTime_t();
-    //qDebug() << currentEvent->getStartTime();
-    //qDebug() << sGWidget->getDateTime();;
-    //qDebug() << QDateTime::currentDateTime();
-
     /* check start/end time for conflicts */
     if (!checkStartTime(tmpEvent->getStartTime(),\
                         tmpEvent->getEndTime())) {
@@ -170,8 +163,7 @@ void SaveEventWidget::editEvent()
                    mBox.height() / 2 );
         mBox.exec();
         delete(tmpEvent); // delete tmp (no need to update data structure)
-        currentEvent = NULL;
-        //emit closeScreen(currentEvent);
+
     /* title or starttime changed */
     } else if (currentEvent->getName() != tmpEvent->getName() ||\
                currentEvent->getStartTime() != tmpEvent->getStartTime()) {
@@ -184,11 +176,9 @@ void SaveEventWidget::editEvent()
                       - mBox.height() / 2);
             mBox.exec();
             delete(tmpEvent); // delete tmp (no need to update data structure)
-            currentEvent = NULL;
             emit closeScreen(currentEvent);
         /* insert successful */
         } else {
-            currentEvent = NULL;
             emit closeScreen(tmpEvent);
         }
     /* title/starttime untouched but location/description/endtime touched */
@@ -200,7 +190,6 @@ void SaveEventWidget::editEvent()
         currentEvent->setDescription(tmpEvent->getDescription());
         currentEvent->setEndTime(tmpEvent->getEndTime());
         delete(tmpEvent); // delete temp event
-        currentEvent = NULL;
         emit closeScreen(currentEvent);
     /* if here, save clicked but nothing edited */
     } else {
@@ -211,7 +200,6 @@ void SaveEventWidget::editEvent()
                   - mBox.height() / 2);
         mBox.exec();
         delete(tmpEvent); // delete tmp (no need to update data structure)
-        currentEvent = NULL;
         emit closeScreen(currentEvent);
     }
 }

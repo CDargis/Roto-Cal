@@ -53,6 +53,7 @@ void MainWindow::slotActionTriggered(QAction *a)
 {
     if(a->text().compare(tr("Add Event")) == 0)
     {
+        saveEventWidget->setCurrentEvent(NULL);
         saveEventWidget->setInput(cWidget->getCurrentDateTime(),
                                   cWidget->getCurrentDateTime().addSecs(60*60));
         screens->setCurrentIndex(1);
