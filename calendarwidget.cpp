@@ -14,7 +14,7 @@ CalendarWidget::CalendarWidget(QRect screenRes, Event_set &set, QWidget *parent)
     menu = new CalendarMenu(0, 0 , screenWidth, menuHeight, this);
     int dateDisplayHeight = screen.height() * .05;
 
-    dateDisplay = new DateDisplay(0, menuHeight, screenWidth, dateDisplayHeight, set, this);
+    dateDisplay = new DateDisplay(0, menuHeight, screenWidth, dateDisplayHeight, this);
     int pageHeight = screenHeight - menuHeight - dateDisplayHeight;
     int pageOffset = menuHeight + dateDisplayHeight;
 
@@ -112,4 +112,11 @@ void CalendarWidget::pokeDateChange()
 void CalendarWidget::emitEventEditedSignal(Event *e)
 {
     emit eventEdited(e);
+}
+
+void CalendarWidget::setDate(QDate date)
+{
+    dayView->setDate(date);
+    monthView->setDate(date);
+    detailView->setDate(date);
 }

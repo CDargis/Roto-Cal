@@ -27,6 +27,11 @@ public:
      * @param parent a pointer to the objets parent
      */
     explicit DetailView(QRect& pageGeometry, Event_set& set, QWidget *parent);
+    /**
+     * @brief setDate used to set the date of the entire view
+     * @param date to be set
+     */
+    virtual void setDate(QDate date);
 signals:
     /**
      * @brief editEventClicked emited when a user clicks the edit event button

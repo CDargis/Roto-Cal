@@ -53,6 +53,11 @@ public:
      * @brief editEvent function called when the user is editing an event
      */
     void editEvent();
+    /**
+     * @brief setDate used to set the date of the entire view
+     * @param date to be set
+     */
+    void setDate(QDate date);
 protected:
 
 signals:

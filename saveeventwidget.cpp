@@ -215,3 +215,8 @@ bool SaveEventWidget::checkStartTime(time_t start, time_t end) {
         return false;
     return true;
 }
+
+void SaveEventWidget::setDate(QDate date)
+{
+    // This function is currently not being used
+}

@@ -49,6 +49,11 @@ public:
      * @param e the event to be emited
      */
     void emitEventEditedSignal(Event* e);
+    /**
+     * @brief setDate used to set the date of the entire view
+     * @param date to be set
+     */
+    void setDate(QDate date);
 signals:
     /**
      * @brief editEvent emited when there is an event to be edited
